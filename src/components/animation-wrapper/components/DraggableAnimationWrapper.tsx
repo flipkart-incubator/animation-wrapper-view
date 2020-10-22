@@ -1,0 +1,88 @@
+import { Animated, PanResponder } from 'react-native';
+import React from 'react';
+import { BaseAnimationWrapper } from './BaseAnimationWrapper';
+import { DraggableAnimation } from '../models/DraggableAnimation';
+import {DraggableAnimationProps} from "../Interfaces";
+
+interface DraggableAnimationState {
+    pan: Animated.ValueXY,
+    panResponder: any
+}
+
+export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAnimationProps, DraggableAnimationState> {
+
+    public constructor(props: DraggableAnimationProps) {
+        super(props);
+
+        this.state = {
+            pan: new Animated.ValueXY(),
+            panResponder: undefined
+        }
+        this.state = this.getAnimationStateFromProps(props);
+    }
+
+    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<DraggableAnimationProps>, _nextContext: any): void {
+        if (nextProps !== this.props) {
+            const nextState: DraggableAnimationState | null = this.getAnimationStateFromProps(nextProps);
+            if (null != nextState) {
+                this.setState(nextState);
+            }
+        }
+    }
+
+
+
+    protected renderAnimation(content: React.ReactNode): React.ReactNode {
+        return (
+            <Animated.View
+                style={this.state.pan.getLayout()}
+                {...this.state.panResponder.panHandlers}
+            >
+                {content}
+            </Animated.View>
+        );
+    }
+
+    protected getAnimationStateFromProps(_: DraggableAnimationProps): DraggableAnimationState {
+        const { pan } = this.state;
+
+        return {
+            ...this.state,
+            panResponder: PanResponder.create({
+                onStartShouldSetPanResponder: () => true,
+                onPanResponderMove: (e, gesture) => {
+                    Animated.event([
+                        null,
+                        {
+                            dx: pan.x,
+                            dy: pan.y,
+                        },
+                    ])(e, gesture)
+                },
+                onPanResponderRelease: () => {
+                    Animated.spring(
+                        pan, // Auto-multiplexed
+                        { toValue: { x: 0, y: 0 }, useNativeDriver: false } // Back to zero
+                        ).start();
+                    }
+            })
+        };
+    }
+
+
+    protected triggerAnimation(): void {
+        // ToastAndroid.show('Animation triggered', ToastAndroid.SHORT);
+        // const { animationConfig } = this.props;
+
+
+        // Animated.timing(this.state.scale, {
+        //     duration: animationConfig.scaleDuration,
+        //     toValue: (this.isScaled) ? 1 : animationConfig.toScale,
+        //     easing: animationConfig.easing ? animationConfig.easing : Easing.linear,
+        //     useNativeDriver: false
+        // }).start(() => {
+        //     this.isScaled = !this.isScaled;
+        // });
+
+    }
+}
