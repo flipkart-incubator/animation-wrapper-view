@@ -33,30 +33,17 @@ const bounceConfig: BounceAnimation = {
 ```
 
 ### Demo
-
-*Bounce Animation*
-![Bounce](/docs/media/bounce.gif)
-
-*Drag Animation*
-![Draggable](/docs/media/draggable.gif)
-
-*FadeIn Animation*
-![Fade In](/docs/media/fade_in.gif)
-
-*FadeOut Animation*
-![Fae Out](/docs/media/fade_out.gif)
-
-*Scale In Animation*
-![Scale In](/docs/media/scale.gif)
-
-*Scale Out Animation*
-![Scale out](/docs/media/scale_out.gif)
-
-*Slie In Animation*
-![Slide in](/docs/media/slide_in.gif)
-
-*Slide Out Animation*
-![Slide out](/docs/media/slide_out.gif)
+| Animation Type | Demo GIF |
+| --- | --- |
+| *Bounce Animation* | ![Bounce](/docs/media/bounce.gif) |
+| *Drag Animation* | ![Draggable](/docs/media/draggable.gif) |
+| *Fade In Animation* | ![Fade In](/docs/media/fade_in.gif) |
+| *Fade Out Animation* | ![Fae Out](/docs/media/fade_out.gif) |
+| *Ripple Animation* | ![Ripple](/docs/media/ripple.gif) |
+| *Scale In Animation* | ![Scale In](/docs/media/scale.gif) |
+| *Scale Out Animation* | ![Scale out](/docs/media/scale_out.gif) |
+| *Slide In Animation* | ![Slide in](/docs/media/slide_in.gif) |
+| *Slide Out Animation* | ![Slide out](/docs/media/slide_out.gif)| 
 
 
 #### In Action

@@ -25,14 +25,14 @@ export default class Main extends React.Component {
             type: AnimationType.SCALE,
             triggerType: AnimationTriggerType.ON_CLICK,
             scaleDuration: 1000,
-            toScale: 2,
+            toScale: .6,
             easing: Easing.bounce
         };
         const rippleConfig: RippleAnimation = {
             type: AnimationType.RIPPLE,
-            triggerType: AnimationTriggerType.ON_LOAD,
-            rippleColor: 'red',
-            rippleCount: 5,
+            triggerType: AnimationTriggerType.ON_CLICK,
+            rippleColor: 'blue',
+            rippleCount: 2,
             rippleDuration: 1000,
             rippleIntervalDuration: 0,
         };
@@ -63,16 +63,17 @@ export default class Main extends React.Component {
         const slideOutConfig: FadeOutAnimation = {
             type: AnimationType.SLIDE_OUT,
             triggerType: AnimationTriggerType.ON_CLICK,
-            animationDuration: 400
+            animationDuration: 2000
         };
         return (
             <View style={{
                 flexDirection: 'column',
                 flex: 1,
+                height: 400,
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-                <AnimationWrapperView animationConfig={draggableConfig} animationDimen={{ width: 200, height: 200 }}>
+                <AnimationWrapperView animationConfig={slideInConfig} animationDimen={{ width: 300, height: 300 }}>
                     {this._renderCard()}
                 </AnimationWrapperView>
                 {/* 
@@ -114,7 +115,8 @@ const styles = StyleSheet.create({
         width: 200,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#34495e'
+        backgroundColor: '#34495e',
+        borderWidth: 1
     },
     paragraph: {
         margin: 8,
