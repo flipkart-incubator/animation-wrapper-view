@@ -33,4 +33,12 @@ const bounceConfig: BounceAnimation = {
 ```
 
 ### Demo
-![Demo](/docs/media/demo.gif)
+![Demo](/docs/media/demo.gif | width=10)
+![Bounce](/docs/media/bounce.gif | width=10)
+![Draggable](/docs/media/draggable.gif | width=10)
+![Fade In](/docs/media/fade_in.gif | width=10)
+![Fae Out](/docs/media/fade_out.gif | width=10)
+![Scale In](/docs/media/scale.gif | width=10)
+![Scale out](/docs/media/scale_out.gif | width=10)
+![Scale out](/docs/media/slide_in.gif | width=10)
+![Scale out](/docs/media/slide_out.gif | width=10)
