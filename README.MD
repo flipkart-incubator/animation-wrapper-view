@@ -33,30 +33,17 @@ const bounceConfig: BounceAnimation = {
 ```
 
 ### Demo
+| AnimationType | Demo |
+| --- | --- |
 
-*Bounce Animation*
-![Bounce](/docs/media/bounce.gif)
-
-*Drag Animation*
-![Draggable](/docs/media/draggable.gif)
-
-*FadeIn Animation*
-![Fade In](/docs/media/fade_in.gif)
-
-*FadeOut Animation*
-![Fae Out](/docs/media/fade_out.gif)
-
-*Scale In Animation*
-![Scale In](/docs/media/scale.gif)
-
-*Scale Out Animation*
-![Scale out](/docs/media/scale_out.gif)
-
-*Slie In Animation*
-![Slide in](/docs/media/slide_in.gif)
-
-*Slide Out Animation*
-![Slide out](/docs/media/slide_out.gif)
+| *Bounce Animation* | <img src="/docs/media/bounce.gif" width="50%"> |
+| *Drag Animation* | <img src="/docs/media/draggable.gif" width="50%"> |
+| *Fade In Animation* | <img src="/docs/media/fade_in.gif" width="50%"> |
+| *FadeOu Animation* | <img src="/docs/media/fade_out.gif" width="50%"> |
+| *Slide in Animation* | <img src="/docs/media/slide_in.gif" width="50%"> |
+| *Slide outAnimation* | <img src="/docs/media/slide_out.gif" width="50%"> |
+| *Scale In Animation* | <img src="/docs/media/scale.gif" width="50%"> |
+| *Scale Out Animation* | <img src="/docs/media/scale_out.gif" width="50%"> |
 
 
 #### In Action
