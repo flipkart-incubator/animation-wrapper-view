@@ -1,14 +1,14 @@
 
 import React from 'react';
 import { Easing, Text, View } from 'react-native';
-import { AnimationWrapperView } from './animation-wrapper/AnimationWrapperView';
-import { AnimationTriggerType } from './animation-wrapper/models/AnimationTriggerType';
-import { AnimationType } from './animation-wrapper/models/AnimationType';
-import { BaseAnimation } from './animation-wrapper/models/BaseAnimation';
-import { BounceAnimation } from './animation-wrapper/models/BounceAnimation';
-import { DraggableAnimation } from './animation-wrapper/models/DraggableAnimation';
-import { RippleAnimation } from './animation-wrapper/models/RippleAnimation';
-import { ScaleAnimation } from './animation-wrapper/models/ScaleAnimation';
+import { AnimationWrapperView } from './components/animation-wrapper/AnimationWrapperView';
+import { AnimationTriggerType } from './components/animation-wrapper/models/AnimationTriggerType';
+import { AnimationType } from './components/animation-wrapper/models/AnimationType';
+import { BaseAnimation } from './components/animation-wrapper/models/BaseAnimation';
+import { BounceAnimation } from './components/animation-wrapper/models/BounceAnimation';
+import { DraggableAnimation } from './components/animation-wrapper/models/DraggableAnimation';
+import { RippleAnimation } from './components/animation-wrapper/models/RippleAnimation';
+import { ScaleAnimation } from './components/animation-wrapper/models/ScaleAnimation';
 
 export default class Main extends React.Component {
 
