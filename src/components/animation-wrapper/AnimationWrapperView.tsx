@@ -7,6 +7,8 @@ import { BaseAnimation } from './models/BaseAnimation';
 import { DraggableAnimationWrapper } from './components/DraggableAnimationWrapper';
 import { WrapperComponent } from "./Types";
 import { AnimationProps } from "./Interfaces";
+import { FadeAnimationWrapper } from './components/FadeAnimationWrapper';
+import { SlideAnimationWrapper } from './components/SlideAnimationWrapper';
 
 export abstract class AnimationWrapperView extends React.PureComponent<AnimationProps> {
     private animationWrapper: WrapperComponent;
@@ -47,6 +49,13 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
                 return ScaleAnimationWrapper;
             case AnimationType.DRAGGABLE:
                 return DraggableAnimationWrapper;
+            case AnimationType.FADE_IN:
+            case AnimationType.FADE_OUT:
+                return FadeAnimationWrapper;
+            
+            case AnimationType.SLIDE_IN:
+            case AnimationType.SLIDE_OUT:
+                return SlideAnimationWrapper;
         }
     }
 

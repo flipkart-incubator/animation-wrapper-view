@@ -7,23 +7,12 @@ import { AnimationType } from './components/animation-wrapper/models/AnimationTy
 import { BaseAnimation } from './components/animation-wrapper/models/BaseAnimation';
 import { BounceAnimation } from './components/animation-wrapper/models/BounceAnimation';
 import { DraggableAnimation } from './components/animation-wrapper/models/DraggableAnimation';
+import { FadeInAnimation, FadeOutAnimation } from './components/animation-wrapper/models/FadeAnimation';
 import { RippleAnimation } from './components/animation-wrapper/models/RippleAnimation';
 import { ScaleAnimation } from './components/animation-wrapper/models/ScaleAnimation';
 
 export default class Main extends React.Component {
 
-    private animationConfig: BaseAnimation;
-    constructor(props) {
-        super(props);
-        this.animationConfig = {
-            type: AnimationType.RIPPLE,
-            triggerType: AnimationTriggerType.ON_CLICK,
-            rippleColor: 'red',
-            rippleCount: 1,
-            rippleDuration: 2000,
-            rippleIntervalDuration: 0,
-        };
-    }
 
     render() {
         const bounceConfig: BounceAnimation = {
@@ -53,16 +42,40 @@ export default class Main extends React.Component {
             type: AnimationType.DRAGGABLE,
             triggerType: AnimationTriggerType.ON_CLICK
         };
+
+        const fadeInConfig: FadeInAnimation = {
+            type: AnimationType.FADE_IN,
+            triggerType: AnimationTriggerType.ON_LOAD,
+            animationDuration: 40000
+        };
+
+        const fadeOutConfig: FadeOutAnimation = {
+            type: AnimationType.FADE_OUT,
+            triggerType: AnimationTriggerType.ON_CLICK,
+            animationDuration: 400
+        };
+        
+        const slideInConfig: FadeInAnimation = {
+            type: AnimationType.SLIDE_IN,
+            triggerType: AnimationTriggerType.ON_LOAD,
+            animationDuration: 500
+        };
+
+        const slideOutConfig: FadeOutAnimation = {
+            type: AnimationType.SLIDE_OUT,
+            triggerType: AnimationTriggerType.ON_CLICK,
+            animationDuration: 400
+        };
         return (
             <View style={{
                 flexDirection: 'column', flex: 1,
                 justifyContent: 'space-evenly'
             }}>
-                <AnimationWrapperView animationConfig={rippleConfig} animationDimen={{ width: 200, height: 200 }}>
+                <AnimationWrapperView animationConfig={slideInConfig} animationDimen={{ width: 200, height: 200 }}>
                     <Text style={{ backgroundColor: 'red', fontSize: 20, padding: 8, color: 'white' }}>Ripple Component</Text>
                 </AnimationWrapperView>
 
-                <AnimationWrapperView animationConfig={bounceConfig} animationDimen={{ width: 200, height: 200 }}>
+                <AnimationWrapperView animationConfig={slideOutConfig} animationDimen={{ width: 200, height: 200 }}>
                     <Text style={{ backgroundColor: 'blue', fontSize: 20, padding: 8, color: 'white' }}>Bounce Component</Text>
                 </AnimationWrapperView>
 

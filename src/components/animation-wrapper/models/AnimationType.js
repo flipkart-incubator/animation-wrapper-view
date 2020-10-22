@@ -6,5 +6,8 @@ var AnimationType;
     AnimationType["SCALE"] = "SCALE";
     AnimationType["BOUNCE"] = "BOUNCE";
     AnimationType["DRAGGABLE"] = "DRAGGABLE";
+    AnimationType["FADE_IN"] = "FADE_IN";
+    AnimationType["FADE_OUT"] = "FADE_OUT";
+    AnimationType["SLIDE_IN"] = "SLIDE_IN";
 
 })(AnimationType = exports.AnimationType || (exports.AnimationType = {}));
