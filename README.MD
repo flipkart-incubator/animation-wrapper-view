@@ -27,7 +27,7 @@ const bounceConfig: BounceAnimation = {
     animationDuration: 1000
 };
 
-<AnimationWrapperView animationConfig={bounceConfig} >
+<AnimationWrapperView animationConfig={bounceConfig}>
     {/* {your component} */}
 </AnimationWrapperView>
 ```
