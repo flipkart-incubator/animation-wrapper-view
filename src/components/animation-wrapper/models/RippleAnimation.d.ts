@@ -4,4 +4,5 @@ export interface RippleAnimation extends BaseAnimation {
     rippleDuration: number;
     rippleCount: number;
     rippleIntervalDuration: number;
+    rippleRadius: number;
 }

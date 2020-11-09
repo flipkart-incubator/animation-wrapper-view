@@ -11,7 +11,6 @@ interface FadeInAnimation extends BaseAnimation {
 interface FadeOutAnimation extends BaseAnimation {
     animationDuration: number;
     finalOpacity?: number;
-
 }
 
 

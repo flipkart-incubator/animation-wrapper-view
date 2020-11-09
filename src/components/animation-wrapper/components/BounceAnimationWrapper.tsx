@@ -3,7 +3,7 @@
 import { Animated, Easing, ToastAndroid, View } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import {BounceAnimationProps} from "../Interfaces";
+import { BounceAnimationProps } from "../Interfaces";
 
 interface BounceAnimationState {
     translateY: Animated.Value;
@@ -25,8 +25,7 @@ export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimation
         }
     }
 
-    protected triggerAnimation(): void {
-        ToastAndroid.show('Animation triggered', ToastAndroid.SHORT);
+    protected triggerAnimation = () => {
         const { animationConfig } = this.props;
         const { translateY } = this.state;
 

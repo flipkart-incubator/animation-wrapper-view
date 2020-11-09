@@ -1,5 +1,5 @@
 import React from "react";
-import {BounceAnimationProps, DraggableAnimationProps, RippleAnimationProps, ScaleAnimationProps, SlideAnimationProps, FadeAnimationProps} from "./Interfaces";
+import {BounceAnimationProps, DraggableAnimationProps, RippleAnimationProps, ScaleAnimationProps, SlideAnimationProps, FadeAnimationProps, WiggleAnimationProps} from "./Interfaces";
 
 
 /**
@@ -11,4 +11,5 @@ export type WrapperComponent = React.ComponentClass<RippleAnimationProps>
     | React.ComponentClass<BounceAnimationProps>
     | React.ComponentClass<SlideAnimationProps>
     | React.ComponentClass<FadeAnimationProps>
-    | React.ComponentClass<DraggableAnimationProps>;
+    | React.ComponentClass<DraggableAnimationProps>
+    | React.ComponentClass<WiggleAnimationProps>;

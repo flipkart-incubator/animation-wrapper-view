@@ -26,7 +26,7 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
         }
     }
 
-    protected triggerAnimation(): void {
+    public triggerAnimation(): void {
         const { animationConfig } = this.props;
         const { scale, opacity, rippleCount } = this.state;
 
@@ -58,8 +58,8 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const { scale, opacity } = this.state;
-        const { animationConfig, animationDimen } = this.props;
-        const rippleStyle = AnimationUtils.getRippleStyle(animationDimen.width);
+        const { animationConfig } = this.props;
+        const rippleStyle = AnimationUtils.getRippleStyle(animationConfig.rippleRadius);
 
         return (
             <View
@@ -75,11 +75,11 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
                             backgroundColor: animationConfig.rippleColor,
                             width: scale.interpolate({
                                 inputRange: [0, 1],
-                                outputRange: [0, animationDimen.width]
+                                outputRange: [0, animationConfig.rippleRadius * 2]
                             }),
                             height: scale.interpolate({
                                 inputRange: [0, 1],
-                                outputRange: [0, animationDimen.height]
+                                outputRange: [0, animationConfig.rippleRadius * 2]
                             }),
                             opacity
                         }

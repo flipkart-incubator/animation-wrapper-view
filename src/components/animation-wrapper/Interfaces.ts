@@ -6,11 +6,11 @@ import { ScaleAnimation } from "./models/ScaleAnimation";
 import { DraggableAnimation } from "./models/DraggableAnimation";
 import { FadeInAnimation, FadeOutAnimation } from "./models/FadeAnimation";
 import { SlideInAnimation, SlideOutAnimation } from "./models/SlideAnimation";
+import { WiggleAnimation } from "./models/WiggleAnimation";
 
 
 interface AnimationProps {
     animationConfig: BaseAnimation;
-    animationDimen: Dimension;
 }
 
 
@@ -49,6 +49,9 @@ interface SlideInAnimationProps extends FadeAnimationProps {
 interface SlideOutAnimationProps extends FadeAnimationProps {
     animationConfig: SlideOutAnimation;
 }
+interface WiggleAnimationProps extends AnimationProps {
+    animationConfig: WiggleAnimation;
+}
 
 export {
     AnimationProps,
@@ -61,5 +64,6 @@ export {
     SlideInAnimationProps,
     SlideOutAnimationProps,
     DraggableAnimationProps,
-    ScaleAnimationProps
+    ScaleAnimationProps,
+    WiggleAnimationProps
 };

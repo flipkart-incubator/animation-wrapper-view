@@ -9,9 +9,11 @@ import { WrapperComponent } from "./Types";
 import { AnimationProps } from "./Interfaces";
 import { FadeAnimationWrapper } from './components/FadeAnimationWrapper';
 import { SlideAnimationWrapper } from './components/SlideAnimationWrapper';
+import { WiggleAnimationWrapper } from './components/WiggleAnimationWrapper';
 
 export abstract class AnimationWrapperView extends React.PureComponent<AnimationProps> {
     private animationWrapper: WrapperComponent;
+    private componentRef: any;
 
     protected constructor(props: AnimationProps) {
         super(props);
@@ -26,11 +28,11 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
 
     public render(): React.ReactNode | undefined {
         this._assertChildType();
-        const { animationDimen, children } = this.props;
+        const { children } = this.props;
         const animationConfig = this.props.animationConfig;
         if (this.animationWrapper && children) {
             return (
-                <this.animationWrapper animationConfig={animationConfig} animationDimen={animationDimen}>
+                <this.animationWrapper ref={this.setRef} animationConfig={animationConfig}>
                     {children}
                 </this.animationWrapper>
             );
@@ -56,6 +58,8 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
             case AnimationType.SLIDE_IN:
             case AnimationType.SLIDE_OUT:
                 return SlideAnimationWrapper;
+            case AnimationType.WIGGLE:
+                return WiggleAnimationWrapper;
         }
     }
 

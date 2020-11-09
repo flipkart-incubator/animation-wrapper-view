@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Easing, Text, View, StyleSheet, Image } from 'react-native';
+import { Easing, Text, View, StyleSheet, ImageBackground } from 'react-native';
 import { AnimationWrapperView } from './components/animation-wrapper/AnimationWrapperView';
 import { AnimationTriggerType } from './components/animation-wrapper/models/AnimationTriggerType';
 import { AnimationType } from './components/animation-wrapper/models/AnimationType';
@@ -9,6 +9,7 @@ import { DraggableAnimation } from './components/animation-wrapper/models/Dragga
 import { FadeInAnimation, FadeOutAnimation } from './components/animation-wrapper/models/FadeAnimation';
 import { RippleAnimation } from './components/animation-wrapper/models/RippleAnimation';
 import { ScaleAnimation } from './components/animation-wrapper/models/ScaleAnimation';
+import { WiggleAnimation } from './components/animation-wrapper/models/WiggleAnimation';
 
 export default class Main extends React.Component {
 
@@ -30,9 +31,10 @@ export default class Main extends React.Component {
         };
         const rippleConfig: RippleAnimation = {
             type: AnimationType.RIPPLE,
-            triggerType: AnimationTriggerType.ON_CLICK,
+            triggerType: AnimationTriggerType.ON_LOAD,
             rippleColor: 'blue',
             rippleCount: 2,
+            rippleRadius: 100,
             rippleDuration: 1000,
             rippleIntervalDuration: 0,
         };
@@ -65,63 +67,64 @@ export default class Main extends React.Component {
             triggerType: AnimationTriggerType.ON_CLICK,
             animationDuration: 2000
         };
+
+        const wiggleAnimation: WiggleAnimation = {
+            type: AnimationType.WIGGLE,
+            triggerType: AnimationTriggerType.ON_CLICK,
+            wiggleDistance: 20,
+            animationDuration: 200
+        }
         return (
-            <View style={{
-                flexDirection: 'column',
-                flex: 1,
-                height: 400,
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-                <AnimationWrapperView animationConfig={slideInConfig} animationDimen={{ width: 300, height: 300 }}>
+            <View style={styles.container}>
+                <AnimationWrapperView animationConfig={wiggleAnimation} >
                     {this._renderCard()}
                 </AnimationWrapperView>
-                {/* 
-                <AnimationWrapperView animationConfig={slideOutConfig} animationDimen={{ width: 200, height: 200 }}>
-                    <Text style={{ backgroundColor: 'blue', fontSize: 20, padding: 8, color: 'white' }}>Bounce Component</Text>
-                </AnimationWrapperView>
-
-                <AnimationWrapperView animationConfig={scaleConfig} animationDimen={{ width: 200, height: 200 }}>
-                    <Text style={{ backgroundColor: 'green', fontSize: 20, padding: 8, color: 'white' }}>Scale Component</Text>
-                </AnimationWrapperView>
-
-                <AnimationWrapperView animationConfig={draggableConfig} animationDimen={{ width: 200, height: 200 }}>
-                    <Text style={{ backgroundColor: 'gray', fontSize: 20, padding: 8, color: 'white' }}>Draggable Component</Text>
-                </AnimationWrapperView> */}
             </View>
         );
     }
 
     _renderCard(): React.ReactNode {
+
+       
         return (
-            <View style={styles.container}>
-                <View style={{flex: 1, flexDirection: 'column'}}>
+            <ImageBackground source={{ uri: 'https://i.imgur.com/fjd3ieX.png'}} style={styles.viewContainer}>
+                <View style={{ flex: 1, flexDirection: 'column' }}>
 
                     <Text style={styles.paragraph}>
-                        This is a widget view
+                        BannerWidget
                     </Text>
                     <Text style={styles.paragraph}>
                         Demo to apply transitions to this container
                     </Text>
                 </View>
-            </View>
+            </ImageBackground>
         );
+
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection: 'column',
+        flex: 1,
+        height: 400,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    viewContainer: {
         height: 200,
-        width: 200,
+        width: 400,
+        backgroundColor: '#fedfed',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#34495e',
-        borderWidth: 1
+        borderRadius: 20,
+        borderColor: '#EE82EE',
+        borderWidth: 2
     },
     paragraph: {
         margin: 8,
+        color: 'white',
         fontSize: 18,
-        fontWeight: 'bold',
-        color: 'white'
+        fontWeight: 'bold'
     },
 });
