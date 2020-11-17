@@ -2,9 +2,9 @@ import { Animated } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { FadeAnimationProps } from '../Interfaces';
-import { AnimationType } from '../models/AnimationType';
-import { FadeInAnimation, FadeOutAnimation } from '../models/FadeAnimation';
+import { FadeAnimationProps } from '../../utils/Interfaces';
+import { AnimationType } from '../../models/AnimationType';
+import { FadeInAnimation, FadeOutAnimation } from '../../models/FadeAnimation';
 
 interface FadeAnimationState {
     opacity: Animated.Value;

@@ -2,10 +2,10 @@ import { Animated, Dimensions } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { SlideAnimationProps } from '../Interfaces';
-import { AnimationType } from '../models/AnimationType';
-import { FadeInAnimation, FadeOutAnimation } from '../models/FadeAnimation';
-import { SlideInAnimation, SlideOutAnimation } from '../models/SlideAnimation';
+import { SlideAnimationProps } from '../../utils/Interfaces';
+import { AnimationType } from '../../models/AnimationType';
+import { FadeInAnimation, FadeOutAnimation } from '../../models/FadeAnimation';
+import { SlideInAnimation, SlideOutAnimation } from '../../models/SlideAnimation';
 
 interface SlideAnimationState {
     translateX: Animated.Value;

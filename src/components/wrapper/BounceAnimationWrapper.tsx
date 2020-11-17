@@ -3,7 +3,7 @@
 import { Animated, Easing, ToastAndroid, View } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { BounceAnimationProps } from "../Interfaces";
+import { BounceAnimationProps } from "../../utils/Interfaces";
 
 interface BounceAnimationState {
     translateY: Animated.Value;

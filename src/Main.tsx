@@ -1,37 +1,40 @@
 
 import React from 'react';
-import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button } from 'react-native';
-import { AnimationWrapperView } from './components/animation-wrapper/AnimationWrapperView';
-import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, wiggleAnimation } from './Templates';
+import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button, GestureResponderEvent } from 'react-native';
+import { AnimationWrapperView } from './components/AnimationWrapperView';
+import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, wiggleAnimation } from './utils/Templates';
 
 export default class Main extends React.Component {
 
-    private wrapperRef?: AnimationWrapperView | null;
+    private _wrapperRef?: AnimationWrapperView | null;
 
     public render(): React.ReactNode {
         return (
             <View style={styles.container}>
                 <AnimationWrapperView
-                    ref={(ref) => (this.wrapperRef = ref)}
-                    animationConfig={fadeInConfig}
-                    onAnimationFinish={this.onComplete}>
+                    ref={(ref) => (this._wrapperRef = ref)}
+                    animationConfig={scaleConfig}
+                    onAnimationFinish={this._onComplete}>
                     {this._renderCard()}
                 </AnimationWrapperView>
 
-                <Button title={"Click me"} onPress={this.onPress} />
+                <View style={{margin: 16}}>
+                    <Button title={"Click me"} onPress={this._onPress} />
+                </View>
             </View>
         );
     }
 
-    private onPress = (_: any) => {
-        this.wrapperRef?.triggerAnimation();
+    private _onPress = (_: GestureResponderEvent) => {
+        // Trigger animation on button press.
+        this._wrapperRef?.triggerAnimation();
     }
 
-    private onComplete = () => {
+    private _onComplete = () => {
         ToastAndroid.show("Completed", ToastAndroid.SHORT);
     }
 
-    _renderCard(): React.ReactNode {
+    private _renderCard(): React.ReactNode {
         return (
             <ImageBackground source={{}} style={styles.viewContainer}>
                 <View style={{ flex: 1, flexDirection: 'column' }}>

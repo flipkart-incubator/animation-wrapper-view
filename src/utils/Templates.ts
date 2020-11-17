@@ -1,12 +1,12 @@
 import { Easing } from "react-native";
-import { AnimationTriggerType } from "./components/animation-wrapper/models/AnimationTriggerType";
-import { AnimationType } from "./components/animation-wrapper/models/AnimationType";
-import { BounceAnimation } from "./components/animation-wrapper/models/BounceAnimation";
-import { DraggableAnimation } from "./components/animation-wrapper/models/DraggableAnimation";
-import { FadeInAnimation, FadeOutAnimation } from "./components/animation-wrapper/models/FadeAnimation";
-import { RippleAnimation } from "./components/animation-wrapper/models/RippleAnimation";
-import { ScaleAnimation } from "./components/animation-wrapper/models/ScaleAnimation";
-import { WiggleAnimation } from "./components/animation-wrapper/models/WiggleAnimation";
+import { AnimationTriggerType } from "../models/AnimationTriggerType";
+import { AnimationType } from "../models/AnimationType";
+import { BounceAnimation } from "../models/BounceAnimation";
+import { DraggableAnimation } from "../models/DraggableAnimation";
+import { FadeInAnimation, FadeOutAnimation } from "../models/FadeAnimation";
+import { RippleAnimation } from "../models/RippleAnimation";
+import { ScaleAnimation } from "../models/ScaleAnimation";
+import { WiggleAnimation } from "../models/WiggleAnimation";
 
 const bounceConfig: BounceAnimation = {
     type: AnimationType.BOUNCE,

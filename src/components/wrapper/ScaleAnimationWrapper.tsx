@@ -2,8 +2,8 @@ import {Animated, Easing, ToastAndroid, View} from 'react-native';
 import React from 'react';
 import {BaseAnimationWrapper} from './BaseAnimationWrapper';
 
-import {ScaleAnimation} from '../models/ScaleAnimation';
-import {ScaleAnimationProps} from "../Interfaces";
+import {ScaleAnimation} from '../../models/ScaleAnimation';
+import {ScaleAnimationProps} from "../../utils/Interfaces";
 
 interface ScaleAnimationState {
     scale: Animated.Value;

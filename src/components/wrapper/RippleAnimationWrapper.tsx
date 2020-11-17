@@ -1,8 +1,8 @@
 import { Animated, View } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import AnimationUtils from '../utils/AnimationUtils';
-import {RippleAnimationProps} from "../Interfaces";
+import AnimationUtils from '../../utils/AnimationUtils';
+import {RippleAnimationProps} from "../../utils/Interfaces";
 
 interface RippleAnimationState {
     scale: Animated.Value;

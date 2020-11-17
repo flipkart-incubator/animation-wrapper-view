@@ -3,7 +3,7 @@
 import { Animated, Easing, ToastAndroid } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { WiggleAnimationProps } from "../Interfaces";
+import { WiggleAnimationProps } from "../../utils/Interfaces";
 
 interface WiggleAnimationState {
     translateX: Animated.Value;

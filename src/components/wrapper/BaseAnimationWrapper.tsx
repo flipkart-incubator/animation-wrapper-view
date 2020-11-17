@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
-import { AnimationTriggerType } from '../models/AnimationTriggerType';
-import { AnimationType } from '../models/AnimationType';
-import { AnimationProps } from "../Interfaces";
+import { AnimationTriggerType } from '../../models/AnimationTriggerType';
+import { AnimationType } from '../../models/AnimationType';
+import { AnimationProps } from "../../utils/Interfaces";
 
 export abstract class BaseAnimationWrapper<P extends AnimationProps, S> extends React.PureComponent<P, S> {
 
