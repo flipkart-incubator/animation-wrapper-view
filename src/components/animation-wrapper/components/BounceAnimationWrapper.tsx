@@ -25,7 +25,7 @@ export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimation
         }
     }
 
-    protected triggerAnimation = () => {
+    public triggerAnimation = () => {
         const { animationConfig } = this.props;
         const { translateY } = this.state;
 
@@ -40,7 +40,9 @@ export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimation
                 toValue: 0,
                 easing: Easing.bounce,
                 useNativeDriver: false
-            }).start();
+            }).start(() => {
+                this.animationEnded();
+            });
         });
     }
 

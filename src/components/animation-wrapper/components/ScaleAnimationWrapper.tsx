@@ -28,11 +28,8 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
         }
     }
 
-    protected triggerAnimation(): void {
-        ToastAndroid.show('Animation triggered', ToastAndroid.SHORT);
+    public triggerAnimation(): void {
         const {animationConfig} = this.props;
-
-
         Animated.timing(this.state.scale, {
             duration: animationConfig.scaleDuration,
             toValue: (this.isScaled) ? 1 : animationConfig.toScale,
@@ -40,6 +37,7 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
             useNativeDriver: false
         }).start(() => {
             this.isScaled = !this.isScaled;
+            this.animationEnded();
         });
 
     }

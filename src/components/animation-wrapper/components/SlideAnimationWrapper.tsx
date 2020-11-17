@@ -30,7 +30,7 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
         }
     }
 
-    protected triggerAnimation(): void {
+    public triggerAnimation(): void {
         const { animationConfig } = this.props;
         if (animationConfig.type === AnimationType.SLIDE_IN) {
             const slideInConfig = animationConfig as SlideInAnimation;

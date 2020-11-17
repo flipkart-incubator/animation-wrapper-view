@@ -52,6 +52,7 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
                 this.triggerAnimation();
             } else {
                 this.setState({ rippleCount: 0 });
+                this.animationEnded();
             }
         });
     }

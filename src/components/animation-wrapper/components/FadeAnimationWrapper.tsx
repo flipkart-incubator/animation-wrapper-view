@@ -26,23 +26,26 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         }
     }
 
-    protected triggerAnimation(): void {
+    public triggerAnimation(): void {
         const { animationConfig } = this.props;
         if (animationConfig.type === AnimationType.FADE_IN) {
-
             const fadeInConfig = animationConfig as FadeInAnimation;
             Animated.timing(this.state.opacity, {
                 duration: fadeInConfig.animationDuration,
                 toValue: 1,
                 useNativeDriver: false
-            }).start();
+            }).start(() => {
+                this.animationEnded();
+            });
         } else {
             const fadeOutConfig = animationConfig as FadeOutAnimation;
             Animated.timing(this.state.opacity, {
                 duration: fadeOutConfig.animationDuration,
                 toValue: fadeOutConfig.finalOpacity ? fadeOutConfig.finalOpacity : 0,
                 useNativeDriver: false
-            }).start();
+            }).start(() => {
+                this.animationEnded();
+            });
         }
     }
 

@@ -11,8 +11,8 @@ import { WiggleAnimation } from "./models/WiggleAnimation";
 
 interface AnimationProps {
     animationConfig: BaseAnimation;
+    onAnimationFinish?: () => void;
 }
-
 
 interface BounceAnimationProps extends AnimationProps {
     animationConfig: BounceAnimation;
@@ -65,5 +65,6 @@ export {
     SlideOutAnimationProps,
     DraggableAnimationProps,
     ScaleAnimationProps,
-    WiggleAnimationProps
+    WiggleAnimationProps, AnimationState
+    
 };

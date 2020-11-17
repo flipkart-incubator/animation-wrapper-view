@@ -1,8 +1,9 @@
 import { Animated, PanResponder } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { DraggableAnimation } from '../models/DraggableAnimation';
-import {DraggableAnimationProps} from "../Interfaces";
+import {DraggableAnimation } from '../models/DraggableAnimation';
+import {  DraggableAnimationProps } from "../Interfaces";
+
 
 interface DraggableAnimationState {
     pan: Animated.ValueXY,
@@ -70,19 +71,7 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     }
 
 
-    protected triggerAnimation(): void {
-        // ToastAndroid.show('Animation triggered', ToastAndroid.SHORT);
-        // const { animationConfig } = this.props;
-
-
-        // Animated.timing(this.state.scale, {
-        //     duration: animationConfig.scaleDuration,
-        //     toValue: (this.isScaled) ? 1 : animationConfig.toScale,
-        //     easing: animationConfig.easing ? animationConfig.easing : Easing.linear,
-        //     useNativeDriver: false
-        // }).start(() => {
-        //     this.isScaled = !this.isScaled;
-        // });
-
+    public triggerAnimation(): void {
+        // no-op
     }
 }

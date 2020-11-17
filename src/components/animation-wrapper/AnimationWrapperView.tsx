@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { RippleAnimationWrapper } from './components/RippleAnimationWrapper';
 import { ScaleAnimationWrapper } from './components/ScaleAnimationWrapper';
 import { BounceAnimationWrapper } from './components/BounceAnimationWrapper';
@@ -10,10 +10,11 @@ import { AnimationProps } from "./Interfaces";
 import { FadeAnimationWrapper } from './components/FadeAnimationWrapper';
 import { SlideAnimationWrapper } from './components/SlideAnimationWrapper';
 import { WiggleAnimationWrapper } from './components/WiggleAnimationWrapper';
+import { BaseAnimationWrapper } from './components/BaseAnimationWrapper';
 
 export abstract class AnimationWrapperView extends React.PureComponent<AnimationProps> {
-    private animationWrapper: WrapperComponent;
-    private componentRef: any;
+    private animationWrapper: WrapperComponent | null;
+    private animatorRef?: BaseAnimationWrapper<AnimationProps, {}> | null;
 
     protected constructor(props: AnimationProps) {
         super(props);
@@ -26,19 +27,30 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
         }
     }
 
+    public triggerAnimation() {
+        this.animatorRef?.triggerAnimation();
+    }
+
     public render(): React.ReactNode | undefined {
         this._assertChildType();
-        const { children } = this.props;
+        const { children, onAnimationFinish } = this.props;
         const animationConfig = this.props.animationConfig;
         if (this.animationWrapper && children) {
             return (
-                <this.animationWrapper ref={this.setRef} animationConfig={animationConfig}>
+                <this.animationWrapper
+                    ref={this._setRef}
+                    animationConfig={animationConfig as any}
+                    onAnimationFinish={onAnimationFinish}>
                     {children}
                 </this.animationWrapper>
             );
         }
 
         return;
+    }
+
+    private _setRef = (ref: Component<AnimationProps, {}, {}>) => {
+        this.animatorRef = ref as BaseAnimationWrapper<AnimationProps, {}>;
     }
 
     private static _animationWrapperGenerator(animationConfig: BaseAnimation): WrapperComponent {
@@ -54,7 +66,6 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
             case AnimationType.FADE_IN:
             case AnimationType.FADE_OUT:
                 return FadeAnimationWrapper;
-            
             case AnimationType.SLIDE_IN:
             case AnimationType.SLIDE_OUT:
                 return SlideAnimationWrapper;

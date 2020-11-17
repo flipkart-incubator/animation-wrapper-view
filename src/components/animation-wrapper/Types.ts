@@ -1,5 +1,5 @@
 import React from "react";
-import {BounceAnimationProps, DraggableAnimationProps, RippleAnimationProps, ScaleAnimationProps, SlideAnimationProps, FadeAnimationProps, WiggleAnimationProps} from "./Interfaces";
+import { BounceAnimationProps, DraggableAnimationProps, RippleAnimationProps, ScaleAnimationProps, SlideAnimationProps, FadeAnimationProps, WiggleAnimationProps, AnimationProps } from "./Interfaces";
 
 
 /**

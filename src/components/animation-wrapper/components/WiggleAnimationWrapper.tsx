@@ -15,7 +15,6 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
     public constructor(props: WiggleAnimationProps) {
         super(props);
         this.state = this.getAnimationStateFromProps(props);
-        console.log('swapnil wiggle');
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps: Readonly<WiggleAnimationProps>, _nextContext: any): void {
@@ -27,13 +26,9 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
         }
     }
 
-    protected triggerAnimation = () => {
+    public triggerAnimation = () => {
         const { animationConfig } = this.props;
-        const { translateX } = this.state;
-
-        ToastAndroid.show(`wiggleDistance ${animationConfig.wiggleDistance}, duration ${animationConfig.animationDuration}`, ToastAndroid.SHORT);
         this.moveLeft(animationConfig.animationDuration, animationConfig.wiggleDistance);
-
     }
 
     private moveLeft = (duration: number, wiggleDistance: number) => {
@@ -57,12 +52,13 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
 
 
     private centerPos = () => {
-
         Animated.timing(this.state.translateX, {
             duration: this.props.animationConfig.animationDuration / 2,
             toValue: 0,
             useNativeDriver: false
-        }).start();
+        }).start(() => {
+            this.animationEnded();
+        });
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
