@@ -71,11 +71,11 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     }
 
 
-    public stopAnimation(): void {
+    public pauseAnimation(): void {
         // this.state.translateY.stopAnimation();
     }
     public resetAnimation(): void {
-        this.stopAnimation();
+        this.pauseAnimation();
         this.setState(this.getAnimationStateFromProps(this.props));
     }
 

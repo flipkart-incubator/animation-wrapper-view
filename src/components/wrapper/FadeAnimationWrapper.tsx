@@ -53,12 +53,12 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         this._fadeAnimation.start(() => { this.animationFinished() });
     }
 
-    public stopAnimation = () => {
+    public pauseAnimation = () => {
         this._fadeAnimation.stop();
     }
 
     public resetAnimation = () => {
-        this.stopAnimation();
+        this.pauseAnimation();
         this.state.opacity.setValue(this._getInitialOpacity(this.props));
     }
 

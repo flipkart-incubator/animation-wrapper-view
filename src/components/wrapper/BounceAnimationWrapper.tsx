@@ -50,12 +50,12 @@ export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimation
         this._bounceAnimation.start(() => { this.animationFinished() });
     }
 
-    public stopAnimation = () => {
+    public pauseAnimation = () => {
         this._bounceAnimation.stop();
     }
 
     public resetAnimation = () => {
-        this.stopAnimation();
+        this.pauseAnimation();
         this.state.translateY.setValue(0);
     }
 

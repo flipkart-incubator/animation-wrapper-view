@@ -59,12 +59,12 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
         this._slideAnimation.start(() => { this.animationFinished() });
     }
 
-    public stopAnimation(): void {
+    public pauseAnimation(): void {
         this._slideAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.stopAnimation();
+        this.pauseAnimation();
         this.state.translateX.setValue(this._getInitialTranslateValue(this.props));
     }
 

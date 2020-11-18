@@ -13,6 +13,7 @@ import { WiggleAnimationWrapper } from './wrapper/WiggleAnimationWrapper';
 import { BaseAnimationWrapper } from './wrapper/BaseAnimationWrapper';
 
 export abstract class AnimationWrapperView extends React.PureComponent<AnimationProps> {
+
     private _component: WrapperComponent;
     private _animatorRef?: BaseAnimationWrapper<AnimationProps, {}> | null;
 
@@ -27,15 +28,27 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
         }
     }
 
-    public startAnimation() {
+    /**
+     * This function will reset all animated timing functions associated with the current animation
+     * and start the animation from it's initial point.
+     */
+    public startAnimation(): void {
         this._animatorRef?.startAnimation();
     }
 
-    public stopAnimation() {
-        this._animatorRef?.stopAnimation();
+    /**
+     * This function will stop all the Animated timing functions without resetting their values
+     * effectively pausing any applied animation when invoked.
+     */
+    public pauseAnimation(): void {
+        this._animatorRef?.pauseAnimation();
     }
 
-    public resetAnimation() {
+    /**
+     * This function will clear the animation timing functions and will reset the view before
+     * any animation transformation were applied to it.
+     */
+    public resetAnimation(): void {
         this._animatorRef?.resetAnimation();
     }
 

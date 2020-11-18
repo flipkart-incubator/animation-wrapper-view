@@ -8,7 +8,7 @@ import { AnimationProps } from "../../utils/Interfaces";
 export abstract class BaseAnimationWrapper<P extends AnimationProps, S> extends React.PureComponent<P, S> {
 
     public abstract startAnimation(): void;
-    public abstract stopAnimation(): void;
+    public abstract pauseAnimation(): void;
     public abstract resetAnimation(): void;
 
     public componentDidMount(): void {
@@ -35,7 +35,7 @@ export abstract class BaseAnimationWrapper<P extends AnimationProps, S> extends 
     }
 
     public componentWillUnmount() {
-        this.stopAnimation();
+        this.pauseAnimation();
     }
 
     protected animationFinished = () => {

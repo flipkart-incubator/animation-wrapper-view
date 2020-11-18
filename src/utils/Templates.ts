@@ -27,7 +27,7 @@ const rippleConfig: RippleAnimation = {
     triggerType: AnimationTriggerType.ON_CLICK,
     rippleColor: 'blue',
     rippleCount: 5,
-    rippleRadius: 100,
+    rippleRadius: 150,
     rippleDuration: 1000,
     rippleIntervalDuration: 0,
 };
@@ -46,6 +46,7 @@ const fadeInConfig: FadeInAnimation = {
 const fadeOutConfig: FadeOutAnimation = {
     type: AnimationType.FADE_OUT,
     triggerType: AnimationTriggerType.ON_CLICK,
+    finalOpacity: .5,
     animationDuration: 2000
 };
 
