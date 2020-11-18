@@ -54,12 +54,12 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
         this._wiggleAnimation.start(() => { this.animationFinished() });
     }
 
-    public stopAnimation(): void {
+    public pauseAnimation(): void {
         this._wiggleAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.stopAnimation();
+        this.pauseAnimation();
         this.state.translateX.setValue(0);
     }
 

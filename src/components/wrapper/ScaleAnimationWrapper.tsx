@@ -40,12 +40,12 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
         this._scaleAnimation.start(() => { this.animationFinished() });
     }
 
-    public stopAnimation(): void {
+    public pauseAnimation(): void {
         this._scaleAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.stopAnimation();
+        this.pauseAnimation();
         this.state.scale.setValue(1);
     }
 

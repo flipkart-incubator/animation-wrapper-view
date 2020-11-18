@@ -54,12 +54,12 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
         this._rippleAnimation.start(() => {this.animationFinished()});
     }
 
-    public stopAnimation(): void {
+    public pauseAnimation(): void {
         this._rippleAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.stopAnimation();
+        this.pauseAnimation();
         this.state.opacity.setValue(1);
         this.state.scale.setValue(0);
     }
