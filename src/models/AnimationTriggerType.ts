@@ -1,4 +1,4 @@
-export declare enum AnimationTriggerType {
+export enum AnimationTriggerType {
     ON_CLICK = "ON_CLICK",
     ON_LOAD = "ON_LOAD"
 }

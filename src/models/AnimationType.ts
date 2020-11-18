@@ -1,4 +1,4 @@
-export declare enum AnimationType {
+export enum AnimationType {
     RIPPLE = "RIPPLE",
     BOUNCE = "BOUNCE",
     SCALE = "SCALE",
