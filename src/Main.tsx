@@ -2,7 +2,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button, GestureResponderEvent } from 'react-native';
 import { AnimationWrapperView } from './components/AnimationWrapperView';
-import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, wiggleAnimation } from './utils/Templates';
+import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
 
 export default class Main extends React.Component {
 
@@ -13,13 +13,15 @@ export default class Main extends React.Component {
             <View style={styles.container}>
                 <AnimationWrapperView
                     ref={(ref) => (this._wrapperRef = ref)}
-                    animationConfig={scaleConfig}
+                    animationConfig={wiggleAnimation}
                     onAnimationFinish={this._onComplete}>
                     {this._renderCard()}
                 </AnimationWrapperView>
 
-                <View style={{margin: 16}}>
-                    <Button title={"Click me"} onPress={this._onPress} />
+                <View style={{ margin: 16, justifyContent: 'space-between', flexDirection: 'row', width: 200 }}>
+                    <Button title={"Start"} onPress={this._onPress} />
+                    <Button title={"Stop"} onPress={this._onPressToStop} />
+                    <Button title={"Reset"} onPress={this._onPressToReset} />
                 </View>
             </View>
         );
@@ -27,7 +29,15 @@ export default class Main extends React.Component {
 
     private _onPress = (_: GestureResponderEvent) => {
         // Trigger animation on button press.
-        this._wrapperRef?.triggerAnimation();
+        this._wrapperRef?.startAnimation();
+    }
+    private _onPressToStop = (_: GestureResponderEvent) => {
+        // Trigger animation on button press.
+        this._wrapperRef?.stopAnimation();
+    }
+    private _onPressToReset = (_: GestureResponderEvent) => {
+        // Trigger animation on button press.
+        this._wrapperRef?.resetAnimation();
     }
 
     private _onComplete = () => {
@@ -63,7 +73,7 @@ const styles = StyleSheet.create({
     viewContainer: {
         height: 200,
         width: 400,
-        backgroundColor: '#fedfed',
+        backgroundColor: '#123123',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 20,

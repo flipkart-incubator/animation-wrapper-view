@@ -13,12 +13,36 @@ interface SlideAnimationState {
 
 
 export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationProps, SlideAnimationState> {
+
+    private _slideAnimation: Animated.CompositeAnimation;
+
     private _screenWidth: number;
     public constructor(props: SlideAnimationProps) {
         super(props);
         
         this._screenWidth = Math.round(Dimensions.get('window').width);
         this.state = this.getAnimationStateFromProps(props);
+
+
+        const { animationConfig } = this.props;
+        let toValue: number;
+        let duration: number;
+        if (animationConfig.type === AnimationType.SLIDE_IN) {
+            const slideInConfig = animationConfig as SlideInAnimation;
+            toValue = 1;
+            duration = slideInConfig.animationDuration;
+            
+        } else {
+            const slideOutConfig = animationConfig as SlideOutAnimation;
+            duration = slideOutConfig.animationDuration;
+            toValue = slideOutConfig.finalOffset ? slideOutConfig.finalOffset : this._screenWidth;
+           
+        }
+        this._slideAnimation = Animated.timing(this.state.translateX, {
+            duration: duration,
+            toValue: toValue,
+            useNativeDriver: false
+        });
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps: Readonly<SlideAnimationProps>, _nextContext: any): void {
@@ -30,23 +54,18 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
         }
     }
 
-    public triggerAnimation(): void {
-        const { animationConfig } = this.props;
-        if (animationConfig.type === AnimationType.SLIDE_IN) {
-            const slideInConfig = animationConfig as SlideInAnimation;
-            Animated.timing(this.state.translateX, {
-                duration: slideInConfig.animationDuration,
-                toValue: 1,
-                useNativeDriver: false
-            }).start();
-        } else {
-            const slideOutConfig = animationConfig as SlideOutAnimation;
-            Animated.timing(this.state.translateX, {
-                duration: slideOutConfig.animationDuration,
-                toValue: slideOutConfig.finalOffset ? slideOutConfig.finalOffset : this._screenWidth,
-                useNativeDriver: false
-            }).start();
-        }
+    public startAnimation(): void {
+        this._slideAnimation.reset();
+        this._slideAnimation.start(() => { this.animationFinished() });
+    }
+
+    public stopAnimation(): void {
+        this._slideAnimation.stop();
+    }
+
+    public resetAnimation(): void {
+        this.stopAnimation();
+        this.state.translateX.setValue(this._getInitialTranslateValue(this.props));
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
@@ -67,16 +86,17 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
     }
 
     protected getAnimationStateFromProps(props: SlideAnimationProps): SlideAnimationState {
+        return {
+            translateX: new Animated.Value(this._getInitialTranslateValue(props))
+        }
+    }
+
+    private _getInitialTranslateValue(props: SlideAnimationProps): number {
         if (props.animationConfig.type === AnimationType.SLIDE_IN) {
             const config = props.animationConfig as SlideInAnimation;
-            return {
-                translateX: new Animated.Value(config.initialOffset ? config.initialOffset : -this._screenWidth)
-            };
+            return config.initialOffset ? config.initialOffset : -this._screenWidth;
         } else {
-            return {
-                translateX: new Animated.Value(0)
-            };
+            return 0;
         }
-
     }
 }

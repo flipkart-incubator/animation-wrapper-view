@@ -11,7 +11,7 @@ import { WiggleAnimation } from "../models/WiggleAnimation";
 const bounceConfig: BounceAnimation = {
     type: AnimationType.BOUNCE,
     triggerType: AnimationTriggerType.ON_CLICK,
-    bounceHeight: 30,
+    bounceHeight: 300,
     animationDuration: 1000
 };
 
@@ -24,9 +24,9 @@ const scaleConfig: ScaleAnimation = {
 };
 const rippleConfig: RippleAnimation = {
     type: AnimationType.RIPPLE,
-    triggerType: AnimationTriggerType.ON_LOAD,
+    triggerType: AnimationTriggerType.ON_CLICK,
     rippleColor: 'blue',
-    rippleCount: 2,
+    rippleCount: 5,
     rippleRadius: 100,
     rippleDuration: 1000,
     rippleIntervalDuration: 0,

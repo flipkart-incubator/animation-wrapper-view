@@ -10,11 +10,33 @@ interface FadeAnimationState {
     opacity: Animated.Value;
 }
 
-
 export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProps, FadeAnimationState> {
+
+    private _fadeAnimation;
+
     public constructor(props: FadeAnimationProps) {
         super(props);
         this.state = this.getAnimationStateFromProps(props);
+        const { animationConfig } = this.props;
+
+        let duration: number;
+        let toValue: number;
+
+        if (animationConfig.type === AnimationType.FADE_IN) {
+            const fadeInConfig = animationConfig as FadeInAnimation;
+            duration = fadeInConfig.animationDuration;
+            toValue = 1;
+        } else {
+            const fadeOutConfig = animationConfig as FadeOutAnimation;
+            duration = fadeOutConfig.animationDuration;
+            toValue = fadeOutConfig.finalOpacity ? fadeOutConfig.finalOpacity : 0;
+        }
+
+        this._fadeAnimation = Animated.timing(this.state.opacity, {
+            duration: duration,
+            toValue: toValue,
+            useNativeDriver: false
+        });
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps: Readonly<FadeAnimationProps>, _nextContext: any): void {
@@ -26,27 +48,18 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         }
     }
 
-    public triggerAnimation(): void {
-        const { animationConfig } = this.props;
-        if (animationConfig.type === AnimationType.FADE_IN) {
-            const fadeInConfig = animationConfig as FadeInAnimation;
-            Animated.timing(this.state.opacity, {
-                duration: fadeInConfig.animationDuration,
-                toValue: 1,
-                useNativeDriver: false
-            }).start(() => {
-                this.animationEnded();
-            });
-        } else {
-            const fadeOutConfig = animationConfig as FadeOutAnimation;
-            Animated.timing(this.state.opacity, {
-                duration: fadeOutConfig.animationDuration,
-                toValue: fadeOutConfig.finalOpacity ? fadeOutConfig.finalOpacity : 0,
-                useNativeDriver: false
-            }).start(() => {
-                this.animationEnded();
-            });
-        }
+    public startAnimation = () => {
+        this._fadeAnimation.reset();
+        this._fadeAnimation.start(() => { this.animationFinished() });
+    }
+
+    public stopAnimation = () => {
+        this._fadeAnimation.stop();
+    }
+
+    public resetAnimation = () => {
+        this.stopAnimation();
+        this.state.opacity.setValue(this._getInitialOpacity(this.props));
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
@@ -65,16 +78,17 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
     }
 
     protected getAnimationStateFromProps(props: FadeAnimationProps): FadeAnimationState {
+        return {
+            opacity: new Animated.Value(this._getInitialOpacity(props))
+        }
+    }
+
+    private _getInitialOpacity(props: FadeAnimationProps): number {
         if (props.animationConfig.type === AnimationType.FADE_IN) {
             const config = props.animationConfig as FadeInAnimation;
-            return {
-                opacity: new Animated.Value(config.initialOpacity ? config.initialOpacity : 0)
-            };
+            return config.initialOpacity ? config.initialOpacity : 0;
         } else {
-            return {
-                opacity: new Animated.Value(1)
-            };
+            return 1;
         }
-
     }
 }

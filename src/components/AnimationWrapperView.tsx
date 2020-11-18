@@ -27,8 +27,16 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
         }
     }
 
-    public triggerAnimation() {
-        this._animatorRef?.triggerAnimation();
+    public startAnimation() {
+        this._animatorRef?.startAnimation();
+    }
+
+    public stopAnimation() {
+        this._animatorRef?.stopAnimation();
+    }
+
+    public resetAnimation() {
+        this._animatorRef?.resetAnimation();
     }
 
     public render(): React.ReactNode | undefined {

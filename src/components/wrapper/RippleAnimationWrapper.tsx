@@ -7,33 +7,21 @@ import {RippleAnimationProps} from "../../utils/Interfaces";
 interface RippleAnimationState {
     scale: Animated.Value;
     opacity: Animated.Value;
-    rippleCount: number;
 }
 
 
 export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimationProps, RippleAnimationState> {
+
+    private _rippleAnimation: Animated.CompositeAnimation;
+
     public constructor(props: RippleAnimationProps) {
         super(props);
         this.state = this.getAnimationStateFromProps(props);
-    }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<RippleAnimationProps>, _nextContext: any): void {
-        if (nextProps !== this.props) {
-            const nextState: RippleAnimationState | null = this.getAnimationStateFromProps(nextProps);
-            if (null != nextState) {
-                this.setState(nextState);
-            }
-        }
-    }
-
-    public triggerAnimation(): void {
         const { animationConfig } = this.props;
-        const { scale, opacity, rippleCount } = this.state;
+        const { scale, opacity } = this.state;
 
-        scale.setValue(0);
-        opacity.setValue(1);
-        this.setState({ rippleCount: rippleCount + 1 });
-        Animated.sequence([
+        this._rippleAnimation = Animated.loop(Animated.sequence([
             Animated.delay(animationConfig.rippleIntervalDuration),
             Animated.parallel([
                 Animated.timing(scale, {
@@ -47,14 +35,33 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
                     useNativeDriver: false
                 })
             ])
-        ]).start(() => {
-            if (this.state.rippleCount < animationConfig.rippleCount) {
-                this.triggerAnimation();
-            } else {
-                this.setState({ rippleCount: 0 });
-                this.animationEnded();
-            }
+        ]), {
+            iterations: animationConfig.rippleCount
         });
+    }
+
+    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<RippleAnimationProps>, _nextContext: any): void {
+        if (nextProps !== this.props) {
+            const nextState: RippleAnimationState | null = this.getAnimationStateFromProps(nextProps);
+            if (null != nextState) {
+                this.setState(nextState);
+            }
+        }
+    }
+
+    public startAnimation(): void {
+        this._rippleAnimation.reset();
+        this._rippleAnimation.start(() => {this.animationFinished()});
+    }
+
+    public stopAnimation(): void {
+        this._rippleAnimation.stop();
+    }
+
+    public resetAnimation(): void {
+        this.stopAnimation();
+        this.state.opacity.setValue(1);
+        this.state.scale.setValue(0);
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
@@ -94,8 +101,7 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
     protected getAnimationStateFromProps(_: RippleAnimationProps): RippleAnimationState {
         return {
             scale: new Animated.Value(0),
-            opacity: new Animated.Value(1),
-            rippleCount: 0
+            opacity: new Animated.Value(1)
         };
     }
 }

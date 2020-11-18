@@ -12,9 +12,32 @@ interface WiggleAnimationState {
 
 
 export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimationProps, WiggleAnimationState> {
+
+    private _wiggleAnimation: Animated.CompositeAnimation;
     public constructor(props: WiggleAnimationProps) {
         super(props);
         this.state = this.getAnimationStateFromProps(props);
+
+        const duration = props.animationConfig.animationDuration;
+        const wiggleDistance = props.animationConfig.wiggleDistance;
+
+        this._wiggleAnimation = Animated.sequence([
+            Animated.timing(this.state.translateX, {
+                duration: duration / 2,
+                toValue: -wiggleDistance,
+                useNativeDriver: false
+            }),
+            Animated.timing(this.state.translateX, {
+                duration: duration,
+                toValue: wiggleDistance,
+                useNativeDriver: false
+            }),
+            Animated.timing(this.state.translateX, {
+                duration: this.props.animationConfig.animationDuration / 2,
+                toValue: 0,
+                useNativeDriver: false
+            })
+        ]);
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps: Readonly<WiggleAnimationProps>, _nextContext: any): void {
@@ -26,39 +49,18 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
         }
     }
 
-    public triggerAnimation = () => {
-        const { animationConfig } = this.props;
-        this.moveLeft(animationConfig.animationDuration, animationConfig.wiggleDistance);
+    public startAnimation = () => {
+        this._wiggleAnimation.reset();
+        this._wiggleAnimation.start(() => { this.animationFinished() });
     }
 
-    private moveLeft = (duration: number, wiggleDistance: number) => {
-
-        Animated.timing(this.state.translateX, {
-            duration: duration / 2,
-            toValue: -wiggleDistance,
-            // easing: Easing.bezier(0, 0.55, 0.45, 1),
-            useNativeDriver: false
-        }).start(() => {
-            Animated.timing(this.state.translateX, {
-                duration: duration,
-                toValue: wiggleDistance,
-                // easing: Easing.bounce,
-                useNativeDriver: false
-            }).start(() => {
-                this.centerPos();
-            });
-        });
+    public stopAnimation(): void {
+        this._wiggleAnimation.stop();
     }
 
-
-    private centerPos = () => {
-        Animated.timing(this.state.translateX, {
-            duration: this.props.animationConfig.animationDuration / 2,
-            toValue: 0,
-            useNativeDriver: false
-        }).start(() => {
-            this.animationEnded();
-        });
+    public resetAnimation(): void {
+        this.stopAnimation();
+        this.state.translateX.setValue(0);
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {

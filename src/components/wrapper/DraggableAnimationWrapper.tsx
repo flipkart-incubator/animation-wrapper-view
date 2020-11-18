@@ -71,7 +71,15 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     }
 
 
-    public triggerAnimation(): void {
+    public stopAnimation(): void {
+        // this.state.translateY.stopAnimation();
+    }
+    public resetAnimation(): void {
+        this.stopAnimation();
+        this.setState(this.getAnimationStateFromProps(this.props));
+    }
+
+    public startAnimation(): void {
         // no-op
     }
 }

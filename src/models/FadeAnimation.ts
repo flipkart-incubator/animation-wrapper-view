@@ -3,7 +3,7 @@ import { BaseAnimation } from './BaseAnimation';
 
 
 interface FadeInAnimation extends BaseAnimation {
-    
+
     animationDuration: number;
     initialOpacity?: number;
 }

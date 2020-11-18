@@ -1,17 +1,19 @@
 
 import React from 'react';
-import { GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
+import { Animated, GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
 import { AnimationTriggerType } from '../../models/AnimationTriggerType';
 import { AnimationType } from '../../models/AnimationType';
 import { AnimationProps } from "../../utils/Interfaces";
 
 export abstract class BaseAnimationWrapper<P extends AnimationProps, S> extends React.PureComponent<P, S> {
 
-    public abstract triggerAnimation(): void;
+    public abstract startAnimation(): void;
+    public abstract stopAnimation(): void;
+    public abstract resetAnimation(): void;
 
     public componentDidMount(): void {
         if (this.props.animationConfig && this.props.animationConfig.triggerType === AnimationTriggerType.ON_LOAD) {
-            this.triggerAnimation();
+            this.startAnimation();
         }
     }
 
@@ -32,7 +34,11 @@ export abstract class BaseAnimationWrapper<P extends AnimationProps, S> extends 
         }
     }
 
-    protected animationEnded = () => {
+    public componentWillUnmount() {
+        this.stopAnimation();
+    }
+
+    protected animationFinished = () => {
         if (this.props.onAnimationFinish) {
             this.props.onAnimationFinish();
         }
@@ -44,7 +50,7 @@ export abstract class BaseAnimationWrapper<P extends AnimationProps, S> extends 
     private _onPress = (_: GestureResponderEvent) => {
         const pressParam = this.props.animationConfig;
         if (pressParam && pressParam.triggerType === AnimationTriggerType.ON_CLICK) {
-            this.triggerAnimation();
+            this.startAnimation();
         }
     };
 }
