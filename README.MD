@@ -21,6 +21,8 @@ Robustly exposed API to allow developer to have control over various aspects of 
 
 #### Start, Pause and Reset Animation
 ```jsx
+private _wrapperRef: AnimationWrapperView | null;
+
 render() {
     return (
         <AnimationWrapperView
