@@ -6,9 +6,10 @@ import { DraggableAnimation } from "../models/DraggableAnimation";
 import { FadeInAnimation, FadeOutAnimation } from "../models/FadeAnimation";
 import { SlideInAnimation, SlideOutAnimation } from "../models/SlideAnimation";
 import { WiggleAnimation } from "../models/WiggleAnimation";
+import { JsonAnimation } from "../models/JsonAnimation";
 
 type WrapperProps = {
-    animationConfig: BaseAnimation;
+    animationConfig: BaseAnimation | JsonAnimation; 
     onAnimationFinish?: () => void;
 }
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button, GestureResponderEvent } from 'react-native';
 import { AnimationWrapperView } from './components/AnimationWrapperView';
 import { BaseAnimation } from './models/BaseAnimation';
+import { JsonAnimation } from './models/JsonAnimation';
 import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
 
 interface State {
@@ -11,7 +12,6 @@ interface State {
 export default class Main extends React.Component<{}, State> {
     constructor(props: any) {
         super(props);
-
         this.state = {
             animationConfig: rippleConfig
         }
@@ -20,12 +20,48 @@ export default class Main extends React.Component<{}, State> {
     private _wrapperRef?: AnimationWrapperView | null;
 
     public render(): React.ReactNode {
+
+
+        const jsonString = {
+            "animation":
+            {
+                "transformations": [
+                    {
+                        "key": "SCALE",
+                        "from": 0,
+                        "to": 1
+                    },
+                    {
+                        "key": "TRANSLATE_Y",
+                        "from": -1000,
+                        "to": 0
+                    },
+                    {
+                        "key": "ROTATE",
+                        "from": 0,
+                        "to": 90
+                    },
+                    {
+                        "key": "ROTATE_X",
+                        "from": 0,
+                        "to": 180
+                    },
+                ],
+                "timing": {
+                    "duration": 1000,
+                    "interpolation": {}
+                }
+            }
+        };
+
+        const jsonAnimation: JsonAnimation = jsonString as JsonAnimation;
+
         return (
             <View>
                 <View style={styles.container}>
-                    <AnimationWrapperView     
+                    <AnimationWrapperView
                         ref={(ref) => (this._wrapperRef = ref)}
-                        animationConfig={this.state.animationConfig}
+                        animationConfig={jsonAnimation}
                         onAnimationFinish={this._onComplete}>
                         {this._renderCard()}
                     </AnimationWrapperView>
@@ -37,7 +73,7 @@ export default class Main extends React.Component<{}, State> {
                         <Button title={"Pause"} onPress={this._onPressToStop} />
                         <Button title={"Reset"} onPress={this._onPressToReset} />
                     </View>
-                    <View style={{ margin: 16,  flexDirection: 'column' }}>
+                    <View style={{ margin: 16, flexDirection: 'column' }}>
 
                         <Button title={"Fade In"} onPress={() => (this.setState({ animationConfig: fadeInConfig }))} />
                         <Button title={"Fade out"} onPress={() => (this.setState({ animationConfig: fadeOutConfig }))} />
