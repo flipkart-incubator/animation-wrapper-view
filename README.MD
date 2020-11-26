@@ -105,30 +105,27 @@ Sample Json
           "key": "SCALE",
           "from": 0,
           "to": 1
-        }
-      ],
-      "duration": 1000,
-      "interpolation": {
-        "easing": "bounce"
-      }
-    },
-    {
-      "transformations": [
+        },
         {
-          "key": "SCALE_X",
-          "from": 2,
-          "to": 1
+          "key": "ROTATE",
+          "from": 0,
+          "to": 90
+        },
+        {
+          "key": "ROTATE_X",
+          "from": 0,
+          "to": 180
         }
       ],
       "duration": 1000,
       "interpolation": {
-        "easing": "circle"
+          "easing": "linear"
       }
     }
   ]
 }
 ```
-
+![Json Animation Demo](/docs/media/json_animation.gif)
 ### Demo
 | Animation Type | Demo GIF |
 | --- | --- |
