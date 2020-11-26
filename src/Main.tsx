@@ -29,16 +29,12 @@ export default class Main extends React.Component<{}, State> {
                         {
                             "key": "SCALE",
                             "from": 0,
-                            "to": .5
+                            "to": 1
                         }
                     ],
-                    "duration": 5000,
+                    "duration": 1000,
                     "interpolation": {
-                        "easing": "elastic",
-                        "params": {
-                            "back": 1,
-                            "bounciness": 1
-                        }
+                        "easing": "bounce"
                     }
 
                 },
@@ -47,20 +43,15 @@ export default class Main extends React.Component<{}, State> {
                         {
                             "key": "SCALE_X",
                             "from": 2,
-                            "to": .7
+                            "to": 1
                         }
                     ],
-                    "duration": 4000,
+                    "duration": 1000,
                     "interpolation": {
-                        "easing": "elastic",
-                        "params": {
-                            "back": 1,
-                            "bounciness": 1
-                        }
+                        "easing": "circle"
                     }
                 }
             ]
-
         };
 
         const jsonAnimation: JsonAnimation = jsonString as JsonAnimation;
