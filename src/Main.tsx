@@ -23,35 +23,44 @@ export default class Main extends React.Component<{}, State> {
 
 
         const jsonString = {
-            "animation":
-            {
-                "transformations": [
-                    {
-                        "key": "SCALE",
-                        "from": 0,
-                        "to": 1
-                    },
-                    {
-                        "key": "TRANSLATE_Y",
-                        "from": -1000,
-                        "to": 0
-                    },
-                    {
-                        "key": "ROTATE",
-                        "from": 0,
-                        "to": 90
-                    },
-                    {
-                        "key": "ROTATE_X",
-                        "from": 0,
-                        "to": 180
-                    },
-                ],
-                "timing": {
-                    "duration": 1000,
-                    "interpolation": {}
+            "animation": [
+                {
+                    "transformations": [
+                        {
+                            "key": "SCALE",
+                            "from": 0,
+                            "to": .5
+                        }
+                    ],
+                    "duration": 5000,
+                    "interpolation": {
+                        "easing": "elastic",
+                        "params": {
+                            "back": 1,
+                            "bounciness": 1
+                        }
+                    }
+
+                },
+                {
+                    "transformations": [
+                        {
+                            "key": "SCALE_X",
+                            "from": 2,
+                            "to": .7
+                        }
+                    ],
+                    "duration": 4000,
+                    "interpolation": {
+                        "easing": "elastic",
+                        "params": {
+                            "back": 1,
+                            "bounciness": 1
+                        }
+                    }
                 }
-            }
+            ]
+
         };
 
         const jsonAnimation: JsonAnimation = jsonString as JsonAnimation;
