@@ -25,6 +25,7 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
 
     public UNSAFE_componentWillReceiveProps(nextProps: AnimationProps): void {
         if (this.props.animationConfig !== nextProps.animationConfig) {
+            this._animatorRef?.resetAnimation();
             this._component = AnimationWrapperView._animationWrapperGenerator(nextProps.animationConfig);
         }
     }

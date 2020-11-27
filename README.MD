@@ -126,6 +126,7 @@ Sample Json
 }
 ```
 ![Json Animation Demo](/docs/media/json_animation.gif)
+![Json Animation Demo](/docs/media/json_demo.gif)
 ### Demo
 | Animation Type | Demo GIF |
 | --- | --- |

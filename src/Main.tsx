@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button, GestureResponderEvent } from 'react-native';
 import { AnimationWrapperView } from './components/AnimationWrapperView';
 import { BaseAnimation } from './models/BaseAnimation';
-import { JsonAnimation } from './models/JsonAnimation';
+import { cardFlipJson, swingJson } from './utils/JsonTemplates';
 import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
 
 interface State {
@@ -13,7 +13,7 @@ export default class Main extends React.Component<{}, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            animationConfig: rippleConfig
+            animationConfig: swingJson
         }
     }
 
@@ -22,46 +22,14 @@ export default class Main extends React.Component<{}, State> {
     public render(): React.ReactNode {
 
 
-        const jsonString = {
-            "animation": [
-                {
-                    "transformations": [
-                        {
-                            "key": "SCALE",
-                            "from": 0,
-                            "to": 1
-                        }
-                    ],
-                    "duration": 1000,
-                    "interpolation": {
-                        "easing": "bounce"
-                    }
-
-                },
-                {
-                    "transformations": [
-                        {
-                            "key": "SCALE_X",
-                            "from": 2,
-                            "to": 1
-                        }
-                    ],
-                    "duration": 1000,
-                    "interpolation": {
-                        "easing": "circle"
-                    }
-                }
-            ]
-        };
-
-        const jsonAnimation: JsonAnimation = jsonString as JsonAnimation;
+        
 
         return (
             <View>
                 <View style={styles.container}>
                     <AnimationWrapperView
                         ref={(ref) => (this._wrapperRef = ref)}
-                        animationConfig={jsonAnimation}
+                        animationConfig={this.state.animationConfig}
                         onAnimationFinish={this._onComplete}>
                         {this._renderCard()}
                     </AnimationWrapperView>
@@ -72,6 +40,12 @@ export default class Main extends React.Component<{}, State> {
                         <Button title={"Start"} onPress={this._onPress} />
                         <Button title={"Pause"} onPress={this._onPressToStop} />
                         <Button title={"Reset"} onPress={this._onPressToReset} />
+                    </View>
+
+
+                    <View style={{ flexDirection: 'row' }}>
+                        <Button title={"Json(Card)"} onPress={() => (this.setState({ animationConfig: cardFlipJson }))} />
+                        <Button title={"Json(Swing)"} onPress={() => (this.setState({ animationConfig: swingJson }))} />
                     </View>
                     <View style={{ margin: 16, flexDirection: 'column' }}>
 
@@ -109,13 +83,10 @@ export default class Main extends React.Component<{}, State> {
     private _renderCard(): React.ReactNode {
         return (
             <ImageBackground source={{}} style={styles.viewContainer}>
-                <View style={{ flex: 1, flexDirection: 'column' }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
 
                     <Text style={styles.paragraph}>
                         BannerWidget
-                    </Text>
-                    <Text style={styles.paragraph}>
-                        Demo to apply transitions to this container
                     </Text>
                 </View>
             </ImageBackground>
@@ -133,7 +104,7 @@ const styles = StyleSheet.create({
     },
     viewContainer: {
         height: 200,
-        width: 400,
+        width: 200,
         backgroundColor: '#123123',
         alignItems: 'center',
         justifyContent: 'center',
