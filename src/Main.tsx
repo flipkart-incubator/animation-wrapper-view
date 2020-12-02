@@ -13,7 +13,7 @@ export default class Main extends React.Component<{}, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            animationConfig: swingJson
+            animationConfig: cardFlipJson
         }
     }
 
@@ -43,7 +43,7 @@ export default class Main extends React.Component<{}, State> {
                     <View style={{ flexDirection: 'row' }}>
                         <Button title={"Json(Card)"} onPress={() => (this.setState({ animationConfig: cardFlipJson }))} />
                         <Button title={"Json(Swing)"} onPress={() => (this.setState({ animationConfig: swingJson }))} />
-                        <Button title={"Json(Swing)"} onPress={() => (this.setState({ animationConfig: zoomInJson }))} />
+                        <Button title={"Json(ZoomIn)"} onPress={() => (this.setState({ animationConfig: zoomInJson }))} />
                     </View>
                     <View style={{ margin: 16, flexDirection: 'column' }}>
 
