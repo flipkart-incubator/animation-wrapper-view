@@ -1,4 +1,6 @@
 import React from "react";
+import { JsonAnimationProps } from "../components/wrapper/JsonAnimationWrapper";
+import { JsonAnimation } from "../models/JsonAnimation";
 import { BounceAnimationProps, DraggableAnimationProps, RippleAnimationProps, ScaleAnimationProps, SlideAnimationProps, FadeAnimationProps, WiggleAnimationProps, AnimationProps } from "./Interfaces";
 
 
@@ -12,4 +14,5 @@ export type WrapperComponent = React.ComponentClass<RippleAnimationProps>
     | React.ComponentClass<SlideAnimationProps>
     | React.ComponentClass<FadeAnimationProps>
     | React.ComponentClass<DraggableAnimationProps>
-    | React.ComponentClass<WiggleAnimationProps>;
+    | React.ComponentClass<WiggleAnimationProps>
+    | React.ComponentClass<JsonAnimationProps>;

@@ -7,5 +7,6 @@ export enum AnimationType {
     DRAGGABLE = "DRAGGABLE",
     SLIDE_IN = "SLIDE_IN",
     SLIDE_OUT = "SLIDE_OUT",
-    WIGGLE = "WIGGLE"
+    WIGGLE = "WIGGLE",
+    JSON = "JSON"
 }

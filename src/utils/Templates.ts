@@ -4,6 +4,7 @@ import { AnimationType } from "../models/AnimationType";
 import { BounceAnimation } from "../models/BounceAnimation";
 import { DraggableAnimation } from "../models/DraggableAnimation";
 import { FadeInAnimation, FadeOutAnimation } from "../models/FadeAnimation";
+import { JsonAnimation } from "../models/JsonAnimation";
 import { RippleAnimation } from "../models/RippleAnimation";
 import { ScaleAnimation } from "../models/ScaleAnimation";
 import { WiggleAnimation } from "../models/WiggleAnimation";

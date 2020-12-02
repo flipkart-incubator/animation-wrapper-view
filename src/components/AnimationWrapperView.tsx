@@ -11,6 +11,7 @@ import { FadeAnimationWrapper } from './wrapper/FadeAnimationWrapper';
 import { SlideAnimationWrapper } from './wrapper/SlideAnimationWrapper';
 import { WiggleAnimationWrapper } from './wrapper/WiggleAnimationWrapper';
 import { BaseAnimationWrapper } from './wrapper/BaseAnimationWrapper';
+import { JsonAnimationWrapper } from './wrapper/JsonAnimationWrapper';
 
 export abstract class AnimationWrapperView extends React.PureComponent<AnimationProps> {
 
@@ -24,6 +25,7 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
 
     public UNSAFE_componentWillReceiveProps(nextProps: AnimationProps): void {
         if (this.props.animationConfig !== nextProps.animationConfig) {
+            this._animatorRef?.resetAnimation();
             this._component = AnimationWrapperView._animationWrapperGenerator(nextProps.animationConfig);
         }
     }
@@ -92,6 +94,8 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
                 return SlideAnimationWrapper;
             case AnimationType.WIGGLE:
                 return WiggleAnimationWrapper;
+            default:
+                return JsonAnimationWrapper;
         }
     }
 
