@@ -77,7 +77,8 @@ Type definitions:
 
 | Type name | params | usage |
 | --- | --- | --- |
-| InterpolationDef | easing: EasingType | Defines the easing function that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
+| InterpolationDef | easing: EasingType | Defines the easing 
+that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
 | | params: InterpolationParams | Some easing functions requre extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing. |
 
 
@@ -88,9 +89,9 @@ Type definitions:
 
 | Type name | params | usage |
 | --- | --- | --- |
-| AnimationDef | TransformFunction[] | An array of transformation functions can be defined, that will be applied to the object in parallel |
+| AnimationDef | TransformDef[] | An array of transformation functions can be defined, that will be applied to the object in parallel |
 | | duration | Duration in which the set of transformations complete animating. |
-| | InterpolationFunction | This param will describe the easing function that will be applied to this set of transformations. ||
+| | InterpolationDef | This param will describe the easing function that will be applied to this set of transformations. ||
 
 
 Multiple set of transformations can be played in a sequence.
