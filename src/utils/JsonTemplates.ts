@@ -104,7 +104,7 @@ export const swingJson = {
         }
 
     ]
-} as JsonAnimation;
+};
 
 
 export const zoomInJson = {
@@ -124,7 +124,11 @@ export const zoomInJson = {
         ],
         "d": 500,
         "i": {
-            "e": "linear"
+            "e": "back",
+            "p": {
+                "back": 1
+            }
+            
         }
     }
 } as JsonAnimation;
