@@ -14,7 +14,7 @@ type TransformType = "scale"
 type EasingType = "linear" | "quad" | "circle" | "elastic" | "bounce" | "back";
 
 export interface JsonAnimation extends BaseAnimation {
-    animationConfig: AnimationDescription[]
+    animationConfig: AnimationDef | AnimationDef[] 
 }
 
 /**
@@ -22,7 +22,7 @@ export interface JsonAnimation extends BaseAnimation {
  * d: Duration for which the animation.
  * i: Interpolation function for the animation.
  */
-export type AnimationDescription = {
+export type AnimationDef = {
     tr: TransformDef[], 
     d: number,
     i?: InterpolationDef

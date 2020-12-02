@@ -2,6 +2,7 @@ import { JsonAnimation } from "../models/JsonAnimation";
 
 export const cardFlipJson = {
     "triggerType": "ON_CLICK",
+    "type": "JSON",
     "animationConfig": [
         {
             "tr": [
@@ -44,6 +45,7 @@ export const cardFlipJson = {
 
 export const swingJson = {
     "triggerType": "ON_LOAD",
+    "type": "JSON",
     "animationConfig": [
         {
             "tr": [
@@ -72,7 +74,7 @@ export const swingJson = {
                     "key": "rotate",
                     "f": 5,
                     "t": -5
-                    
+
                 }
 
             ],
@@ -102,4 +104,27 @@ export const swingJson = {
         }
 
     ]
+} as JsonAnimation;
+
+
+export const zoomInJson = {
+    "triggerType": "ON_CLICK",
+    "type": "JSON",
+    "animationConfig": {
+        "tr": [
+            {
+                "key": "scale",
+                "f": 0,
+                "t": 1
+            }, {
+                "key": "rotate",
+                "f": -30,
+                "t": 0
+            }
+        ],
+        "d": 500,
+        "i": {
+            "e": "linear"
+        }
+    }
 } as JsonAnimation;

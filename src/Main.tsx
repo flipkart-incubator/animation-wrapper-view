@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button, GestureResponderEvent } from 'react-native';
 import { AnimationWrapperView } from './components/AnimationWrapperView';
 import { BaseAnimation } from './models/BaseAnimation';
-import { cardFlipJson, swingJson } from './utils/JsonTemplates';
+import { cardFlipJson, swingJson, zoomInJson } from './utils/JsonTemplates';
 import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
 
 interface State {
@@ -20,9 +20,6 @@ export default class Main extends React.Component<{}, State> {
     private _wrapperRef?: AnimationWrapperView | null;
 
     public render(): React.ReactNode {
-
-
-        
 
         return (
             <View>
@@ -46,6 +43,7 @@ export default class Main extends React.Component<{}, State> {
                     <View style={{ flexDirection: 'row' }}>
                         <Button title={"Json(Card)"} onPress={() => (this.setState({ animationConfig: cardFlipJson }))} />
                         <Button title={"Json(Swing)"} onPress={() => (this.setState({ animationConfig: swingJson }))} />
+                        <Button title={"Json(Swing)"} onPress={() => (this.setState({ animationConfig: zoomInJson }))} />
                     </View>
                     <View style={{ margin: 16, flexDirection: 'column' }}>
 

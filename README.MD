@@ -62,22 +62,22 @@ private _onPressToReset = (_: GestureResponderEvent) => {
 AnimationWrapperView also gives you the capability to define your custom animation using JSON.
 This tool is very powerful as it allows you to play with various transformation attributes that can be applied to any Animated.View.
 
- - A `TransformFunction` object defines an individual piece of transformation, `from` to `to` value and the `property` to transform. 
- - An array of `TransformFunction` along with the `duration` and the `InterpolationFunction` will create an `AnimationDescription` object. All the transformations defined in the array will play in a parrallel.
- - An array of `AnimationDescription` definitions can be played in sequence to render any type of animation(limited by imagination :P).
+ - A `TransformDef` object defines an individual piece of transformation, `f`(from) to `t`(to) value and the `p`(property) to transform. 
+ - An array of `TransformDef` along with the `duration` and the `InterpolationDef` will create an `AnimationDef` object. All the transformations defined in the array will play in a parrallel.
+ - An array of `AnimationDef` definitions can be played in sequence to render any type of animation(limited by imagination :P).
 
 Type definitions:
 
 | Type name | params | usage |
 | --- | --- | --- |
-| TransformFunction | key: TransformType  | Defines the property to transform: SCALE, FADE,OPACITY, TRANSLATE_Y, ROTATE, TRANSLATE_X, ROTATE_X, ROTATE_Y , SCALE_X, SCALE_Y |
-| | to | The starting value of the transformation |
-| | from | The final value of transformation after animation |
+| TransformDef | property: TransformType  | Defines the property to transform: SCALE, FADE,OPACITY, TRANSLATE_Y, ROTATE, TRANSLATE_X, ROTATE_X, ROTATE_Y , SCALE_X, SCALE_Y |
+| | to:number | The starting value of the transformation |
+| | from:number | The final value of transformation after animation |
 
 
 | Type name | params | usage |
 | --- | --- | --- |
-| InterpolationFunction | easing: EasingType | Defines the easing function that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
+| InterpolationDef | easing: EasingType | Defines the easing function that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
 | | params: InterpolationParams | Some easing functions requre extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing. |
 
 
@@ -88,7 +88,7 @@ Type definitions:
 
 | Type name | params | usage |
 | --- | --- | --- |
-| AnimationDescription | TransformFunction[] | An array of transformation functions can be defined, that will be applied to the object in parallel |
+| AnimationDef | TransformFunction[] | An array of transformation functions can be defined, that will be applied to the object in parallel |
 | | duration | Duration in which the set of transformations complete animating. |
 | | InterpolationFunction | This param will describe the easing function that will be applied to this set of transformations. ||
 

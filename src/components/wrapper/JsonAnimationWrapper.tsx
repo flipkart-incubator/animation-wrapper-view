@@ -14,104 +14,25 @@ export interface JsonAnimationProps extends AnimationProps {
 
 export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProps, JsonAnimationState> {
 
+
+    private animation: Animated.Value[]
+
     private transformAnimation: any[][] = [];
     private _compositeAnimation: Animated.CompositeAnimation;
 
     public constructor(props: JsonAnimationProps) {
         super(props);
-        this.state = this.getAnimationStateFromProps(props);
-        this._compositeAnimation = this.getCompositeAnimation(props);
-        this.updateFromProps(this.props);
+        this.state = this.getAnimationStateFromProps(props);     
+        this._compositeAnimation = this.getCompositeAnimation(this.props);
+        this._updateFromProps(this.props);
+
     }
 
-    private getCompositeAnimation(props: JsonAnimationProps): Animated.CompositeAnimation {
+    public componentDidMount() {
+        this._compositeAnimation = this.getCompositeAnimation(this.props);
+        this._updateFromProps(this.props);
 
-        const animationSequence: Animated.CompositeAnimation[] = [];
-        for (let i = 0; i < props.animationConfig.animationConfig.length; i++) {
-            const animationDescription = props.animationConfig.animationConfig[i];
-            animationSequence.push(Animated.timing(this.state.animation[i], {
-                toValue: 1,
-                duration: animationDescription.d,
-                easing: this.getEasingFunction(animationDescription.i),
-                useNativeDriver: false
-            }));
-        }
-        return Animated.sequence(animationSequence);
-    }
-
-    private updateFromProps(props: JsonAnimationProps) {
-        const jsonAnimation = props.animationConfig as JsonAnimation;
-        this.transformAnimation = [];
-
-        for (let animationIndex = 0; animationIndex < jsonAnimation.animationConfig.length; animationIndex++) {
-            if (this.transformAnimation[animationIndex] === undefined) {
-                this.transformAnimation[animationIndex] = [];
-            }
-            const transformations = jsonAnimation.animationConfig[animationIndex].tr;
-            for (let transformIndex = 0; transformIndex < transformations.length; transformIndex++) {
-                const transformation = transformations[transformIndex];
-                console.log('swapnil', animationIndex, " ", transformIndex, " ");
-                switch (transformation.key) {
-                    case "translateX":
-                        const translateX = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [transformation.f, transformation.t]
-                        });
-                        this.transformAnimation[animationIndex].push({ translateX });
-                        break;
-                    case "translateY":
-                        const translateY = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [transformation.f, transformation.t]
-                        });
-                        this.transformAnimation[animationIndex].push({ translateY });
-                        break;
-                    case "scale":
-                        const scale = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [transformation.f, transformation.t]
-                        });
-                        this.transformAnimation[animationIndex].push({ scale });
-                        break;
-                    case "scaleX":
-                        const scaleX = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [transformation.f, transformation.t]
-                        });
-                        this.transformAnimation[animationIndex].push({ scaleX });
-                        break;
-                    case "scaleY":
-                        const scaleY = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [transformation.f, transformation.t]
-                        });
-                        this.transformAnimation[animationIndex].push({ scaleY });
-                        break;
-                    case "rotate":
-                        const rotate = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
-                        });
-                        this.transformAnimation[animationIndex].push({ rotate });
-                        break;
-                    case "rotateX":
-                        const rotateX = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
-                        });
-                        this.transformAnimation[animationIndex].push({ rotateX });
-                        break;
-                    case "rotateY":
-                        const rotateY = this.state.animation[animationIndex].interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
-                        });
-                        this.transformAnimation[animationIndex].push({ rotateY });
-                        break;
-
-                }
-            }
-        }
+        super.componentDidMount();
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps: Readonly<JsonAnimationProps>, _nextContext: any): void {
@@ -119,35 +40,174 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
             const nextState: JsonAnimationState | null = this.getAnimationStateFromProps(nextProps);
             this.setState(nextState);
             this._compositeAnimation = this.getCompositeAnimation(nextProps);
-            this.updateFromProps(nextProps);
+            this._updateFromProps(nextProps);
         }
     }
 
     public startAnimation(): void {
-        this._compositeAnimation.reset();
-        this._compositeAnimation.start(() => { this.animationFinished() });
+        this._compositeAnimation?.reset();
+        this._compositeAnimation?.start(() => { this.animationFinished() });
     }
 
     public pauseAnimation(): void {
-        this._compositeAnimation.stop();
+        this._compositeAnimation?.stop();
     }
 
     public resetAnimation(): void {
         this.pauseAnimation();
-        for (let i = 0; i < this.props.animationConfig.animationConfig.length; i++) {
-            this.state.animation[i].setValue(0);
+        if (Array.isArray(this.props.animationConfig.animationConfig)) {
+            for (let i = 0; i < this.props.animationConfig.animationConfig.length; i++) {
+                this.state.animation[i] && this.state.animation[i].setValue(0);
+            }
+        } else {
+            this.state.animation[0] && this.state.animation[0].setValue(0);
         }
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
-        const transformArray = this.getTransformArray();
+        const transformArray = this._getTransformArray();
         return (
             <Animated.View style={{ transform: transformArray }}>
                 {content}
             </Animated.View>
         );
     }
-    private getTransformArray(): any[] {
+
+    protected getAnimationStateFromProps(props: JsonAnimationProps): JsonAnimationState {
+        const jsonAnimationState: JsonAnimationState = {
+            animation: []
+        };
+
+        if (Array.isArray(props.animationConfig.animationConfig)) {
+            for (let i = 0; i < props.animationConfig.animationConfig.length; i++) {
+                const animationObj = new Animated.Value(0);
+                jsonAnimationState.animation.push(animationObj);
+            }
+            return jsonAnimationState;
+        } else {
+            return {
+                animation: [new Animated.Value(0)]
+            }
+        }
+    }
+
+
+    private getCompositeAnimation(props: JsonAnimationProps): Animated.CompositeAnimation {
+
+        const animationSequence: Animated.CompositeAnimation[] = [];
+        if (Array.isArray(props.animationConfig.animationConfig)) {
+            for (let i = 0; i < props.animationConfig.animationConfig.length; i++) {
+                const animationDescription = props.animationConfig.animationConfig[i];
+                animationSequence.push(Animated.timing(this.state.animation[i], {
+                    toValue: 1,
+                    duration: animationDescription.d,
+                    easing: this._getEasingFunction(animationDescription.i),
+                    useNativeDriver: false
+                }));
+            }
+            return Animated.sequence(animationSequence);
+        } else {
+            const animationDef = props.animationConfig.animationConfig;
+            return Animated.timing(this.state.animation[0], {
+                toValue: 1,
+                duration: animationDef.d,
+                easing: this._getEasingFunction(animationDef.i),
+                useNativeDriver: false
+            });
+        }
+    }
+
+    private _updateFromProps(props: JsonAnimationProps) {
+        const jsonAnimation = props.animationConfig as JsonAnimation;
+        this.transformAnimation = [];
+
+        if (Array.isArray(jsonAnimation.animationConfig)) {
+            for (let animationIndex = 0; animationIndex < jsonAnimation.animationConfig.length; animationIndex++) {
+                if (this.transformAnimation[animationIndex] === undefined) {
+                    this.transformAnimation[animationIndex] = [];
+                }
+                const transformations = jsonAnimation.animationConfig[animationIndex].tr;
+                for (let transformIndex = 0; transformIndex < transformations.length; transformIndex++) {
+                    this._appendTransform(transformations, transformIndex, animationIndex);
+                }
+            }
+        } else {
+            const animationDef = jsonAnimation.animationConfig;
+            if (this.transformAnimation[0] === undefined) {
+                this.transformAnimation[0] = [];
+            }
+            const transformations = animationDef.tr;
+            for (let transformIndex = 0; transformIndex < transformations.length; transformIndex++) {
+                this._appendTransform(transformations, transformIndex, 0);
+            }
+        }
+    }
+
+    private _appendTransform(transformations: any, transformIndex: number, animationIndex: number) {
+        console.log('swapnil', 'append animationIndex:', animationIndex, ' transformIndex: ', transformIndex);
+        const transformation = transformations[transformIndex];
+        switch (transformation.key) {
+            case "translateX":
+                const translateX = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.f, transformation.t]
+                });
+                this.transformAnimation[animationIndex].push({ translateX });
+                break;
+            case "translateY":
+                const translateY = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.f, transformation.t]
+                });
+                this.transformAnimation[animationIndex].push({ translateY });
+                break;
+            case "scale":
+                const scale = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.f, transformation.t]
+                });
+                this.transformAnimation[animationIndex].push({ scale });
+                break;
+            case "scaleX":
+                const scaleX = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.f, transformation.t]
+                });
+                this.transformAnimation[animationIndex].push({ scaleX });
+                break;
+            case "scaleY":
+                const scaleY = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.f, transformation.t]
+                });
+                this.transformAnimation[animationIndex].push({ scaleY });
+                break;
+            case "rotate":
+                const rotate = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
+                });
+                this.transformAnimation[animationIndex].push({ rotate });
+                break;
+            case "rotateX":
+                const rotateX = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
+                });
+                this.transformAnimation[animationIndex].push({ rotateX });
+                break;
+            case "rotateY":
+                const rotateY = this.state.animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
+                });
+                this.transformAnimation[animationIndex].push({ rotateY });
+                break;
+
+        }
+    }
+
+    private _getTransformArray(): any[] {
 
         let transforms: any[] = [];
         for (let i = 0; i < this.transformAnimation.length; i++) {
@@ -156,7 +216,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         return transforms;
     }
 
-    private getEasingFunction(interpolation?: InterpolationDef): EasingFunction {
+    private _getEasingFunction(interpolation?: InterpolationDef): EasingFunction {
         switch (interpolation?.e) {
             case "linear":
                 return Easing.linear;
@@ -179,17 +239,5 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
             default:
                 return Easing.linear;
         }
-    }
-
-    protected getAnimationStateFromProps(props: JsonAnimationProps): JsonAnimationState {
-        const jsonAnimationState: JsonAnimationState = {
-            animation: []
-        };
-        for (let i = 0; i < props.animationConfig.animationConfig.length; i++) {
-            const animationObj = new Animated.Value(0);
-            jsonAnimationState.animation.push(animationObj);
-            console.log('swapnil', 'new animation object');
-        }
-        return jsonAnimationState;
     }
 }
