@@ -1,134 +1,132 @@
+import { AnimationTriggerType } from "../models/AnimationTriggerType";
+import { AnimationType } from "../models/AnimationType";
 import { JsonAnimation } from "../models/JsonAnimation";
 
-export const cardFlipJson = {
-    "triggerType": "ON_CLICK",
-    "type": "JSON",
-    "animationConfig": [
+export const cardFlipJson: JsonAnimation = {
+    triggerType: AnimationTriggerType.ON_CLICK,
+    type: AnimationType.JSON,
+    animationConfig: [
         {
-            "tr": [
+            transforms: [
                 {
-                    "key": "scale",
-                    "f": .4,
-                    "t": 1
+                    key: "scale",
+                    from: .4,
+                    to: 1
                 }, {
-                    "key": "rotateX",
-                    "f": 0,
-                    "t": 360
+                    key: "rotateX",
+                    from: 0,
+                    to: 360
                 }
             ],
-            "d": 2000,
-            "i": {
-                "e": "quad"
+            duration: 2000,
+            interpolation: {
+                easing: "quad"
             }
         },
         {
-            "tr": [
+            transforms: [
                 {
-                    "key": "scale",
-                    "f": 1,
-                    "t": .4
+                    key: "scale",
+                    from: 1,
+                    to: .4
                 }, {
-                    "key": "rotateY",
-                    "t": 0,
-                    "f": -360
+                    key: "rotateY",
+                    to: 0,
+                    from: -360
                 }
 
             ],
-            "d": 2000,
-            "i": {
-                "e": "circle"
+            duration: 2000,
+            interpolation: {
+                easing: "circle"
             }
         }
     ]
-} as JsonAnimation;
+};
 
-
-export const swingJson = {
-    "triggerType": "ON_LOAD",
-    "type": "JSON",
-    "animationConfig": [
+export const swingJson: JsonAnimation = {
+    triggerType: AnimationTriggerType.ON_LOAD,
+    type: AnimationType.JSON,
+    animationConfig: [
         {
-            "tr": [
+            transforms: [
                 {
-                    "key": "translateX",
-                    "f": 0,
-                    "t": 100
+                    key: "translateX",
+                    from: 0,
+                    to: 100
                 }, {
-                    "key": "rotate",
-                    "f": 0,
-                    "t": 5
+                    key: "rotate",
+                    from: 0,
+                    to: 5
                 }
             ],
-            "d": 500,
-            "i": {
-                "e": "quad"
+            duration: 500,
+            interpolation: {
+                easing: "quad"
             }
         },
         {
-            "tr": [
+            transforms: [
                 {
-                    "key": "translateX",
-                    "f": 50,
-                    "t": -100
+                    key: "translateX",
+                    from: 50,
+                    to: -100
                 }, {
-                    "key": "rotate",
-                    "f": 5,
-                    "t": -5
+                    key: "rotate",
+                    from: 5,
+                    to: -5
 
                 }
-
             ],
-            "d": 500,
-            "i": {
-                "e": "quad"
+            duration: 500,
+            interpolation: {
+                easing: "quad"
             }
         },
         {
-            "tr": [
+            transforms: [
                 {
-                    "key": "translateX",
-                    "f": -100,
-                    "t": 0
+                    key: "translateX",
+                    from: -100,
+                    to: 0
                 }, {
-                    "key": "rotate",
-                    "f": -5,
-                    "t": 0
+                    key: "rotate",
+                    from: -5,
+                    to: 0
 
                 }
 
             ],
-            "d": 500,
-            "i": {
-                "e": "ease"
+            duration: 500,
+            interpolation: {
+                easing: "linear"
             }
         }
 
     ]
 };
 
-
-export const zoomInJson = {
-    "triggerType": "ON_CLICK",
-    "type": "JSON",
-    "animationConfig": {
-        "tr": [
+export const zoomInJson: JsonAnimation = {
+    triggerType: AnimationTriggerType.ON_CLICK,
+    type: AnimationType.JSON,
+    animationConfig: {
+        transforms: [
             {
-                "key": "scale",
-                "f": 0,
-                "t": 1
+                key: "scale",
+                from: 0,
+                to: 1
             }, {
-                "key": "rotate",
-                "f": -30,
-                "t": 0
+                key: "rotate",
+                from: -30,
+                to: 0
             }
         ],
-        "d": 500,
-        "i": {
-            "e": "back",
-            "p": {
-                "back": 1
+        duration: 500,
+        interpolation: {
+            easing: "back",
+            params: {
+                back: 1
             }
-            
         }
     }
-} as JsonAnimation;
+};

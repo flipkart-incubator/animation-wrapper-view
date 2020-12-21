@@ -116,8 +116,8 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                 if (this._animation) {
                     animationSequence.push(Animated.timing(this._animation[i], {
                         toValue: 1,
-                        duration: animationDef.d,
-                        easing: this._getEasingFunction(animationDef.i),
+                        duration: animationDef.duration,
+                        easing: this._getEasingFunction(animationDef.interpolation),
                         useNativeDriver: false
                     }));
                 }
@@ -128,8 +128,8 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
             if (this._animation) {
                 this._compositeAnimation = Animated.timing(this._animation[0], {
                     toValue: 1,
-                    duration: animationDef.d,
-                    easing: this._getEasingFunction(animationDef.i),
+                    duration: animationDef.duration,
+                    easing: this._getEasingFunction(animationDef.interpolation),
                     useNativeDriver: false
                 });
             }
@@ -145,7 +145,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                 if (this._transforms[animationIndex] === undefined) {
                     this._transforms[animationIndex] = [];
                 }
-                const transformations = jsonAnimation.animationConfig[animationIndex].tr;
+                const transformations = jsonAnimation.animationConfig[animationIndex].transforms;
                 for (let transformIndex = 0; transformIndex < transformations.length; transformIndex++) {
                     this._appendTransform(transformations, transformIndex, animationIndex);
                 }
@@ -155,7 +155,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
             if (this._transforms[0] === undefined) {
                 this._transforms[0] = [];
             }
-            const transformations = animationDef.tr;
+            const transformations = animationDef.transforms;
             for (let transformIndex = 0; transformIndex < transformations.length; transformIndex++) {
                 this._appendTransform(transformations, transformIndex, 0);
             }
@@ -239,7 +239,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
     }
 
     private _getEasingFunction = (interpolation?: InterpolationDef): EasingFunction => {
-        switch (interpolation?.e) {
+        switch (interpolation?.easing) {
             case "linear":
                 return Easing.linear;
             case "quad":
@@ -247,14 +247,14 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
             case "circle":
                 return Easing.circle;
             case "elastic":
-                const bounciness = interpolation?.p?.bounciness;
+                const bounciness = interpolation?.params?.bounciness;
                 if (bounciness && !isNaN(bounciness)) {
                     return Easing.elastic(bounciness);
                 }
             case "bounce":
                 return Easing.bounce;
             case "back":
-                const back = interpolation?.p?.back;
+                const back = interpolation?.params?.back;
                 if (back && !isNaN(back)) {
                     return Easing.back(back);
                 }
