@@ -23,9 +23,9 @@ export interface JsonAnimation extends BaseAnimation {
  * i: Interpolation function for the animation.
  */
 export type AnimationDef = {
-    tr: TransformDef[], 
-    d: number,
-    i?: InterpolationDef
+    transforms: TransformDef[], 
+    duration: number,
+    interpolation?: InterpolationDef
 }
 
 /**
@@ -35,8 +35,8 @@ export type AnimationDef = {
  */
 export type TransformDef = {
     key: TransformType,
-    f: number,
-    t: number
+    from: number,
+    to: number
 }
 
 /**
@@ -44,8 +44,8 @@ export type TransformDef = {
  * p: Additional params needed by some easing functions
  */
 export type InterpolationDef = {
-    e: EasingType;
-    p?: InterpolationParams;
+    easing: EasingType;
+    params?: InterpolationParams;
 }
 
 type InterpolationParams = {
