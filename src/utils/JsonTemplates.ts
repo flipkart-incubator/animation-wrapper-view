@@ -44,6 +44,30 @@ export const cardFlipJson: JsonAnimation = {
     ]
 };
 
+export const cardRotateJson: JsonAnimation = {
+    triggerType: AnimationTriggerType.ON_CLICK,
+    type: AnimationType.JSON,
+    animationConfig: {
+        transforms: [
+            {
+                key: "translateX",
+                from: 0,
+                to: 100
+            },
+            {
+                key: "rotate",
+                from: 0,
+                to: 90
+            }
+
+        ],
+        duration: 2000,
+        interpolation: {
+            easing: "linear"
+        }
+    }
+};
+
 export const swingJson: JsonAnimation = {
     triggerType: AnimationTriggerType.ON_LOAD,
     type: AnimationType.JSON,

@@ -9,7 +9,7 @@ import { WiggleAnimation } from "../models/WiggleAnimation";
 import { JsonAnimation } from "../models/JsonAnimation";
 
 type WrapperProps = {
-    animationConfig: BaseAnimation | JsonAnimation; 
+    animationConfig: BaseAnimation; 
     onAnimationFinish?: () => void;
 }
 
