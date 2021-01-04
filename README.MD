@@ -126,21 +126,21 @@ Sample Json
   ]
 }
 ```
-![Json Animation Demo](/docs/media/json_animation.gif)
-![Json Animation Demo](/docs/media/json_demo.gif)
+![Json Animation Demo](/media/json_animation.gif)
+![Json Animation Demo](/media/json_demo.gif)
 ### Demo
 | Animation Type | Demo GIF |
 | --- | --- |
-| *Bounce Animation* | ![Bounce](/docs/media/bounce.gif) |
-| *Drag Animation* | ![Draggable](/docs/media/draggable.gif) |
-| *Fade In Animation* | ![Fade In](/docs/media/fade_in.gif) |
-| *Fade Out Animation* | ![Fae Out](/docs/media/fade_out.gif) |
-| *Ripple Animation* | ![Ripple](/docs/media/ripple.gif) |
-| *Scale In Animation* | ![Scale In](/docs/media/scale.gif) |
-| *Scale Out Animation* | ![Scale out](/docs/media/scale_out.gif) |
-| *Slide In Animation* | ![Slide in](/docs/media/slide_in.gif) |
-| *Slide Out Animation* | ![Slide out](/docs/media/slide_out.gif)| 
+| *Bounce Animation* | ![Bounce](/media/bounce.gif) |
+| *Drag Animation* | ![Draggable](/media/draggable.gif) |
+| *Fade In Animation* | ![Fade In](/media/fade_in.gif) |
+| *Fade Out Animation* | ![Fae Out](/media/fade_out.gif) |
+| *Ripple Animation* | ![Ripple](/media/ripple.gif) |
+| *Scale In Animation* | ![Scale In](/media/scale.gif) |
+| *Scale Out Animation* | ![Scale out](/media/scale_out.gif) |
+| *Slide In Animation* | ![Slide in](/media/slide_in.gif) |
+| *Slide Out Animation* | ![Slide out](/media/slide_out.gif)| 
 
 
 #### In Action
-![Demore](/docs/media/demo.gif)
+![Demore](/media/demo.gif)
