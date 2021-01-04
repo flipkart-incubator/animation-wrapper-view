@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button, GestureResponderEvent } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Button, GestureResponderEvent } from 'react-native';
 import { AnimationWrapperView } from './core/components/AnimationWrapperView';
 import { BaseAnimationConfig } from './core/data/BaseAnimation';
 import { cardFlipJson, swingJson, zoomInJson } from './utils/JsonTemplates';
@@ -28,7 +28,9 @@ export default class Main extends React.Component<{}, State> {
                     <AnimationWrapperView
                         ref={(ref) => (this._wrapperRef = ref)}
                         animationConfig={this.state.animationConfig}
+                        onAnimationStart={this._onStart}
                         onAnimationFinish={this._onComplete}>
+                            
                         {this._renderCard()}
                     </AnimationWrapperView>
                     {/* <AnimationWrapperView
@@ -41,8 +43,8 @@ export default class Main extends React.Component<{}, State> {
 
                 <View style={styles.container}>
                     <View style={{ margin: 16, justifyContent: 'space-between', flexDirection: 'row', width: 300 }}>
-                        <Button title={"Start"} onPress={this._onPress} />
-                        <Button title={"Pause"} onPress={this._onPressToStop} />
+                        <Button title={"Start"} onPress={this._onPressToStart} />
+                        <Button title={"Stop"} onPress={this._onPressToStop} />
                         <Button title={"Reset"} onPress={this._onPressToReset} />
                     </View>
 
@@ -68,13 +70,13 @@ export default class Main extends React.Component<{}, State> {
         );
     }
 
-    private _onPress = (_: GestureResponderEvent) => {
+    private _onPressToStart = (_: GestureResponderEvent) => {
         // Trigger animation on button press.
         this._wrapperRef?.startAnimation();
     }
     private _onPressToStop = (_: GestureResponderEvent) => {
         // Trigger animation on button press.
-        this._wrapperRef?.pauseAnimation();
+        this._wrapperRef?.stopAnimation();
     }
     private _onPressToReset = (_: GestureResponderEvent) => {
         // Trigger animation on button press.
@@ -82,8 +84,11 @@ export default class Main extends React.Component<{}, State> {
     }
 
     private _onComplete = () => {
-        ToastAndroid.show("Completed", ToastAndroid.SHORT);
-        // this._wrapperRef2?.startAnimation();
+        console.log('AnimationWrapperView', 'onComplete');
+    }
+
+    private _onStart = () => {
+        console.log('AnimationWrapperView', 'onStart');
     }
 
     private _renderCard(): React.ReactNode {

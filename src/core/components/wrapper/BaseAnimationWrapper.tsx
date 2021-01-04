@@ -7,7 +7,7 @@ import { AnimationWrapperProps } from '../../Types';
 export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps, S> extends React.Component<P, S> {
 
     public abstract startAnimation(): void;
-    public abstract pauseAnimation(): void;
+    public abstract stopAnimation(): void;
     public abstract resetAnimation(): void;
 
     public componentDidMount(): void {
@@ -34,12 +34,18 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps, S> e
     }
 
     public componentWillUnmount() {
-        this.pauseAnimation();
+        this.stopAnimation();
     }
 
     protected animationFinished = () => {
         if (this.props.onAnimationFinish) {
             this.props.onAnimationFinish();
+        }
+    }
+
+    protected animationStarted = () => {
+        if (this.props.onAnimationStart) {
+            this.props.onAnimationStart();
         }
     }
 

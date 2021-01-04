@@ -2,13 +2,19 @@ import { Animated, PanResponder } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { DraggableAnimationProps } from '../../Types';
+import { AnimationWrapperProps } from '../../Types';
+import { BaseAnimationConfig } from '../../data/BaseAnimation';
 
 
 
 interface DraggableAnimationState {
     pan: Animated.ValueXY,
     panResponder: any
+}
+
+
+export interface DraggableAnimationProps extends AnimationWrapperProps {
+    animationConfig: BaseAnimationConfig;
 }
 
 export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAnimationProps, DraggableAnimationState> {
@@ -72,11 +78,11 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     }
 
 
-    public pauseAnimation(): void {
+    public stopAnimation(): void {
         // this.state.translateY.stopAnimation();
     }
     public resetAnimation(): void {
-        this.pauseAnimation();
+        this.stopAnimation();
         this.setState(this.getAnimationStateFromProps(this.props));
     }
 

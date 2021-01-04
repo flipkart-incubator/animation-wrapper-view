@@ -1,16 +1,20 @@
 
 
-import { Animated, Easing, ToastAndroid } from 'react-native';
+import { Animated } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { WiggleAnimationProps } from '../../Types';
+import { BaseAnimationConfig } from '../../data/BaseAnimation';
+import { WiggleAnimationConfig } from '../../data/WiggleAnimation';
+import { AnimationWrapperProps } from '../../Types';
 
 
 interface WiggleAnimationState {
     translateX: Animated.Value;
     wiggleCount: number;
 }
-
+export interface WiggleAnimationProps extends AnimationWrapperProps  {
+    animationConfig: WiggleAnimationConfig;
+}
 
 export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimationProps, WiggleAnimationState> {
 
@@ -51,16 +55,17 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
     }
 
     public startAnimation = () => {
+        this.animationStarted();
         this._wiggleAnimation.reset();
         this._wiggleAnimation.start(() => { this.animationFinished() });
     }
 
-    public pauseAnimation(): void {
+    public stopAnimation(): void {
         this._wiggleAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.pauseAnimation();
+        this.stopAnimation();
         this.state.translateX.setValue(0);
     }
 

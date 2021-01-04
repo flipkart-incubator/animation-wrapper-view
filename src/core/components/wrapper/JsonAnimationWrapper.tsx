@@ -38,16 +38,17 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
     }
 
     public startAnimation = (): void => {
+        this.animationStarted();
         this._compositeAnimation?.reset();
         this._compositeAnimation?.start(() => { this.animationFinished() });
     }
 
-    public pauseAnimation = (): void => {
+    public stopAnimation = (): void => {
         this._compositeAnimation?.stop();
     }
 
     public resetAnimation = (): void => {
-        this.pauseAnimation();
+        this.stopAnimation();
         if (Array.isArray(this.props.animationConfig.animationConfig)) {
             for (let i = 0; i < this.props.animationConfig.animationConfig.length; i++) {
                 this._animation && this._animation[i] && this._animation[i].setValue(0);
