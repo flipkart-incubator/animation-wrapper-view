@@ -2,10 +2,10 @@ import { Animated, Dimensions } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { SlideAnimationProps } from '../../utils/Interfaces';
-import { AnimationType } from '../../models/AnimationType';
-import { FadeInAnimation, FadeOutAnimation } from '../../models/FadeAnimation';
-import { SlideInAnimation, SlideOutAnimation } from '../../models/SlideAnimation';
+import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimation';
+import { SlideInAnimationConfig, SlideOutAnimationConfig } from '../../data/SlideAnimation';
+import { AnimationType } from '../../data/Enums';
+import { SlideAnimationProps } from '../../Types';
 
 interface SlideAnimationState {
     translateX: Animated.Value;
@@ -28,12 +28,12 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
         let toValue: number;
         let duration: number;
         if (animationConfig.type === AnimationType.SLIDE_IN) {
-            const slideInConfig = animationConfig as SlideInAnimation;
+            const slideInConfig = animationConfig as SlideInAnimationConfig;
             toValue = 1;
             duration = slideInConfig.animationDuration;
             
         } else {
-            const slideOutConfig = animationConfig as SlideOutAnimation;
+            const slideOutConfig = animationConfig as SlideOutAnimationConfig;
             duration = slideOutConfig.animationDuration;
             toValue = slideOutConfig.finalOffset ? slideOutConfig.finalOffset : this._screenWidth;
            
@@ -93,7 +93,7 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
 
     private _getInitialTranslateValue(props: SlideAnimationProps): number {
         if (props.animationConfig.type === AnimationType.SLIDE_IN) {
-            const config = props.animationConfig as SlideInAnimation;
+            const config = props.animationConfig as SlideInAnimationConfig;
             return config.initialOffset ? config.initialOffset : -this._screenWidth;
         } else {
             return 0;

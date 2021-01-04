@@ -1,4 +1,4 @@
-import { BaseAnimation } from "./BaseAnimation"
+import { BaseAnimationConfig } from "./BaseAnimation"
 
 type TransformType = "scale"
     | "fade"
@@ -13,7 +13,7 @@ type TransformType = "scale"
 
 type EasingType = "linear" | "quad" | "circle" | "elastic" | "bounce" | "back";
 
-export interface JsonAnimation extends BaseAnimation {
+export interface JsonAnimationConfig extends BaseAnimationConfig {
     animationConfig: AnimationDef | AnimationDef[] 
 }
 

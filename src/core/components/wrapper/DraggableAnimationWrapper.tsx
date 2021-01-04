@@ -1,8 +1,9 @@
 import { Animated, PanResponder } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import {DraggableAnimation } from '../../models/DraggableAnimation';
-import {  DraggableAnimationProps } from "../../utils/Interfaces";
+
+import { DraggableAnimationProps } from '../../Types';
+
 
 
 interface DraggableAnimationState {

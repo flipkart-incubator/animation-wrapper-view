@@ -1,6 +1,6 @@
 import { EasingFunction } from 'react-native';
-import { BaseAnimation } from './BaseAnimation';
-export interface WiggleAnimation extends BaseAnimation {
+import { BaseAnimationConfig } from './BaseAnimation';
+export interface WiggleAnimationConfig extends BaseAnimationConfig {
     wiggleDistance: number;
     wiggleCount?: number;
     easing?: EasingFunction;

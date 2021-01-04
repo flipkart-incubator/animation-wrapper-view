@@ -2,9 +2,9 @@ import { Animated } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { FadeAnimationProps } from '../../utils/Interfaces';
-import { AnimationType } from '../../models/AnimationType';
-import { FadeInAnimation, FadeOutAnimation } from '../../models/FadeAnimation';
+import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimation';
+import { FadeAnimationProps } from '../../Types';
+import { AnimationType } from '../../data/Enums';
 
 interface FadeAnimationState {
     opacity: Animated.Value;
@@ -23,11 +23,11 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         let toValue: number;
 
         if (animationConfig.type === AnimationType.FADE_IN) {
-            const fadeInConfig = animationConfig as FadeInAnimation;
+            const fadeInConfig = animationConfig as FadeInAnimationConfig;
             duration = fadeInConfig.animationDuration;
             toValue = 1;
         } else {
-            const fadeOutConfig = animationConfig as FadeOutAnimation;
+            const fadeOutConfig = animationConfig as FadeOutAnimationConfig;
             duration = fadeOutConfig.animationDuration;
             toValue = fadeOutConfig.finalOpacity ? fadeOutConfig.finalOpacity : 0;
         }
@@ -85,7 +85,7 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
 
     private _getInitialOpacity(props: FadeAnimationProps): number {
         if (props.animationConfig.type === AnimationType.FADE_IN) {
-            const config = props.animationConfig as FadeInAnimation;
+            const config = props.animationConfig as FadeInAnimationConfig;
             return config.initialOpacity ? config.initialOpacity : 0;
         } else {
             return 1;

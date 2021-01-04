@@ -1,8 +1,8 @@
-import { AnimationTriggerType } from "../models/AnimationTriggerType";
-import { AnimationType } from "../models/AnimationType";
-import { JsonAnimation } from "../models/JsonAnimation";
 
-export const cardFlipJson: JsonAnimation = {
+import { AnimationTriggerType, AnimationType } from "../core/data/Enums";
+import { JsonAnimationConfig } from "../core/data/JsonAnimation";
+
+export const cardFlipJson: JsonAnimationConfig = {
     triggerType: AnimationTriggerType.ON_CLICK,
     type: AnimationType.JSON,
     animationConfig: [
@@ -44,7 +44,7 @@ export const cardFlipJson: JsonAnimation = {
     ]
 };
 
-export const cardRotateJson: JsonAnimation = {
+export const cardRotateJson: JsonAnimationConfig = {
     triggerType: AnimationTriggerType.ON_CLICK,
     type: AnimationType.JSON,
     animationConfig: {
@@ -68,7 +68,7 @@ export const cardRotateJson: JsonAnimation = {
     }
 };
 
-export const swingJson: JsonAnimation = {
+export const swingJson: JsonAnimationConfig = {
     triggerType: AnimationTriggerType.ON_LOAD,
     type: AnimationType.JSON,
     animationConfig: [
@@ -130,7 +130,7 @@ export const swingJson: JsonAnimation = {
     ]
 };
 
-export const zoomInJson: JsonAnimation = {
+export const zoomInJson: JsonAnimationConfig = {
     triggerType: AnimationTriggerType.ON_CLICK,
     type: AnimationType.JSON,
     animationConfig: {

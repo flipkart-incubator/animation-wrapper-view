@@ -1,11 +1,10 @@
 
 import React from 'react';
 import { Animated, GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
-import { AnimationTriggerType } from '../../models/AnimationTriggerType';
-import { AnimationType } from '../../models/AnimationType';
-import { AnimationProps } from "../../utils/Interfaces";
+import { AnimationTriggerType, AnimationType } from '../../data/Enums';
+import { AnimationWrapperProps } from '../../Types';
 
-export abstract class BaseAnimationWrapper<P extends AnimationProps, S> extends React.PureComponent<P, S> {
+export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps, S> extends React.Component<P, S> {
 
     public abstract startAnimation(): void;
     public abstract pauseAnimation(): void;

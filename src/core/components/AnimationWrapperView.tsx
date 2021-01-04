@@ -2,28 +2,29 @@ import React, { Component } from 'react';
 import { RippleAnimationWrapper } from './wrapper/RippleAnimationWrapper';
 import { ScaleAnimationWrapper } from './wrapper/ScaleAnimationWrapper';
 import { BounceAnimationWrapper } from './wrapper/BounceAnimationWrapper';
-import { AnimationType } from '../models/AnimationType';
-import { BaseAnimation } from '../models/BaseAnimation';
+
+import { BaseAnimationConfig } from '../data/BaseAnimation';
 import { DraggableAnimationWrapper } from './wrapper/DraggableAnimationWrapper';
-import { WrapperComponent } from "../utils/Types";
-import { AnimationProps } from "../utils/Interfaces";
+import { AnimationWrapperProps, WrapperComponent } from "../Types";
+
 import { FadeAnimationWrapper } from './wrapper/FadeAnimationWrapper';
 import { SlideAnimationWrapper } from './wrapper/SlideAnimationWrapper';
 import { WiggleAnimationWrapper } from './wrapper/WiggleAnimationWrapper';
 import { BaseAnimationWrapper } from './wrapper/BaseAnimationWrapper';
 import { JsonAnimationWrapper } from './wrapper/JsonAnimationWrapper';
+import { AnimationType } from '../data/Enums';
 
-export abstract class AnimationWrapperView extends React.PureComponent<AnimationProps> {
+export abstract class AnimationWrapperView extends React.PureComponent<AnimationWrapperProps> {
 
     private _component: WrapperComponent;
-    private _animatorRef?: BaseAnimationWrapper<AnimationProps, {}> | null;
+    private _animatorRef?: BaseAnimationWrapper<AnimationWrapperProps, {}> | null;
 
-    protected constructor(props: AnimationProps) {
+    protected constructor(props: AnimationWrapperProps) {
         super(props);
         this._component = AnimationWrapperView._animationWrapperGenerator(props.animationConfig);
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: AnimationProps): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: AnimationWrapperProps): void {
         if (this.props.animationConfig !== nextProps.animationConfig) {
             this._animatorRef?.resetAnimation();
             this._component = AnimationWrapperView._animationWrapperGenerator(nextProps.animationConfig);
@@ -72,11 +73,11 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
         return;
     }
 
-    private _setRef = (ref: Component<AnimationProps, {}, {}>) => {
-        this._animatorRef = ref as BaseAnimationWrapper<AnimationProps, {}>;
+    private _setRef = (ref: Component<AnimationWrapperProps, {}, {}>) => {
+        this._animatorRef = ref as BaseAnimationWrapper<AnimationWrapperProps, {}>;
     }
 
-    private static _animationWrapperGenerator(animationConfig: BaseAnimation): WrapperComponent {
+    private static _animationWrapperGenerator(animationConfig: BaseAnimationConfig): WrapperComponent {
         switch (animationConfig.type) {
             case AnimationType.BOUNCE:
                 return BounceAnimationWrapper;

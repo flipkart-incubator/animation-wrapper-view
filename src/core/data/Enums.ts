@@ -1,3 +1,8 @@
+export enum AnimationTriggerType {
+    ON_CLICK = "ON_CLICK",
+    ON_LOAD = "ON_LOAD"
+}
+
 export enum AnimationType {
     RIPPLE = "RIPPLE",
     BOUNCE = "BOUNCE",

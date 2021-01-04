@@ -1,14 +1,11 @@
-
-
-import { Animated, Easing, ToastAndroid, View } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { BounceAnimationProps } from "../../utils/Interfaces";
+import { BounceAnimationProps } from '../../Types';
 
 interface BounceAnimationState {
     translateY: Animated.Value;
 }
-
 
 export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimationProps, BounceAnimationState> {
     private _bounceAnimation: Animated.CompositeAnimation;

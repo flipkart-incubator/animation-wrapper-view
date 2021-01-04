@@ -1,8 +1,7 @@
-import { Animated, View } from 'react-native';
+import { Animated, StyleProp, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import AnimationUtils from '../../utils/AnimationUtils';
-import {RippleAnimationProps} from "../../utils/Interfaces";
+import { RippleAnimationProps } from '../../Types';
 
 interface RippleAnimationState {
     scale: Animated.Value;
@@ -67,7 +66,7 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const { scale, opacity } = this.state;
         const { animationConfig } = this.props;
-        const rippleStyle = AnimationUtils.getRippleStyle(animationConfig.rippleRadius);
+        const rippleStyle = RippleAnimationWrapper.getRippleStyle(animationConfig.rippleRadius);
 
         return (
             <View
@@ -102,6 +101,15 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
         return {
             scale: new Animated.Value(0),
             opacity: new Animated.Value(1)
+        };
+    }
+
+    public static getRippleStyle(contentWidth: number): StyleProp<ViewStyle> {
+        return {
+            position: 'absolute',
+            marginLeft: 0,
+            marginTop: 0,
+            borderRadius: contentWidth
         };
     }
 }

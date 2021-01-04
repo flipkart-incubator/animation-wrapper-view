@@ -1,14 +1,14 @@
 import { Animated, Easing, EasingFunction } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { AnimationProps } from "../../utils/Interfaces";
-import { InterpolationDef, JsonAnimation } from '../../models/JsonAnimation';
+import { InterpolationDef, JsonAnimationConfig, TransformDef } from '../../data/JsonAnimation';
+import { AnimationWrapperProps } from '../../Types';
 
 interface JsonAnimationState {
 }
 
-export interface JsonAnimationProps extends AnimationProps {
-    animationConfig: JsonAnimation
+export interface JsonAnimationProps extends AnimationWrapperProps {
+    animationConfig: JsonAnimationConfig
 }
 
 export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProps, JsonAnimationState> {
@@ -137,7 +137,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
     }
 
     private _updateTransformsArray = (props: JsonAnimationProps) => {
-        const jsonAnimation = props.animationConfig as JsonAnimation;
+        const jsonAnimation = props.animationConfig as JsonAnimationConfig;
         this._transforms = [];
 
         if (Array.isArray(jsonAnimation.animationConfig)) {
@@ -162,8 +162,8 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
-    private _appendTransform = (transformations: any, transformIndex: number, animationIndex: number) => {
-        const transformation = transformations[transformIndex];
+    private _appendTransform = (transformations: TransformDef[], transformIndex: number, animationIndex: number) => {
+        const transformation: TransformDef = transformations[transformIndex];
         if (this._animation === undefined || this._animation[animationIndex] === undefined || this._transforms[animationIndex] === undefined) {
 
             return;
@@ -172,56 +172,56 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
             case "translateX":
                 const translateX = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [transformation.f, transformation.t]
+                    outputRange: [transformation.from, transformation.to]
                 });
                 this._transforms[animationIndex].push({ translateX });
                 break;
             case "translateY":
                 const translateY = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [transformation.f, transformation.t]
+                    outputRange: [transformation.from, transformation.to]
                 });
                 this._transforms[animationIndex].push({ translateY });
                 break;
             case "scale":
                 const scale = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [transformation.f, transformation.t]
+                    outputRange: [transformation.from, transformation.to]
                 });
                 this._transforms[animationIndex].push({ scale });
                 break;
             case "scaleX":
                 const scaleX = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [transformation.f, transformation.t]
+                    outputRange: [transformation.from, transformation.to]
                 });
                 this._transforms[animationIndex].push({ scaleX });
                 break;
             case "scaleY":
                 const scaleY = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [transformation.f, transformation.t]
+                    outputRange: [transformation.from, transformation.to]
                 });
                 this._transforms[animationIndex].push({ scaleY });
                 break;
             case "rotate":
                 const rotate = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
+                    outputRange: [`${transformation.from}deg`, `${transformation.to}deg`]
                 });
                 this._transforms[animationIndex].push({ rotate });
                 break;
             case "rotateX":
                 const rotateX = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
+                    outputRange: [`${transformation.from}deg`, `${transformation.to}deg`]
                 });
                 this._transforms[animationIndex].push({ rotateX });
                 break;
             case "rotateY":
                 const rotateY = this._animation[animationIndex].interpolate({
                     inputRange: [0, 1],
-                    outputRange: [`${transformation.f}deg`, `${transformation.t}deg`]
+                    outputRange: [`${transformation.from}deg`, `${transformation.to}deg`]
                 });
                 this._transforms[animationIndex].push({ rotateY });
                 break;

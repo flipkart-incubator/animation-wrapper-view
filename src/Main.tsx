@@ -1,23 +1,24 @@
 
 import React from 'react';
 import { Text, View, StyleSheet, ImageBackground, ToastAndroid, Button, GestureResponderEvent } from 'react-native';
-import { AnimationWrapperView } from './components/AnimationWrapperView';
-import { BaseAnimation } from './models/BaseAnimation';
+import { AnimationWrapperView } from './core/components/AnimationWrapperView';
+import { BaseAnimationConfig } from './core/data/BaseAnimation';
 import { cardFlipJson, swingJson, zoomInJson } from './utils/JsonTemplates';
 import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
 
 interface State {
-    animationConfig: BaseAnimation
+    animationConfig: BaseAnimationConfig
 }
 export default class Main extends React.Component<{}, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            animationConfig: cardFlipJson
+            animationConfig: swingJson
         }
     }
 
     private _wrapperRef?: AnimationWrapperView | null;
+    // private _wrapperRef2?: AnimationWrapperView | null;
 
     public render(): React.ReactNode {
 
@@ -30,6 +31,12 @@ export default class Main extends React.Component<{}, State> {
                         onAnimationFinish={this._onComplete}>
                         {this._renderCard()}
                     </AnimationWrapperView>
+                    {/* <AnimationWrapperView
+                        ref={(ref) => (this._wrapperRef2 = ref)}
+                        animationConfig={this.state.animationConfig}
+                        onAnimationFinish={this._onComplete}>
+                        {this._renderCard()}
+                    </AnimationWrapperView> */}
                 </View>
 
                 <View style={styles.container}>
@@ -76,6 +83,7 @@ export default class Main extends React.Component<{}, State> {
 
     private _onComplete = () => {
         ToastAndroid.show("Completed", ToastAndroid.SHORT);
+        // this._wrapperRef2?.startAnimation();
     }
 
     private _renderCard(): React.ReactNode {
