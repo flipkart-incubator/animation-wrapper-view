@@ -1,10 +1,15 @@
 import { Animated, Easing } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { BounceAnimationProps } from '../../Types';
+import { AnimationWrapperProps } from '../../Types';
+import { BounceAnimationConfig } from '../../data/BounceAnimation';
 
 interface BounceAnimationState {
     translateY: Animated.Value;
+}
+
+export interface BounceAnimationProps extends AnimationWrapperProps {
+    animationConfig: BounceAnimationConfig;
 }
 
 export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimationProps, BounceAnimationState> {
@@ -43,16 +48,17 @@ export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimation
     }
 
     public startAnimation = () => {
+        this.animationStarted();
         this._bounceAnimation.reset();
         this._bounceAnimation.start(() => { this.animationFinished() });
     }
 
-    public pauseAnimation = () => {
+    public stopAnimation = () => {
         this._bounceAnimation.stop();
     }
 
     public resetAnimation = () => {
-        this.pauseAnimation();
+        this.stopAnimation();
         this.state.translateY.setValue(0);
     }
 

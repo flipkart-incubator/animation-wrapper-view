@@ -12,6 +12,14 @@ interface SlideAnimationState {
 }
 
 
+export interface SlideInAnimationProps extends SlideAnimationProps {
+    animationConfig: SlideInAnimationConfig;
+}
+
+export interface SlideOutAnimationProps extends SlideAnimationProps{
+    animationConfig: SlideOutAnimationConfig;
+}
+
 export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationProps, SlideAnimationState> {
 
     private _slideAnimation: Animated.CompositeAnimation;
@@ -55,16 +63,17 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
     }
 
     public startAnimation(): void {
+        this.animationStarted();
         this._slideAnimation.reset();
         this._slideAnimation.start(() => { this.animationFinished() });
     }
 
-    public pauseAnimation(): void {
+    public stopAnimation(): void {
         this._slideAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.pauseAnimation();
+        this.stopAnimation();
         this.state.translateX.setValue(this._getInitialTranslateValue(this.props));
     }
 

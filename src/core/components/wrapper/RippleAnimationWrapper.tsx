@@ -1,11 +1,16 @@
 import { Animated, StyleProp, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { RippleAnimationProps } from '../../Types';
+import { AnimationWrapperProps } from '../../Types';
+import { RippleAnimationConfig } from '../../data/RippleAnimation';
 
 interface RippleAnimationState {
     scale: Animated.Value;
     opacity: Animated.Value;
+}
+
+export interface RippleAnimationProps extends AnimationWrapperProps {
+    animationConfig: RippleAnimationConfig;
 }
 
 
@@ -49,16 +54,17 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
     }
 
     public startAnimation(): void {
+        this.animationStarted();
         this._rippleAnimation.reset();
         this._rippleAnimation.start(() => {this.animationFinished()});
     }
 
-    public pauseAnimation(): void {
+    public stopAnimation(): void {
         this._rippleAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.pauseAnimation();
+        this.stopAnimation();
         this.state.opacity.setValue(1);
         this.state.scale.setValue(0);
     }

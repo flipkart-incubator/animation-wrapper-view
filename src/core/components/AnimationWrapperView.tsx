@@ -43,8 +43,8 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
      * This function will stop all the Animated timing functions without resetting their values
      * effectively pausing any applied animation when invoked.
      */
-    public pauseAnimation(): void {
-        this._animatorRef?.pauseAnimation();
+    public stopAnimation(): void {
+        this._animatorRef?.stopAnimation();
     }
 
     /**
@@ -57,14 +57,15 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
 
     public render(): React.ReactNode | undefined {
         this._assertChildType();
-        const { children, onAnimationFinish } = this.props;
+        const { children, onAnimationFinish, onAnimationStart } = this.props;
         const animationConfig = this.props.animationConfig;
         if (this._component && children) {
             return (
                 <this._component
                     ref={this._setRef}
                     animationConfig={animationConfig as any}
-                    onAnimationFinish={onAnimationFinish}>
+                    onAnimationFinish={onAnimationFinish}
+                    onAnimationStart={onAnimationStart}>
                     {children}
                 </this._component>
             );

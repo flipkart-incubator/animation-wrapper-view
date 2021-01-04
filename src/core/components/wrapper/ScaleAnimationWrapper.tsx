@@ -3,12 +3,18 @@ import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
 import { ScaleAnimationConfig } from '../../data/ScaleAnimation';
-import { ScaleAnimationProps } from '../../Types';
+import { AnimationWrapperProps } from '../../Types';
 
 
 interface ScaleAnimationState {
     scale: Animated.Value;
 }
+
+
+export interface ScaleAnimationProps extends AnimationWrapperProps {
+    animationConfig: ScaleAnimationConfig;
+}
+
 
 export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationProps, ScaleAnimationState> {
     private isScaled: boolean;
@@ -37,16 +43,17 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
     }
 
     public startAnimation(): void {
+        this.animationStarted();
         this._scaleAnimation.reset();
         this._scaleAnimation.start(() => { this.animationFinished() });
     }
 
-    public pauseAnimation(): void {
+    public stopAnimation(): void {
         this._scaleAnimation.stop();
     }
 
     public resetAnimation(): void {
-        this.pauseAnimation();
+        this.stopAnimation();
         this.state.scale.setValue(1);
     }
 

@@ -10,9 +10,17 @@ interface FadeAnimationState {
     opacity: Animated.Value;
 }
 
+export interface FadeInAnimationProps extends FadeAnimationProps {
+    animationConfig: FadeInAnimationConfig;
+}
+
+export interface FadeOutAnimationProps extends FadeAnimationProps{
+    animationConfig: FadeOutAnimationConfig;
+}
+
 export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProps, FadeAnimationState> {
 
-    private _fadeAnimation;
+    private _fadeAnimation: Animated.CompositeAnimation;
 
     public constructor(props: FadeAnimationProps) {
         super(props);
@@ -49,16 +57,17 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
     }
 
     public startAnimation = () => {
+        this.animationStarted();
         this._fadeAnimation.reset();
         this._fadeAnimation.start(() => { this.animationFinished() });
     }
 
-    public pauseAnimation = () => {
+    public stopAnimation = () => {
         this._fadeAnimation.stop();
     }
 
     public resetAnimation = () => {
-        this.pauseAnimation();
+        this.stopAnimation();
         this.state.opacity.setValue(this._getInitialOpacity(this.props));
     }
 
