@@ -56,6 +56,7 @@ private _onPressToReset = (_: GestureResponderEvent) => {
 | --- | --- | --- | 
 | animationConfig | BaseAnimation | Object which will contain all optional and non-optional parameters needed to render the animation, including AnimationType, AnimationTriggerType, etc. |
 | onAnimationFinish | () => void | (optional) Callback function, if provided will be invoked once animation is finished. |
+| onAnimationStart | () => void | (optional) Callback function, if provided will be invoked when the animation is triggered. |
 
 
 ### Define your custom animations!
