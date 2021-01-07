@@ -1,4 +1,3 @@
-## AnimationWrapperView
 AnimationWrapperView is a collection of a well defined set of component level animations, that a developer can utilize just by just providing some configurations. AnimationWrapperView will add plug and play type support to the already robust Animated API,  and will take care of all the intricate details of each animation type.
  
 
