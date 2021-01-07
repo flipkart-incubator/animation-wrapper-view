@@ -259,6 +259,14 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                 if (back && !isNaN(back)) {
                     return Easing.back(back);
                 }
+            case "cubic":
+                return Easing.cubic;
+            case "sin":
+                return Easing.sin;
+            case "exp":
+                return Easing.exp;
+            case "ease":
+                return Easing.ease;
             default:
                 return Easing.linear;
         }

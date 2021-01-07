@@ -50,16 +50,15 @@ export const cardRotateJson: JsonAnimationConfig = {
     animationConfig: {
         transforms: [
             {
-                key: "translateX",
-                from: 0,
-                to: 100
-            },
-            {
                 key: "rotate",
                 from: 0,
                 to: 90
+            },
+            {
+                key: "scale",
+                from: 0, 
+                to: 1
             }
-
         ],
         duration: 2000,
         interpolation: {
@@ -133,24 +132,40 @@ export const swingJson: JsonAnimationConfig = {
 export const zoomInJson: JsonAnimationConfig = {
     triggerType: AnimationTriggerType.ON_CLICK,
     type: AnimationType.JSON,
-    animationConfig: {
-        transforms: [
-            {
-                key: "scale",
-                from: 0,
-                to: 1
-            }, {
-                key: "rotate",
-                from: -30,
-                to: 0
+    animationConfig: [
+        {
+            transforms: [
+                {
+                    key: "scale",
+                    from: 0,
+                    to: 1
+                }, {
+                    key: "rotate",
+                    from: -90,
+                    to: 0
+                }, {
+                    key: "rotateY",
+                    from: 0,
+                    to: 360
+                }
+            ],
+            duration: 1500,
+            interpolation: {
+                easing: "quad"
             }
-        ],
-        duration: 500,
-        interpolation: {
-            easing: "back",
-            params: {
-                back: 1
+        },
+        {
+            transforms: [
+                {
+                    key: "scale",
+                    from: 1,
+                    to: .7
+                }
+            ],
+            duration: 500,
+            interpolation: {
+                easing: "exp"
             }
         }
-    }
+    ]
 };

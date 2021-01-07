@@ -11,7 +11,16 @@ type TransformType = "scale"
     | "scaleX"
     | "scaleY";
 
-type EasingType = "linear" | "quad" | "circle" | "elastic" | "bounce" | "back";
+type EasingType = "linear"
+    | "quad"
+    | "circle"
+    | "elastic"
+    | "bounce"
+    | "back"
+    | "cubic"
+    | "sin"
+    | "exp"
+    | "ease";
 
 export interface JsonAnimationConfig extends BaseAnimationConfig {
     animationConfig: AnimationDef | AnimationDef[] 
