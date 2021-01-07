@@ -77,8 +77,7 @@ Type definitions:
 
 | Type name | params | usage |
 | --- | --- | --- |
-| InterpolationDef | easing: EasingType | Defines the easing 
-that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
+| InterpolationDef | easing: EasingType | Defines the easing that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
 | | params: InterpolationParams | Some easing functions requre extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing. |
 
 
