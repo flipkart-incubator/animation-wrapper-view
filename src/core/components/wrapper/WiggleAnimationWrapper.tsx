@@ -69,6 +69,11 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
         this.state.translateX.setValue(0);
     }
 
+    public finishAnimation = () => {
+        this.stopAnimation();
+        // no extra op
+    }
+
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const translateX = this.state.translateX;
 

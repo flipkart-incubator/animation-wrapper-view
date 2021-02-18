@@ -55,6 +55,10 @@ export abstract class AnimationWrapperView extends React.PureComponent<Animation
         this._animatorRef?.resetAnimation();
     }
 
+    public finishAnimation(): void {
+        this._animatorRef?.finishAnimation();
+    }
+
     public render(): React.ReactNode | undefined {
         this._assertChildType();
         const { children, onAnimationFinish, onAnimationStart } = this.props;

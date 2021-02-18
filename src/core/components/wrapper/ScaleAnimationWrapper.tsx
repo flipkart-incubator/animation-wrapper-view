@@ -57,6 +57,11 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
         this.state.scale.setValue(1);
     }
 
+    public finishAnimation = () => {
+        this.stopAnimation();
+        this.state.scale.setValue(this.props.animationConfig.toScale);
+    }
+
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const scale = this.state.scale;
 

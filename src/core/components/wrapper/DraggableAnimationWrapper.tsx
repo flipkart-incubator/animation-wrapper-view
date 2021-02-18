@@ -89,4 +89,9 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     public startAnimation(): void {
         // no-op
     }
+
+    public finishAnimation = () => {
+        this.stopAnimation();
+        // no extra op
+    }
 }

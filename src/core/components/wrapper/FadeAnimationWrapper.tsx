@@ -14,7 +14,7 @@ export interface FadeInAnimationProps extends FadeAnimationProps {
     animationConfig: FadeInAnimationConfig;
 }
 
-export interface FadeOutAnimationProps extends FadeAnimationProps{
+export interface FadeOutAnimationProps extends FadeAnimationProps {
     animationConfig: FadeOutAnimationConfig;
 }
 
@@ -71,6 +71,12 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         this.state.opacity.setValue(this._getInitialOpacity(this.props));
     }
 
+
+    public finishAnimation = () => {
+        this.stopAnimation();
+        this.state.opacity.setValue(this._getFinalOpacity(this.props));
+    }
+
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const opacity = this.state.opacity;
 
@@ -96,6 +102,15 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         if (props.animationConfig.type === AnimationType.FADE_IN) {
             const config = props.animationConfig as FadeInAnimationConfig;
             return config.initialOpacity ? config.initialOpacity : 0;
+        } else {
+            return 1;
+        }
+    }
+
+    private _getFinalOpacity(props: FadeAnimationProps): number {
+        if (props.animationConfig.type === AnimationType.FADE_OUT) {
+            const config = props.animationConfig as FadeOutAnimationConfig;
+            return config.finalOpacity ? config.finalOpacity : 0;
         } else {
             return 1;
         }

@@ -3,7 +3,6 @@ import { BaseAnimationConfig } from './BaseAnimation';
 
 
 interface FadeInAnimationConfig extends BaseAnimationConfig {
-
     animationDuration: number;
     initialOpacity?: number;
 }

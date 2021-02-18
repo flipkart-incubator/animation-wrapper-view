@@ -56,7 +56,7 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
     public startAnimation(): void {
         this.animationStarted();
         this._rippleAnimation.reset();
-        this._rippleAnimation.start(() => {this.animationFinished()});
+        this._rippleAnimation.start(() => { this.animationFinished() });
     }
 
     public stopAnimation(): void {
@@ -67,6 +67,10 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
         this.stopAnimation();
         this.state.opacity.setValue(1);
         this.state.scale.setValue(0);
+    }
+    public finishAnimation = () => {
+        this.stopAnimation();
+        // no extra op
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {

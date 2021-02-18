@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Animated, GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
+import { GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
 import { AnimationTriggerType, AnimationType } from '../../data/Enums';
 import { AnimationWrapperProps } from '../../Types';
 
@@ -9,6 +8,7 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps, S> e
     public abstract startAnimation(): void;
     public abstract stopAnimation(): void;
     public abstract resetAnimation(): void;
+    public abstract finishAnimation(): void;
 
     public componentDidMount(): void {
         if (this.props.animationConfig && this.props.animationConfig.triggerType === AnimationTriggerType.ON_LOAD) {

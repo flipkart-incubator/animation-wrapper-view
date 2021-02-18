@@ -58,6 +58,17 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
+    public finishAnimation = () => {
+        this.stopAnimation();
+        if (Array.isArray(this.props.animationConfig.animationConfig)) {
+            for (let i = 0; i < this.props.animationConfig.animationConfig.length; i++) {
+                this._animation && this._animation[i] && this._animation[i].setValue(1);
+            }
+        } else {
+            this._animation && this._animation[0] && this._animation[0].setValue(1);
+        }
+    }
+
     protected renderAnimation = (content: React.ReactNode): React.ReactNode => {
         const transformArray = this._getTransformArray();
         return (

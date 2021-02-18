@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Button, GestureResponderEvent } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Button, GestureResponderEvent, TouchableOpacity, ToastAndroid } from 'react-native';
 import { AnimationWrapperView } from './core/components/AnimationWrapperView';
 import { BaseAnimationConfig } from './core/data/BaseAnimation';
 import { cardFlipJson, swingJson, zoomInJson } from './utils/JsonTemplates';
-import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
+import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleInConfig, scaleOutConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
 
 interface State {
     animationConfig: BaseAnimationConfig
@@ -30,7 +30,7 @@ export default class Main extends React.Component<{}, State> {
                         animationConfig={this.state.animationConfig}
                         onAnimationStart={this._onStart}
                         onAnimationFinish={this._onComplete}>
-                            
+
                         {this._renderCard()}
                     </AnimationWrapperView>
                     {/* <AnimationWrapperView
@@ -46,6 +46,7 @@ export default class Main extends React.Component<{}, State> {
                         <Button title={"Start"} onPress={this._onPressToStart} />
                         <Button title={"Stop"} onPress={this._onPressToStop} />
                         <Button title={"Reset"} onPress={this._onPressToReset} />
+                        <Button title={"Finish"} onPress={this._onPressToFinish} />
                     </View>
 
 
@@ -61,6 +62,8 @@ export default class Main extends React.Component<{}, State> {
                         <Button title={"Slide Out"} onPress={() => (this.setState({ animationConfig: slideOutConfig }))} />
                         <Button title={"Slide In"} onPress={() => (this.setState({ animationConfig: slideInConfig }))} />
                         <Button title={"Wiggle"} onPress={() => (this.setState({ animationConfig: wiggleAnimation }))} />
+                        <Button title={"Scale In"} onPress={() => (this.setState({ animationConfig: scaleInConfig }))} />
+                        <Button title={"Scale Out"} onPress={() => (this.setState({ animationConfig: scaleOutConfig }))} />
                         <Button title={"Bounce"} onPress={() => (this.setState({ animationConfig: bounceConfig }))} />
                         <Button title={"Ripple"} onPress={() => (this.setState({ animationConfig: rippleConfig }))} />
                         <Button title={"Draggable"} onPress={() => (this.setState({ animationConfig: draggableConfig }))} />
@@ -83,6 +86,11 @@ export default class Main extends React.Component<{}, State> {
         this._wrapperRef?.resetAnimation();
     }
 
+    private _onPressToFinish = (_: GestureResponderEvent) => {
+        // Trigger animation on button press.
+        this._wrapperRef?.finishAnimation();
+    }
+
     private _onComplete = () => {
         console.log('AnimationWrapperView', 'onComplete');
     }
@@ -99,10 +107,21 @@ export default class Main extends React.Component<{}, State> {
                     <Text style={styles.paragraph}>
                         BannerWidget
                     </Text>
+                    <Button onPress={this.onPressButton} title={"hello"} />
+                    <TouchableOpacity onPress={this.onPressButton}>
+                        <Text style={{ backgroundColor: 'red', padding: 12 }}>
+                            Hello
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         );
 
+    }
+
+    private onPressButton = (ev: any) => {
+        ToastAndroid.show("hello", ToastAndroid.SHORT);
+        console.log('swapnil');
     }
 }
 

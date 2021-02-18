@@ -16,13 +16,22 @@ const bounceConfig: BounceAnimationConfig = {
     animationDuration: 1000
 };
 
-const scaleConfig: ScaleAnimationConfig = {
+const scaleInConfig: ScaleAnimationConfig = {
+    type: AnimationType.SCALE,
+    triggerType: AnimationTriggerType.ON_CLICK,
+    scaleDuration: 1000,
+    toScale: 2,
+    easing: Easing.bounce
+};
+
+const scaleOutConfig: ScaleAnimationConfig = {
     type: AnimationType.SCALE,
     triggerType: AnimationTriggerType.ON_CLICK,
     scaleDuration: 1000,
     toScale: .6,
     easing: Easing.bounce
 };
+
 const rippleConfig: RippleAnimationConfig = {
     type: AnimationType.RIPPLE,
     triggerType: AnimationTriggerType.ON_CLICK,
@@ -72,12 +81,13 @@ const wiggleAnimation: WiggleAnimationConfig = {
 
 export {
     bounceConfig,
-    scaleConfig,
+    scaleInConfig,
     slideInConfig,
     slideOutConfig,
     wiggleAnimation,
     fadeInConfig,
     fadeOutConfig,
     rippleConfig,
-    draggableConfig
+    draggableConfig,
+    scaleOutConfig
 };
