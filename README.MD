@@ -1,4 +1,3 @@
-## AnimationWrapperView
 AnimationWrapperView is a collection of a well defined set of component level animations, that a developer can utilize just by just providing some configurations. AnimationWrapperView will add plug and play type support to the already robust Animated API,  and will take care of all the intricate details of each animation type.
  
 
@@ -56,6 +55,7 @@ private _onPressToReset = (_: GestureResponderEvent) => {
 | --- | --- | --- | 
 | animationConfig | BaseAnimation | Object which will contain all optional and non-optional parameters needed to render the animation, including AnimationType, AnimationTriggerType, etc. |
 | onAnimationFinish | () => void | (optional) Callback function, if provided will be invoked once animation is finished. |
+| onAnimationStart | () => void | (optional) Callback function, if provided will be invoked when the animation is triggered. |
 
 
 ### Define your custom animations!
@@ -77,8 +77,7 @@ Type definitions:
 
 | Type name | params | usage |
 | --- | --- | --- |
-| InterpolationDef | easing: EasingType | Defines the easing 
-that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
+| InterpolationDef | easing: EasingType | Defines the easing that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
 | | params: InterpolationParams | Some easing functions requre extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing. |
 
 
