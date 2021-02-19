@@ -3,7 +3,7 @@ import { RippleAnimationWrapper } from './wrapper/RippleAnimationWrapper';
 import { ScaleAnimationWrapper } from './wrapper/ScaleAnimationWrapper';
 import { BounceAnimationWrapper } from './wrapper/BounceAnimationWrapper';
 
-import { BaseAnimationConfig } from '../data/BaseAnimation';
+import BaseAnimationConfig from '../data/BaseAnimationConfig';
 import { DraggableAnimationWrapper } from './wrapper/DraggableAnimationWrapper';
 import { AnimationWrapperProps, WrapperComponent } from "../Types";
 
@@ -14,7 +14,7 @@ import { BaseAnimationWrapper } from './wrapper/BaseAnimationWrapper';
 import { JsonAnimationWrapper } from './wrapper/JsonAnimationWrapper';
 import { AnimationType } from '../data/Enums';
 
-export abstract class AnimationWrapperView extends React.PureComponent<AnimationWrapperProps> {
+export default class AnimationWrapperView extends React.PureComponent<AnimationWrapperProps> {
 
     private _component: WrapperComponent;
     private _animatorRef?: BaseAnimationWrapper<AnimationWrapperProps, {}> | null;

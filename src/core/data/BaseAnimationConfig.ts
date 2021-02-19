@@ -1,6 +1,6 @@
 import { AnimationTriggerType, AnimationType } from "./Enums";
 
-export interface BaseAnimationConfig {
+export default interface BaseAnimationConfig {
     type: AnimationType;
     triggerType: AnimationTriggerType;
 }

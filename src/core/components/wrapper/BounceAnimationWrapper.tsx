@@ -2,7 +2,7 @@ import { Animated, Easing } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { AnimationWrapperProps } from '../../Types';
-import { BounceAnimationConfig } from '../../data/BounceAnimation';
+import BounceAnimationConfig from '../../data/BounceAnimationConfig';
 
 interface BounceAnimationState {
     translateY: Animated.Value;
@@ -38,7 +38,7 @@ export class BounceAnimationWrapper extends BaseAnimationWrapper<BounceAnimation
         ]);
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<BounceAnimationProps>, _nextContext: any): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: BounceAnimationProps, _nextContext: any): void {
         if (nextProps !== this.props) {
             const nextState: BounceAnimationState | null = this.getAnimationStateFromProps(nextProps);
             if (null != nextState) {

@@ -2,7 +2,7 @@ import { Animated, Easing, ToastAndroid, View } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { ScaleAnimationConfig } from '../../data/ScaleAnimation';
+import { ScaleAnimationConfig } from '../../data/ScaleAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
 
 
@@ -33,7 +33,7 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
         });
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<ScaleAnimationProps>, _nextContext: any): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: ScaleAnimationProps, _nextContext: any): void {
         if (nextProps !== this.props) {
             const nextState: ScaleAnimationState | null = this.getAnimationStateFromProps(nextProps);
             if (null != nextState) {

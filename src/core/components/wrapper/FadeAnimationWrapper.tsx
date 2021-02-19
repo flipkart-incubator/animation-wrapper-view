@@ -2,7 +2,7 @@ import { Animated } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimation';
+import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimationConfig';
 import { FadeAnimationProps } from '../../Types';
 import { AnimationType } from '../../data/Enums';
 
@@ -47,7 +47,7 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         });
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<FadeAnimationProps>, _nextContext: any): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: FadeAnimationProps, _nextContext: any): void {
         if (nextProps !== this.props) {
             const nextState: FadeAnimationState | null = this.getAnimationStateFromProps(nextProps);
             if (null != nextState) {

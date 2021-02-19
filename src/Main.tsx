@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Text, View, StyleSheet, ImageBackground, Button, GestureResponderEvent, TouchableOpacity, ToastAndroid } from 'react-native';
-import { AnimationWrapperView } from './core/components/AnimationWrapperView';
-import { BaseAnimationConfig } from './core/data/BaseAnimation';
+import AnimationWrapperView from './core/components/AnimationWrapperView';
+import BaseAnimationConfig from './core/data/BaseAnimationConfig';
 import { cardFlipJson, swingJson, zoomInJson } from './utils/JsonTemplates';
 import { bounceConfig, draggableConfig, fadeInConfig, fadeOutConfig, rippleConfig, scaleInConfig, scaleOutConfig, slideInConfig, slideOutConfig, wiggleAnimation } from './utils/Templates';
 

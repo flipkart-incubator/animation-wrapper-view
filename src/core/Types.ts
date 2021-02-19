@@ -4,7 +4,7 @@ import { JsonAnimationProps } from "./components/wrapper/JsonAnimationWrapper";
 import { RippleAnimationProps } from "./components/wrapper/RippleAnimationWrapper";
 import { ScaleAnimationProps } from "./components/wrapper/ScaleAnimationWrapper";
 import { WiggleAnimationProps } from "./components/wrapper/WiggleAnimationWrapper";
-import { BaseAnimationConfig } from "./data/BaseAnimation";
+import BaseAnimationConfig from "./data/BaseAnimationConfig";
 
 /**
  * Append the React.ComponentClass<T extends AnimationProps> for each class extending from BaseAnimationWrapper
