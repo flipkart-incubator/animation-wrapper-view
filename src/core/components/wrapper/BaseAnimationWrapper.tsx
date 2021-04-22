@@ -1,13 +1,16 @@
 import React from 'react';
-import { GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
-import { AnimationTriggerType, AnimationType } from '../../data/Enums';
-import { AnimationWrapperProps } from '../../Types';
+import {GestureResponderEvent, TouchableWithoutFeedback, View} from 'react-native';
+import {AnimationTriggerType, AnimationType} from '../../data/Enums';
+import {AnimationWrapperProps} from '../../Types';
 
 export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps, S> extends React.Component<P, S> {
 
     public abstract startAnimation(): void;
+
     public abstract stopAnimation(): void;
+
     public abstract resetAnimation(): void;
+
     public abstract finishAnimation(): void;
 
     public componentDidMount(): void {
@@ -50,6 +53,7 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps, S> e
     }
 
     protected abstract renderAnimation(content: React.ReactNode): React.ReactNode;
+
     protected abstract getAnimationStateFromProps(animationConfig: P): S;
 
     private _onPress = (_: GestureResponderEvent) => {

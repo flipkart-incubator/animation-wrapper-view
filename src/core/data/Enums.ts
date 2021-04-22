@@ -10,8 +10,8 @@ export enum AnimationType {
     FADE_IN = "FADE_IN",
     FADE_OUT = "FADE_OUT",
     DRAGGABLE = "DRAGGABLE",
-    SLIDE_IN = "SLIDE_IN",
-    SLIDE_OUT = "SLIDE_OUT",
+    SLIDE_VERTICAL = "SLIDE_VERTICAL",
+    SLIDE_HORIZONTAL = "SLIDE_HORIZONTAL",
     WIGGLE = "WIGGLE",
     JSON = "JSON"
 }

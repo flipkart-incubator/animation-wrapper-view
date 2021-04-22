@@ -61,13 +61,13 @@ const fadeOutConfig: FadeOutAnimationConfig = {
 };
 
 const slideInConfig: FadeInAnimationConfig = {
-    type: AnimationType.SLIDE_IN,
+    type: AnimationType.SLIDE_VERTICAL,
     triggerType: AnimationTriggerType.ON_LOAD,
     animationDuration: 500
 };
 
 const slideOutConfig: FadeOutAnimationConfig = {
-    type: AnimationType.SLIDE_OUT,
+    type: AnimationType.SLIDE_HORIZONTAL,
     triggerType: AnimationTriggerType.ON_CLICK,
     animationDuration: 2000
 };

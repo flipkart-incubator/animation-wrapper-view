@@ -1,23 +1,13 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.fkinternal.com/Flipkart/animation-wrapper-view/",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",
   "types": "dist/typescript/src/index.d.ts",
   "scripts": {
-    "android": "expo start --android",
-    "eject": "expo eject",
-    "ios": "expo start --ios",
-    "prepare": "bob build",
-    "start": "expo start",
-    "web": "expo start --web"
-  },
-  "peerDependencies": {
-    "react": "16.9.0",
-    "react-dom": "16.0.0",
-    "react-native": "0.61.2"
+    "prepare": "bob build"
   },
   "@react-native-community/bob": {
     "source": "src",
@@ -27,6 +17,11 @@
       "module",
       "typescript"
     ]
+  },
+  "peerDependencies": {
+    "react": "16.9.0",
+    "react-dom": "16.0.0",
+    "react-native": "0.61.2"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

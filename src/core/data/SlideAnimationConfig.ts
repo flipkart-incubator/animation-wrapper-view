@@ -1,16 +1,26 @@
-import { EasingFunction } from 'react-native';
 import BaseAnimationConfig from './BaseAnimationConfig';
 
+type SlideHorizontalDirection = "ltr" | "rtl";
+type SlideVerticalDirection = "top_down" | "bottom_up";
 
-interface SlideInAnimationConfig extends BaseAnimationConfig {
+interface SlideAnimationConfig extends BaseAnimationConfig {
     animationDuration: number;
     initialOffset?: number;
+    finalOffset: number;
 }
 
-interface SlideOutAnimationConfig extends BaseAnimationConfig {
-    animationDuration: number;
-    finalOffset?: number;
+interface SlideHorizontalAnimationConfig extends SlideAnimationConfig {
+    direction?: SlideHorizontalDirection;
 }
 
+interface SlideVerticalAnimationConfig extends SlideAnimationConfig {
+    direction?: SlideVerticalDirection;
+}
 
-export { SlideInAnimationConfig, SlideOutAnimationConfig };
+export {
+    SlideHorizontalAnimationConfig,
+    SlideVerticalAnimationConfig,
+    SlideAnimationConfig,
+    SlideHorizontalDirection,
+    SlideVerticalDirection
+};

@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { RippleAnimationWrapper } from './wrapper/RippleAnimationWrapper';
-import { ScaleAnimationWrapper } from './wrapper/ScaleAnimationWrapper';
-import { BounceAnimationWrapper } from './wrapper/BounceAnimationWrapper';
+import React, {Component} from 'react';
+import {RippleAnimationWrapper} from './wrapper/RippleAnimationWrapper';
+import {ScaleAnimationWrapper} from './wrapper/ScaleAnimationWrapper';
+import {BounceAnimationWrapper} from './wrapper/BounceAnimationWrapper';
 
 import BaseAnimationConfig from '../data/BaseAnimationConfig';
-import { DraggableAnimationWrapper } from './wrapper/DraggableAnimationWrapper';
-import { AnimationWrapperProps, WrapperComponent } from "../Types";
+import {DraggableAnimationWrapper} from './wrapper/DraggableAnimationWrapper';
+import {AnimationWrapperProps, WrapperComponent} from "../Types";
 
-import { FadeAnimationWrapper } from './wrapper/FadeAnimationWrapper';
-import { SlideAnimationWrapper } from './wrapper/SlideAnimationWrapper';
-import { WiggleAnimationWrapper } from './wrapper/WiggleAnimationWrapper';
-import { BaseAnimationWrapper } from './wrapper/BaseAnimationWrapper';
-import { JsonAnimationWrapper } from './wrapper/JsonAnimationWrapper';
-import { AnimationType } from '../data/Enums';
+import {FadeAnimationWrapper} from './wrapper/FadeAnimationWrapper';
+import {SlideAnimationWrapper} from './wrapper/SlideAnimationWrapper';
+import {WiggleAnimationWrapper} from './wrapper/WiggleAnimationWrapper';
+import {BaseAnimationWrapper} from './wrapper/BaseAnimationWrapper';
+import {JsonAnimationWrapper} from './wrapper/JsonAnimationWrapper';
+import {AnimationType} from '../data/Enums';
 
 export default class AnimationWrapperView extends React.PureComponent<AnimationWrapperProps> {
 
@@ -61,7 +61,7 @@ export default class AnimationWrapperView extends React.PureComponent<AnimationW
 
     public render(): React.ReactNode | undefined {
         this._assertChildType();
-        const { children, onAnimationFinish, onAnimationStart } = this.props;
+        const {children, onAnimationFinish, onAnimationStart} = this.props;
         const animationConfig = this.props.animationConfig;
         if (this._component && children) {
             return (
@@ -95,8 +95,8 @@ export default class AnimationWrapperView extends React.PureComponent<AnimationW
             case AnimationType.FADE_IN:
             case AnimationType.FADE_OUT:
                 return FadeAnimationWrapper;
-            case AnimationType.SLIDE_IN:
-            case AnimationType.SLIDE_OUT:
+            case AnimationType.SLIDE_VERTICAL:
+            case AnimationType.SLIDE_HORIZONTAL:
                 return SlideAnimationWrapper;
             case AnimationType.WIGGLE:
                 return WiggleAnimationWrapper;
