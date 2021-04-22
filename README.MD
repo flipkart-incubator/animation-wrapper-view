@@ -1,4 +1,4 @@
-AnimationWrapperView is a collection of a well defined set of component level animations, that a developer can utilize just by just providing some configurations. AnimationWrapperView will add plug and play type support to the already robust Animated API,  and will take care of all the intricate details of each animation type.
+AnimationWrapperView is a collection of a well defined set of component level animations, that a developer can utilize just by providing some configurations. AnimationWrapperView will add plug and play type support to the already robust Animated API,  and will take care of all the intricate details of each animation type.
  
 
 ### Sample code
@@ -63,8 +63,8 @@ AnimationWrapperView also gives you the capability to define your custom animati
 This tool is very powerful as it allows you to play with various transformation attributes that can be applied to any Animated.View.
 
  - A `TransformDef` object defines an individual piece of transformation, `f`(from) to `t`(to) value and the `p`(property) to transform. 
- - An array of `TransformDef` along with the `duration` and the `InterpolationDef` will create an `AnimationDef` object. All the transformations defined in the array will play in a parrallel.
- - An array of `AnimationDef` definitions can be played in sequence to render any type of animation(limited by imagination :P).
+ - An array of `TransformDef` along with the `duration` and the `InterpolationDef` will create an `AnimationDef` object. All the transformations defined in the array will play in parallel.
+ - An array of `AnimationDef` definitions can be played in sequence to render any type of animation (limited by imagination :P).
 
 Type definitions:
 
@@ -78,7 +78,7 @@ Type definitions:
 | Type name | params | usage |
 | --- | --- | --- |
 | InterpolationDef | easing: EasingType | Defines the easing that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back. |
-| | params: InterpolationParams | Some easing functions requre extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing. |
+| | params: InterpolationParams | Some easing functions require extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing. |
 
 
 | Type name | params | usage |
