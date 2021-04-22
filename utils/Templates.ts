@@ -20,16 +20,14 @@ const scaleInConfig: ScaleAnimationConfig = {
     type: AnimationType.SCALE,
     triggerType: AnimationTriggerType.ON_CLICK,
     scaleDuration: 1000,
-    toScale: 2,
-    easing: Easing.bounce
+    toScale: 2
 };
 
 const scaleOutConfig: ScaleAnimationConfig = {
     type: AnimationType.SCALE,
     triggerType: AnimationTriggerType.ON_CLICK,
     scaleDuration: 1000,
-    toScale: .6,
-    easing: Easing.bounce
+    toScale: .6
 };
 
 const rippleConfig: RippleAnimationConfig = {

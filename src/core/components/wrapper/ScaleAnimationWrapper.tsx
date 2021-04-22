@@ -4,6 +4,7 @@ import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
 import { ScaleAnimationConfig } from '../../data/ScaleAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
+import getEasingFunction from "../Utils";
 
 
 interface ScaleAnimationState {
@@ -28,7 +29,7 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
         this._scaleAnimation = Animated.timing(this.state.scale, {
             duration: animationConfig.scaleDuration,
             toValue: (this.isScaled) ? 1 : animationConfig.toScale,
-            easing: animationConfig.easing ? animationConfig.easing : Easing.linear,
+            easing: getEasingFunction(animationConfig.interpolationDef),
             useNativeDriver: false
         });
     }

@@ -10,6 +10,7 @@ import {
 } from '../../data/SlideAnimationConfig';
 import {AnimationType} from '../../data/Enums';
 import {SlideAnimationProps} from '../../Types';
+import getEasingFunction from "../Utils";
 
 interface SlideAnimationState {
     translate: Animated.Value;
@@ -50,6 +51,7 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
         this._slideAnimation = Animated.timing(this.state.translate, {
             duration: duration,
             toValue: toValue,
+            easing: getEasingFunction(animationConfig.interpolationDef),
             useNativeDriver: false
         });
     }

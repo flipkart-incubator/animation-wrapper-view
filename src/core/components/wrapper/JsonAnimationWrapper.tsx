@@ -3,6 +3,7 @@ import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { InterpolationDef, JsonAnimationConfig, TransformDef } from '../../data/JsonAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
+import getEasingFunction from "../Utils";
 
 interface JsonAnimationState {
 }
@@ -129,7 +130,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                     animationSequence.push(Animated.timing(this._animation[i], {
                         toValue: 1,
                         duration: animationDef.duration,
-                        easing: this._getEasingFunction(animationDef.interpolation),
+                        easing: getEasingFunction(animationDef.interpolation),
                         useNativeDriver: false
                     }));
                 }
@@ -141,7 +142,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                 this._compositeAnimation = Animated.timing(this._animation[0], {
                     toValue: 1,
                     duration: animationDef.duration,
-                    easing: this._getEasingFunction(animationDef.interpolation),
+                    easing: getEasingFunction(animationDef.interpolation),
                     useNativeDriver: false
                 });
             }
@@ -250,36 +251,5 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         return transforms;
     }
 
-    private _getEasingFunction = (interpolation?: InterpolationDef): EasingFunction => {
-        switch (interpolation?.easing) {
-            case "linear":
-                return Easing.linear;
-            case "quad":
-                return Easing.quad;
-            case "circle":
-                return Easing.circle;
-            case "elastic":
-                const bounciness = interpolation?.params?.bounciness;
-                if (bounciness && !isNaN(bounciness)) {
-                    return Easing.elastic(bounciness);
-                }
-            case "bounce":
-                return Easing.bounce;
-            case "back":
-                const back = interpolation?.params?.back;
-                if (back && !isNaN(back)) {
-                    return Easing.back(back);
-                }
-            case "cubic":
-                return Easing.cubic;
-            case "sin":
-                return Easing.sin;
-            case "exp":
-                return Easing.exp;
-            case "ease":
-                return Easing.ease;
-            default:
-                return Easing.linear;
-        }
-    }
+
 }
