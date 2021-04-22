@@ -1,5 +1,5 @@
 import { EasingFunction } from 'react-native';
-import { BaseAnimationConfig } from './BaseAnimation';
+import BaseAnimationConfig from './BaseAnimationConfig';
 
 
 interface FadeInAnimationConfig extends BaseAnimationConfig {

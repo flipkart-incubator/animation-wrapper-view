@@ -1,7 +1,7 @@
 import { Animated, Easing, EasingFunction } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { InterpolationDef, JsonAnimationConfig, TransformDef } from '../../data/JsonAnimation';
+import { InterpolationDef, JsonAnimationConfig, TransformDef } from '../../data/JsonAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
 
 interface JsonAnimationState {

@@ -2,7 +2,7 @@ import { Animated, StyleProp, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { AnimationWrapperProps } from '../../Types';
-import { RippleAnimationConfig } from '../../data/RippleAnimation';
+import { RippleAnimationConfig } from '../../data/RippleAnimationConfig';
 
 interface RippleAnimationState {
     scale: Animated.Value;
@@ -44,7 +44,7 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
         });
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<RippleAnimationProps>, _nextContext: any): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: RippleAnimationProps, _nextContext: any): void {
         if (nextProps !== this.props) {
             const nextState: RippleAnimationState | null = this.getAnimationStateFromProps(nextProps);
             if (null != nextState) {

@@ -3,7 +3,7 @@
 import { Animated } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { BaseAnimationConfig } from '../../data/BaseAnimation';
+import BaseAnimationConfig from '../../data/BaseAnimationConfig';
 import { WiggleAnimationConfig } from '../../data/WiggleAnimation';
 import { AnimationWrapperProps } from '../../Types';
 
@@ -45,7 +45,7 @@ export class WiggleAnimationWrapper extends BaseAnimationWrapper<WiggleAnimation
         ]);
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<WiggleAnimationProps>, _nextContext: any): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: WiggleAnimationProps, _nextContext: any): void {
         if (nextProps !== this.props) {
             const nextState: WiggleAnimationState | null = this.getAnimationStateFromProps(nextProps);
             if (null != nextState) {

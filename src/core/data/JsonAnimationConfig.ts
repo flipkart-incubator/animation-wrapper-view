@@ -1,6 +1,6 @@
-import { BaseAnimationConfig } from "./BaseAnimation"
+import BaseAnimationConfig from "./BaseAnimationConfig"
 
-type TransformType = "scale"
+export type TransformType = "scale"
     | "fade"
     | "opacity"
     | "translateX"
@@ -11,7 +11,7 @@ type TransformType = "scale"
     | "scaleX"
     | "scaleY";
 
-type EasingType = "linear"
+export type EasingType = "linear"
     | "quad"
     | "circle"
     | "elastic"

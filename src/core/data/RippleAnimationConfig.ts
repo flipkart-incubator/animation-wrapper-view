@@ -1,4 +1,4 @@
-import { BaseAnimationConfig } from './BaseAnimation';
+import BaseAnimationConfig from './BaseAnimationConfig';
 export interface RippleAnimationConfig extends BaseAnimationConfig {
     rippleColor: string;
     rippleDuration: number;

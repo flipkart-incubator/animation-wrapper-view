@@ -3,7 +3,7 @@ import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
 import { AnimationWrapperProps } from '../../Types';
-import { BaseAnimationConfig } from '../../data/BaseAnimation';
+import BaseAnimationConfig from '../../data/BaseAnimationConfig';
 
 
 
@@ -29,7 +29,7 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
         this.state = this.getAnimationStateFromProps(props);
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<DraggableAnimationProps>, _nextContext: any): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: DraggableAnimationProps, _nextContext: any): void {
         if (nextProps !== this.props) {
             const nextState: DraggableAnimationState | null = this.getAnimationStateFromProps(nextProps);
             if (null != nextState) {
@@ -37,8 +37,6 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
             }
         }
     }
-
-
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         return (

@@ -2,8 +2,8 @@ import { Animated, Dimensions } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimation';
-import { SlideInAnimationConfig, SlideOutAnimationConfig } from '../../data/SlideAnimation';
+import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimationConfig';
+import { SlideInAnimationConfig, SlideOutAnimationConfig } from '../../data/SlideAnimationConfig';
 import { AnimationType } from '../../data/Enums';
 import { SlideAnimationProps } from '../../Types';
 
@@ -53,7 +53,7 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
         });
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<SlideAnimationProps>, _nextContext: any): void {
+    public UNSAFE_componentWillReceiveProps(nextProps: SlideAnimationProps, _nextContext: any): void {
         if (nextProps !== this.props) {
             const nextState: SlideAnimationState | null = this.getAnimationStateFromProps(nextProps);
             if (null != nextState) {
