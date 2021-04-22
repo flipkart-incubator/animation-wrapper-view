@@ -38,8 +38,6 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
         }
     }
 
-
-
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         return (
             <Animated.View

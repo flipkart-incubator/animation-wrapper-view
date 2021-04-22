@@ -1,6 +1,6 @@
 
-import { AnimationTriggerType, AnimationType } from "../core/data/Enums";
-import { JsonAnimationConfig } from "../core/data/JsonAnimationConfig";
+import { AnimationTriggerType, AnimationType } from "../src/core/data/Enums";
+import { JsonAnimationConfig } from "../src/core/data/JsonAnimationConfig";
 
 export const cardFlipJson: JsonAnimationConfig = {
     triggerType: AnimationTriggerType.ON_CLICK,

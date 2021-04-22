@@ -1,13 +1,13 @@
 import { Easing } from "react-native";
-import BaseAnimationConfig from "../core/data/BaseAnimationConfig";
-import BounceAnimationConfig from "../core/data/BounceAnimationConfig";
-import { AnimationType, AnimationTriggerType } from "../core/data/Enums";
+import BaseAnimationConfig from "../src/core/data/BaseAnimationConfig";
+import BounceAnimationConfig from "../src/core/data/BounceAnimationConfig";
+import { AnimationType, AnimationTriggerType } from "../src/core/data/Enums";
 
-import { FadeInAnimationConfig, FadeOutAnimationConfig } from "../core/data/FadeAnimationConfig";
-import { JsonAnimationConfig } from "../core/data/JsonAnimationConfig";
-import { RippleAnimationConfig } from "../core/data/RippleAnimationConfig";
-import { ScaleAnimationConfig } from "../core/data/ScaleAnimationConfig";
-import { WiggleAnimationConfig } from "../core/data/WiggleAnimation";
+import { FadeInAnimationConfig, FadeOutAnimationConfig } from "../src/core/data/FadeAnimationConfig";
+import { JsonAnimationConfig } from "../src/core/data/JsonAnimationConfig";
+import { RippleAnimationConfig } from "../src/core/data/RippleAnimationConfig";
+import { ScaleAnimationConfig } from "../src/core/data/ScaleAnimationConfig";
+import { WiggleAnimationConfig } from "../src/core/data/WiggleAnimation";
 
 const bounceConfig: BounceAnimationConfig = {
     type: AnimationType.BOUNCE,
