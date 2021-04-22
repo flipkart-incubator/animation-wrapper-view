@@ -1,23 +1,26 @@
-import { Animated, Dimensions } from 'react-native';
+import {Animated, Dimensions, TransformsStyle} from 'react-native';
 import React from 'react';
-import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-
-import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimationConfig';
-import { SlideInAnimationConfig, SlideOutAnimationConfig } from '../../data/SlideAnimationConfig';
-import { AnimationType } from '../../data/Enums';
-import { SlideAnimationProps } from '../../Types';
+import {BaseAnimationWrapper} from './BaseAnimationWrapper';
+import {
+    SlideAnimationConfig,
+    SlideHorizontalAnimationConfig,
+    SlideHorizontalDirection,
+    SlideVerticalAnimationConfig,
+    SlideVerticalDirection
+} from '../../data/SlideAnimationConfig';
+import {AnimationType} from '../../data/Enums';
+import {SlideAnimationProps} from '../../Types';
 
 interface SlideAnimationState {
-    translateX: Animated.Value;
+    translate: Animated.Value;
 }
 
-
-export interface SlideInAnimationProps extends SlideAnimationProps {
-    animationConfig: SlideInAnimationConfig;
+export interface SlideHorizontalAnimationProps extends SlideAnimationProps {
+    animationConfig: SlideHorizontalAnimationConfig;
 }
 
-export interface SlideOutAnimationProps extends SlideAnimationProps {
-    animationConfig: SlideOutAnimationConfig;
+export interface SlideVerticalAnimationProps extends SlideAnimationProps {
+    animationConfig: SlideVerticalAnimationConfig;
 }
 
 export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationProps, SlideAnimationState> {
@@ -25,28 +28,26 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
     private _slideAnimation: Animated.CompositeAnimation;
 
     private _screenWidth: number;
+    private _screenHeight: number;
+    private _animationType: AnimationType;
+
     public constructor(props: SlideAnimationProps) {
         super(props);
 
         this._screenWidth = Math.round(Dimensions.get('window').width);
+        this._screenHeight = Math.round(Dimensions.get('window').height);
         this.state = this.getAnimationStateFromProps(props);
 
+        const {animationConfig} = this.props;
+        this._animationType = animationConfig.type;
 
-        const { animationConfig } = this.props;
-        let toValue: number;
-        let duration: number;
-        if (animationConfig.type === AnimationType.SLIDE_IN) {
-            const slideInConfig = animationConfig as SlideInAnimationConfig;
-            toValue = 1;
-            duration = slideInConfig.animationDuration;
+        const config = animationConfig as SlideAnimationConfig;
+        let fromValue: number = this._getInitialTranslateValue(this.props);
+        let toValue: number = config.finalOffset;
+        let duration: number = config.animationDuration;
 
-        } else {
-            const slideOutConfig = animationConfig as SlideOutAnimationConfig;
-            duration = slideOutConfig.animationDuration;
-            toValue = slideOutConfig.finalOffset ? slideOutConfig.finalOffset : this._screenWidth;
-
-        }
-        this._slideAnimation = Animated.timing(this.state.translateX, {
+        this.state.translate.setValue(fromValue);
+        this._slideAnimation = Animated.timing(this.state.translate, {
             duration: duration,
             toValue: toValue,
             useNativeDriver: false
@@ -65,7 +66,9 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
     public startAnimation(): void {
         this.animationStarted();
         this._slideAnimation.reset();
-        this._slideAnimation.start(() => { this.animationFinished() });
+        this._slideAnimation.start(() => {
+            this.animationFinished()
+        });
     }
 
     public stopAnimation(): void {
@@ -74,53 +77,72 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
 
     public resetAnimation(): void {
         this.stopAnimation();
-        this.state.translateX.setValue(this._getInitialTranslateValue(this.props));
+        this.state.translate.setValue(this._getInitialTranslateValue(this.props));
     }
-
 
     public finishAnimation = () => {
         this.stopAnimation();
-        this.state.translateX.setValue(this._getFinalTranslateValue(this.props));
+        this.state.translate.setValue(this._getFinalTranslateValue(this.props));
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
-        const translateX = this.state.translateX;
-
-        return (
-            <Animated.View
-                style={{
+        if (this._animationType === AnimationType.SLIDE_HORIZONTAL) {
+            return (
+                <Animated.View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
                     transform: [
-                        { translateX }
+                        {translateX: this.state.translate}
                     ]
                 }}>
-                {content}
-            </Animated.View>
-        );
+                    {content}
+                </Animated.View>
+            );
+        } else {
+            return (
+                <Animated.View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    transform: [
+                        {translateY: this.state.translate}
+                    ]
+                }}>
+                    {content}
+                </Animated.View>
+            );
+        }
+
     }
 
     protected getAnimationStateFromProps(props: SlideAnimationProps): SlideAnimationState {
         return {
-            translateX: new Animated.Value(this._getInitialTranslateValue(props))
+            translate: new Animated.Value(this._getInitialTranslateValue(props))
         }
     }
 
     private _getInitialTranslateValue(props: SlideAnimationProps): number {
-        if (props.animationConfig.type === AnimationType.SLIDE_IN) {
-            const config = props.animationConfig as SlideInAnimationConfig;
-            return config.initialOffset ? config.initialOffset : -this._screenWidth;
-        } else {
-            return 0;
-        }
+        const config = props.animationConfig as SlideAnimationConfig;
+        if (config.initialOffset === undefined || config.initialOffset === 0) {
+            if (config.type === AnimationType.SLIDE_VERTICAL) {
+                const direction: SlideVerticalDirection | undefined = (config as SlideVerticalAnimationConfig).direction;
+                if (direction === "top_down") {
+                    return -this._screenHeight;
+                } else {
+                    return this._screenHeight;
+                }
+            } else {
+                const direction: SlideHorizontalDirection | undefined = (config as SlideHorizontalAnimationConfig).direction;
+                if (direction === "ltr") {
+                    return -this._screenWidth;
+                } else {
+                    return this._screenWidth;
+                }
+            }
+        } else return config.initialOffset;
     }
 
     private _getFinalTranslateValue(props: SlideAnimationProps): number {
-        if (props.animationConfig.type === AnimationType.SLIDE_OUT) {
-            const config = props.animationConfig as SlideOutAnimationConfig;
-            return config.finalOffset ? config.finalOffset : -this._screenWidth;
-        } else {
-            return 0;
-        }
+        const config = props.animationConfig as SlideAnimationConfig;
+        return config.finalOffset;
     }
 }
