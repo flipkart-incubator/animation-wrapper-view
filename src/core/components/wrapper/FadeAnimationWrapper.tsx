@@ -5,6 +5,7 @@ import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimationConfig';
 import { FadeAnimationProps } from '../../Types';
 import { AnimationType } from '../../data/Enums';
+import getEasingFunction from "../Utils";
 
 interface FadeAnimationState {
     opacity: Animated.Value;
@@ -43,6 +44,7 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         this._fadeAnimation = Animated.timing(this.state.opacity, {
             duration: duration,
             toValue: toValue,
+            easing: getEasingFunction(animationConfig.interpolationDef),
             useNativeDriver: false
         });
     }

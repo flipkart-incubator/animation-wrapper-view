@@ -14,8 +14,15 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps, S> e
     public abstract finishAnimation(): void;
 
     public componentDidMount(): void {
-        if (this.props.animationConfig && this.props.animationConfig.triggerType === AnimationTriggerType.ON_LOAD) {
-            this.startAnimation();
+        const {triggerDelay, triggerType} = this.props.animationConfig;
+        if (triggerType === AnimationTriggerType.ON_LOAD) {
+            if (triggerDelay) {
+                setTimeout(() => {
+                    this.startAnimation();
+                }, triggerDelay);
+            } else {
+                this.startAnimation();
+            }
         }
     }
 

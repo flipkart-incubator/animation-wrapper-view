@@ -3,18 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AnimationWrapperView</title>
-	<meta name="description" content="Documentation for AnimationWrapperView">
+	<title>animation-wrapper-view</title>
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -23,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">AnimationWrapperView</a>
+					<a href="index.html" class="title">animation-wrapper-view</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -41,6 +40,8 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -50,7 +51,12 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>AnimationWrapperView</h1>
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>animation-wrapper-view</h1>
 		</div>
 	</div>
 </header>
@@ -58,24 +64,20 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#animationwrapperview" id="animationwrapperview" style="color: inherit; text-decoration: none;">
-					<h2>AnimationWrapperView</h2>
-				</a>
-				<p>AnimationWrapperView is a collection of a well defined set of component level animations, that a developer can utilize just by just providing some configurations. AnimationWrapperView will add plug and play type support to the already robust Animated API,  and will take care of all the intricate details of each animation type.</p>
+				<p>AnimationWrapperView is a collection of a well defined set of component level animations, that a developer can utilize just by providing some configurations. AnimationWrapperView will add plug and play type support to the already robust Animated API,  and will take care of all the intricate details of each animation type.</p>
 				<a href="#sample-code" id="sample-code" style="color: inherit; text-decoration: none;">
 					<h3>Sample code</h3>
 				</a>
-				<pre><code class="language-jsx"><span style="color: #000000">const bounceConfig: BounceAnimation = {</span>
-<span style="color: #000000">    type: AnimationType.BOUNCE,</span>
-<span style="color: #000000">    triggerType: AnimationTriggerType.ON_CLICK,</span>
-<span style="color: #000000">    bounceHeight: 20,</span>
-<span style="color: #000000">    animationDuration: 1000</span>
-<span style="color: #000000">};</span>
+				<pre><code class="language-jsx"><span class="hljs-keyword">const</span> bounceConfig: BounceAnimation = {
+    <span class="hljs-attr">type</span>: AnimationType.BOUNCE,
+    <span class="hljs-attr">triggerType</span>: AnimationTriggerType.ON_CLICK,
+    <span class="hljs-attr">bounceHeight</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">animationDuration</span>: <span class="hljs-number">1000</span>
+};
 
-<span style="color: #000000">&lt;AnimationWrapperView animationConfig={bounceConfig}&gt;</span>
-<span style="color: #000000">    {/* {your component} */}</span>
-<span style="color: #000000">&lt;/AnimationWrapperView&gt;</span>
-</code></pre>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AnimationWrapperView</span> <span class="hljs-attr">animationConfig</span>=<span class="hljs-string">{bounceConfig}</span>&gt;</span>
+    {/* {your component} */}
+<span class="hljs-tag">&lt;/<span class="hljs-name">AnimationWrapperView</span>&gt;</span></span></code></pre>
 				<a href="#animationwrapperview-capabilities" id="animationwrapperview-capabilities" style="color: inherit; text-decoration: none;">
 					<h3>AnimationWrapperView capabilities</h3>
 				</a>
@@ -86,34 +88,33 @@
 				<a href="#start-pause-and-reset-animation" id="start-pause-and-reset-animation" style="color: inherit; text-decoration: none;">
 					<h4>Start, Pause and Reset Animation</h4>
 				</a>
-				<pre><code class="language-jsx"><span style="color: #000000">private _wrapperRef: AnimationWrapperView | null;</span>
+				<pre><code class="language-jsx">private _wrapperRef: AnimationWrapperView | <span class="hljs-literal">null</span>;
 
-<span style="color: #000000">render() {</span>
-<span style="color: #000000">    return (</span>
-<span style="color: #000000">        &lt;AnimationWrapperView</span>
-<span style="color: #000000">            ref={(ref) =&gt; (this._wrapperRef = ref)}</span>
-<span style="color: #000000">            animationConfig={this.state.animationConfig}</span>
-<span style="color: #000000">            onAnimationFinish={this._onComplete}&gt;</span>
-<span style="color: #000000">                {your component}</span>
-<span style="color: #000000">        &lt;/AnimationWrapperView&gt;</span>
-<span style="color: #000000">    );</span>
-<span style="color: #000000">}</span>
+render() {
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AnimationWrapperView</span>
+            <span class="hljs-attr">ref</span>=<span class="hljs-string">{(ref)</span> =&gt;</span> (this._wrapperRef = ref)}
+            animationConfig={this.state.animationConfig}
+            onAnimationFinish={this._onComplete}&gt;
+                {your component}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">AnimationWrapperView</span>&gt;</span></span>
+    );
+}
 
-<span style="color: #000000">// Start animation on button press.</span>
-<span style="color: #000000">private _onPressToStart = (_: GestureResponderEvent) =&gt; {</span>
-<span style="color: #000000">    this._wrapperRef?.startAnimation();</span>
-<span style="color: #000000">}</span>
+<span class="hljs-comment">// Start animation on button press.</span>
+private _onPressToStart = <span class="hljs-function">(<span class="hljs-params">_: GestureResponderEvent</span>) =&gt;</span> {
+    <span class="hljs-keyword">this</span>._wrapperRef?.startAnimation();
+}
 
-<span style="color: #000000">// Pause animation on button press.</span>
-<span style="color: #000000">private _onPressToPause = (_: GestureResponderEvent) =&gt; {</span>
-<span style="color: #000000">    this._wrapperRef?.pauseAnimation();</span>
-<span style="color: #000000">}</span>
+<span class="hljs-comment">// Pause animation on button press.</span>
+private _onPressToPause = <span class="hljs-function">(<span class="hljs-params">_: GestureResponderEvent</span>) =&gt;</span> {
+    <span class="hljs-keyword">this</span>._wrapperRef?.pauseAnimation();
+}
 
-<span style="color: #000000">// Reset animation on button press.</span>
-<span style="color: #000000">private _onPressToReset = (_: GestureResponderEvent) =&gt; {</span>
-<span style="color: #000000">    this._wrapperRef?.resetAnimation();</span>
-<span style="color: #000000">}</span>
-</code></pre>
+<span class="hljs-comment">// Reset animation on button press.</span>
+private _onPressToReset = <span class="hljs-function">(<span class="hljs-params">_: GestureResponderEvent</span>) =&gt;</span> {
+    <span class="hljs-keyword">this</span>._wrapperRef?.resetAnimation();
+}</code></pre>
 				<a href="#animationwrapperview-props" id="animationwrapperview-props" style="color: inherit; text-decoration: none;">
 					<h3>AnimationWrapperView props</h3>
 				</a>
@@ -135,6 +136,11 @@
 							<td>() =&gt; void</td>
 							<td>(optional) Callback function, if provided will be invoked once animation is finished.</td>
 						</tr>
+						<tr>
+							<td>onAnimationStart</td>
+							<td>() =&gt; void</td>
+							<td>(optional) Callback function, if provided will be invoked when the animation is triggered.</td>
+						</tr>
 				</tbody></table>
 				<a href="#define-your-custom-animations" id="define-your-custom-animations" style="color: inherit; text-decoration: none;">
 					<h3>Define your custom animations!</h3>
@@ -143,8 +149,8 @@
 				This tool is very powerful as it allows you to play with various transformation attributes that can be applied to any Animated.View.</p>
 				<ul>
 					<li>A <code>TransformDef</code> object defines an individual piece of transformation, <code>f</code>(from) to <code>t</code>(to) value and the <code>p</code>(property) to transform. </li>
-					<li>An array of <code>TransformDef</code> along with the <code>duration</code> and the <code>InterpolationDef</code> will create an <code>AnimationDef</code> object. All the transformations defined in the array will play in a parrallel.</li>
-					<li>An array of <code>AnimationDef</code> definitions can be played in sequence to render any type of animation(limited by imagination :P).</li>
+					<li>An array of <code>TransformDef</code> along with the <code>duration</code> and the <code>InterpolationDef</code> will create an <code>AnimationDef</code> object. All the transformations defined in the array will play in parallel.</li>
+					<li>An array of <code>AnimationDef</code> definitions can be played in sequence to render any type of animation (limited by imagination :P).</li>
 				</ul>
 				<p>Type definitions:</p>
 				<table>
@@ -182,17 +188,12 @@
 					<tbody><tr>
 							<td>InterpolationDef</td>
 							<td>easing: EasingType</td>
-							<td>Defines the easing</td>
-						</tr>
-						<tr>
-							<td>that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back.</td>
-							<td></td>
-							<td></td>
+							<td>Defines the easing that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back.</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>params: InterpolationParams</td>
-							<td>Some easing functions requre extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing.</td>
+							<td>Some easing functions require extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing.</td>
 						</tr>
 				</tbody></table>
 				<table>
@@ -240,36 +241,35 @@
 				</tbody></table>
 				<p>Multiple set of transformations can be played in a sequence.</p>
 				<p>Sample Json</p>
-				<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;animation&quot;</span><span style="color: #000000">: [</span>
-<span style="color: #000000">    {</span>
-<span style="color: #000000">      </span><span style="color: #0451A5">&quot;transformations&quot;</span><span style="color: #000000">: [</span>
-<span style="color: #000000">        {</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;key&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;SCALE&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;from&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;to&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1</span>
-<span style="color: #000000">        },</span>
-<span style="color: #000000">        {</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;key&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;ROTATE&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;from&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;to&quot;</span><span style="color: #000000">: </span><span style="color: #098658">90</span>
-<span style="color: #000000">        },</span>
-<span style="color: #000000">        {</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;key&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;ROTATE_X&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;from&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;to&quot;</span><span style="color: #000000">: </span><span style="color: #098658">180</span>
-<span style="color: #000000">        }</span>
-<span style="color: #000000">      ],</span>
-<span style="color: #000000">      </span><span style="color: #0451A5">&quot;duration&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1000</span><span style="color: #000000">,</span>
-<span style="color: #000000">      </span><span style="color: #0451A5">&quot;interpolation&quot;</span><span style="color: #000000">: {</span>
-<span style="color: #000000">          </span><span style="color: #0451A5">&quot;easing&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;linear&quot;</span>
-<span style="color: #000000">      }</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">  ]</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<p><img src="/docs/media/json_animation.gif" alt="Json Animation Demo">
-				<img src="/docs/media/json_demo.gif" alt="Json Animation Demo"></p>
+				<pre><code class="language-json">{
+  <span class="hljs-attr">"animation"</span>: [
+    {
+      <span class="hljs-attr">"transformations"</span>: [
+        {
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"SCALE"</span>,
+          <span class="hljs-attr">"from"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>
+        },
+        {
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"ROTATE"</span>,
+          <span class="hljs-attr">"from"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"to"</span>: <span class="hljs-number">90</span>
+        },
+        {
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"ROTATE_X"</span>,
+          <span class="hljs-attr">"from"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"to"</span>: <span class="hljs-number">180</span>
+        }
+      ],
+      <span class="hljs-attr">"duration"</span>: <span class="hljs-number">1000</span>,
+      <span class="hljs-attr">"interpolation"</span>: {
+          <span class="hljs-attr">"easing"</span>: <span class="hljs-string">"linear"</span>
+      }
+    }
+  ]
+}</code></pre>
+				<p><img src="/media/json_animation.gif" alt="Json Animation Demo">
+				<img src="/media/json_demo.gif" alt="Json Animation Demo"></p>
 				<a href="#demo" id="demo" style="color: inherit; text-decoration: none;">
 					<h3>Demo</h3>
 				</a>
@@ -282,112 +282,115 @@
 					</thead>
 					<tbody><tr>
 							<td><em>Bounce Animation</em></td>
-							<td><img src="/docs/media/bounce.gif" alt="Bounce"></td>
+							<td><img src="/media/bounce.gif" alt="Bounce"></td>
 						</tr>
 						<tr>
 							<td><em>Drag Animation</em></td>
-							<td><img src="/docs/media/draggable.gif" alt="Draggable"></td>
+							<td><img src="/media/draggable.gif" alt="Draggable"></td>
 						</tr>
 						<tr>
 							<td><em>Fade In Animation</em></td>
-							<td><img src="/docs/media/fade_in.gif" alt="Fade In"></td>
+							<td><img src="/media/fade_in.gif" alt="Fade In"></td>
 						</tr>
 						<tr>
 							<td><em>Fade Out Animation</em></td>
-							<td><img src="/docs/media/fade_out.gif" alt="Fae Out"></td>
+							<td><img src="/media/fade_out.gif" alt="Fae Out"></td>
 						</tr>
 						<tr>
 							<td><em>Ripple Animation</em></td>
-							<td><img src="/docs/media/ripple.gif" alt="Ripple"></td>
+							<td><img src="/media/ripple.gif" alt="Ripple"></td>
 						</tr>
 						<tr>
 							<td><em>Scale In Animation</em></td>
-							<td><img src="/docs/media/scale.gif" alt="Scale In"></td>
+							<td><img src="/media/scale.gif" alt="Scale In"></td>
 						</tr>
 						<tr>
 							<td><em>Scale Out Animation</em></td>
-							<td><img src="/docs/media/scale_out.gif" alt="Scale out"></td>
+							<td><img src="/media/scale_out.gif" alt="Scale out"></td>
 						</tr>
 						<tr>
 							<td><em>Slide In Animation</em></td>
-							<td><img src="/docs/media/slide_in.gif" alt="Slide in"></td>
+							<td><img src="/media/slide_in.gif" alt="Slide in"></td>
 						</tr>
 						<tr>
 							<td><em>Slide Out Animation</em></td>
-							<td><img src="/docs/media/slide_out.gif" alt="Slide out"></td>
+							<td><img src="/media/slide_out.gif" alt="Slide out"></td>
 						</tr>
 				</tbody></table>
 				<a href="#in-action" id="in-action" style="color: inherit; text-decoration: none;">
 					<h4>In Action</h4>
 				</a>
-				<p><img src="/docs/media/demo.gif" alt="Demore"></p>
+				<p><img src="/media/demo.gif" alt="Demore"></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/types.html">Types</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_.html">&quot;<wbr>Types&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_animationwrapperview.html">components/<wbr>Animation<wbr>Wrapper<wbr>View</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_animationwrapperview_.html">&quot;components/<wbr>Animation<wbr>Wrapper<wbr>View&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_baseanimationwrapper.html">components/wrapper/<wbr>Base<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_utils_.html">&quot;components/<wbr>Utils&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_bounceanimationwrapper.html">components/wrapper/<wbr>Bounce<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_baseanimationwrapper_.html">&quot;components/wrapper/<wbr>Base<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_draggableanimationwrapper.html">components/wrapper/<wbr>Draggable<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_bounceanimationwrapper_.html">&quot;components/wrapper/<wbr>Bounce<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_fadeanimationwrapper.html">components/wrapper/<wbr>Fade<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_draggableanimationwrapper_.html">&quot;components/wrapper/<wbr>Draggable<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_jsonanimationwrapper.html">components/wrapper/<wbr>Json<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_fadeanimationwrapper_.html">&quot;components/wrapper/<wbr>Fade<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_rippleanimationwrapper.html">components/wrapper/<wbr>Ripple<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_jsonanimationwrapper_.html">&quot;components/wrapper/<wbr>Json<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_scaleanimationwrapper.html">components/wrapper/<wbr>Scale<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_rippleanimationwrapper_.html">&quot;components/wrapper/<wbr>Ripple<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_slideanimationwrapper.html">components/wrapper/<wbr>Slide<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_scaleanimationwrapper_.html">&quot;components/wrapper/<wbr>Scale<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/components_wrapper_wiggleanimationwrapper.html">components/wrapper/<wbr>Wiggle<wbr>Animation<wbr>Wrapper</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_slideanimationwrapper_.html">&quot;components/wrapper/<wbr>Slide<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_baseanimation.html">data/<wbr>Base<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_wrapper_wiggleanimationwrapper_.html">&quot;components/wrapper/<wbr>Wiggle<wbr>Animation<wbr>Wrapper&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_bounceanimation.html">data/<wbr>Bounce<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_baseanimationconfig_.html">&quot;data/<wbr>Base<wbr>Animation<wbr>Config&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_enums.html">data/<wbr>Enums</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_bounceanimationconfig_.html">&quot;data/<wbr>Bounce<wbr>Animation<wbr>Config&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_fadeanimation.html">data/<wbr>Fade<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_enums_.html">&quot;data/<wbr>Enums&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_jsonanimation.html">data/<wbr>Json<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_fadeanimationconfig_.html">&quot;data/<wbr>Fade<wbr>Animation<wbr>Config&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_rippleanimation.html">data/<wbr>Ripple<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_jsonanimationconfig_.html">&quot;data/<wbr>Json<wbr>Animation<wbr>Config&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_scaleanimation.html">data/<wbr>Scale<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_rippleanimationconfig_.html">&quot;data/<wbr>Ripple<wbr>Animation<wbr>Config&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_slideanimation.html">data/<wbr>Slide<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_scaleanimationconfig_.html">&quot;data/<wbr>Scale<wbr>Animation<wbr>Config&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/data_wiggleanimation.html">data/<wbr>Wiggle<wbr>Animation</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_slideanimationconfig_.html">&quot;data/<wbr>Slide<wbr>Animation<wbr>Config&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_wiggleanimation_.html">&quot;data/<wbr>Wiggle<wbr>Animation&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -403,17 +406,57 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
@@ -423,5 +466,6 @@
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

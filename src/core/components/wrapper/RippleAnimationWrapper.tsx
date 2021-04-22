@@ -3,6 +3,7 @@ import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { AnimationWrapperProps } from '../../Types';
 import { RippleAnimationConfig } from '../../data/RippleAnimationConfig';
+import getEasingFunction from "../Utils";
 
 interface RippleAnimationState {
     scale: Animated.Value;
@@ -31,11 +32,13 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
                 Animated.timing(scale, {
                     duration: animationConfig.rippleDuration,
                     toValue: 1,
+                    easing: getEasingFunction(animationConfig.interpolationDef),
                     useNativeDriver: false
                 }),
                 Animated.timing(opacity, {
                     duration: animationConfig.rippleDuration,
                     toValue: 0,
+                    easing: getEasingFunction(animationConfig.interpolationDef),
                     useNativeDriver: false
                 })
             ])
