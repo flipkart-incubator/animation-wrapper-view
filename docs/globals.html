@@ -63,270 +63,44 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<p>AnimationWrapperView is a collection of a well defined set of component level animations, that a developer can utilize just by providing some configurations. AnimationWrapperView will add plug and play type support to the already robust Animated API,  and will take care of all the intricate details of each animation type.</p>
-				<a href="#sample-code" id="sample-code" style="color: inherit; text-decoration: none;">
-					<h3>Sample code</h3>
-				</a>
-				<pre><code class="language-jsx"><span class="hljs-keyword">const</span> bounceConfig: BounceAnimation = {
-    <span class="hljs-attr">type</span>: AnimationType.BOUNCE,
-    <span class="hljs-attr">triggerType</span>: AnimationTriggerType.ON_CLICK,
-    <span class="hljs-attr">bounceHeight</span>: <span class="hljs-number">20</span>,
-    <span class="hljs-attr">animationDuration</span>: <span class="hljs-number">1000</span>
-};
-
-<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AnimationWrapperView</span> <span class="hljs-attr">animationConfig</span>=<span class="hljs-string">{bounceConfig}</span>&gt;</span>
-    {/* {your component} */}
-<span class="hljs-tag">&lt;/<span class="hljs-name">AnimationWrapperView</span>&gt;</span></span></code></pre>
-				<a href="#animationwrapperview-capabilities" id="animationwrapperview-capabilities" style="color: inherit; text-decoration: none;">
-					<h3>AnimationWrapperView capabilities</h3>
-				</a>
-				<ul>
-					<li>Robustly exposed API to allow developer to have control over various aspects of predefined animations.</li>
-					<li>Ability to compose your own animations on the fly by providing a custom JSON.</li>
-				</ul>
-				<a href="#start-pause-and-reset-animation" id="start-pause-and-reset-animation" style="color: inherit; text-decoration: none;">
-					<h4>Start, Pause and Reset Animation</h4>
-				</a>
-				<pre><code class="language-jsx">private _wrapperRef: AnimationWrapperView | <span class="hljs-literal">null</span>;
-
-render() {
-    <span class="hljs-keyword">return</span> (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AnimationWrapperView</span>
-            <span class="hljs-attr">ref</span>=<span class="hljs-string">{(ref)</span> =&gt;</span> (this._wrapperRef = ref)}
-            animationConfig={this.state.animationConfig}
-            onAnimationFinish={this._onComplete}&gt;
-                {your component}
-        <span class="hljs-tag">&lt;/<span class="hljs-name">AnimationWrapperView</span>&gt;</span></span>
-    );
-}
-
-<span class="hljs-comment">// Start animation on button press.</span>
-private _onPressToStart = <span class="hljs-function">(<span class="hljs-params">_: GestureResponderEvent</span>) =&gt;</span> {
-    <span class="hljs-keyword">this</span>._wrapperRef?.startAnimation();
-}
-
-<span class="hljs-comment">// Pause animation on button press.</span>
-private _onPressToPause = <span class="hljs-function">(<span class="hljs-params">_: GestureResponderEvent</span>) =&gt;</span> {
-    <span class="hljs-keyword">this</span>._wrapperRef?.pauseAnimation();
-}
-
-<span class="hljs-comment">// Reset animation on button press.</span>
-private _onPressToReset = <span class="hljs-function">(<span class="hljs-params">_: GestureResponderEvent</span>) =&gt;</span> {
-    <span class="hljs-keyword">this</span>._wrapperRef?.resetAnimation();
-}</code></pre>
-				<a href="#animationwrapperview-props" id="animationwrapperview-props" style="color: inherit; text-decoration: none;">
-					<h3>AnimationWrapperView props</h3>
-				</a>
-				<table>
-					<thead>
-						<tr>
-							<th>Prop name</th>
-							<th>Prop Type</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>animationConfig</td>
-							<td>BaseAnimation</td>
-							<td>Object which will contain all optional and non-optional parameters needed to render the animation, including AnimationType, AnimationTriggerType, etc.</td>
-						</tr>
-						<tr>
-							<td>onAnimationFinish</td>
-							<td>() =&gt; void</td>
-							<td>(optional) Callback function, if provided will be invoked once animation is finished.</td>
-						</tr>
-						<tr>
-							<td>onAnimationStart</td>
-							<td>() =&gt; void</td>
-							<td>(optional) Callback function, if provided will be invoked when the animation is triggered.</td>
-						</tr>
-				</tbody></table>
-				<a href="#define-your-custom-animations" id="define-your-custom-animations" style="color: inherit; text-decoration: none;">
-					<h3>Define your custom animations!</h3>
-				</a>
-				<p>AnimationWrapperView also gives you the capability to define your custom animation using JSON.
-				This tool is very powerful as it allows you to play with various transformation attributes that can be applied to any Animated.View.</p>
-				<ul>
-					<li>A <code>TransformDef</code> object defines an individual piece of transformation, <code>f</code>(from) to <code>t</code>(to) value and the <code>p</code>(property) to transform. </li>
-					<li>An array of <code>TransformDef</code> along with the <code>duration</code> and the <code>InterpolationDef</code> will create an <code>AnimationDef</code> object. All the transformations defined in the array will play in parallel.</li>
-					<li>An array of <code>AnimationDef</code> definitions can be played in sequence to render any type of animation (limited by imagination :P).</li>
-				</ul>
-				<p>Type definitions:</p>
-				<table>
-					<thead>
-						<tr>
-							<th>Type name</th>
-							<th>params</th>
-							<th>usage</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>TransformDef</td>
-							<td>property: TransformType</td>
-							<td>Defines the property to transform: SCALE, FADE,OPACITY, TRANSLATE_Y, ROTATE, TRANSLATE_X, ROTATE_X, ROTATE_Y , SCALE_X, SCALE_Y</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>to:number</td>
-							<td>The starting value of the transformation</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>from:number</td>
-							<td>The final value of transformation after animation</td>
-						</tr>
-				</tbody></table>
-				<table>
-					<thead>
-						<tr>
-							<th>Type name</th>
-							<th>params</th>
-							<th>usage</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>InterpolationDef</td>
-							<td>easing: EasingType</td>
-							<td>Defines the easing that will be applied to the transformation set: linear, quad, circle, elastic, bounce, back.</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>params: InterpolationParams</td>
-							<td>Some easing functions require extra params, we use this object to populate the optional params for easing functions, please note if a non optional param is not provided for the specified easing function, it will fallback to linear easing.</td>
-						</tr>
-				</tbody></table>
-				<table>
-					<thead>
-						<tr>
-							<th>Type name</th>
-							<th>params</th>
-							<th>usage</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>InterpolationParams</td>
-							<td>back: number</td>
-							<td><a href="https://reactnative.dev/docs/easing#back">https://reactnative.dev/docs/easing#back</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>bounciness: number</td>
-							<td><a href="https://reactnative.dev/docs/easing#bounce">https://reactnative.dev/docs/easing#bounce</a></td>
-						</tr>
-				</tbody></table>
-				<table>
-					<thead>
-						<tr>
-							<th>Type name</th>
-							<th>params</th>
-							<th>usage</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td>AnimationDef</td>
-							<td>TransformDef[]</td>
-							<td>An array of transformation functions can be defined, that will be applied to the object in parallel</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>duration</td>
-							<td>Duration in which the set of transformations complete animating.</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>InterpolationDef</td>
-							<td>This param will describe the easing function that will be applied to this set of transformations.</td>
-						</tr>
-				</tbody></table>
-				<p>Multiple set of transformations can be played in a sequence.</p>
-				<p>Sample Json</p>
-				<pre><code class="language-json">{
-  <span class="hljs-attr">"animation"</span>: [
-    {
-      <span class="hljs-attr">"transformations"</span>: [
-        {
-          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"SCALE"</span>,
-          <span class="hljs-attr">"from"</span>: <span class="hljs-number">0</span>,
-          <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>
-        },
-        {
-          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"ROTATE"</span>,
-          <span class="hljs-attr">"from"</span>: <span class="hljs-number">0</span>,
-          <span class="hljs-attr">"to"</span>: <span class="hljs-number">90</span>
-        },
-        {
-          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"ROTATE_X"</span>,
-          <span class="hljs-attr">"from"</span>: <span class="hljs-number">0</span>,
-          <span class="hljs-attr">"to"</span>: <span class="hljs-number">180</span>
-        }
-      ],
-      <span class="hljs-attr">"duration"</span>: <span class="hljs-number">1000</span>,
-      <span class="hljs-attr">"interpolation"</span>: {
-          <span class="hljs-attr">"easing"</span>: <span class="hljs-string">"linear"</span>
-      }
-    }
-  ]
-}</code></pre>
-				<p><img src="/media/json_animation.gif" alt="Json Animation Demo">
-				<img src="/media/json_demo.gif" alt="Json Animation Demo"></p>
-				<a href="#demo" id="demo" style="color: inherit; text-decoration: none;">
-					<h3>Demo</h3>
-				</a>
-				<table>
-					<thead>
-						<tr>
-							<th>Animation Type</th>
-							<th>Demo GIF</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td><em>Bounce Animation</em></td>
-							<td><img src="/media/bounce.gif" alt="Bounce"></td>
-						</tr>
-						<tr>
-							<td><em>Drag Animation</em></td>
-							<td><img src="/media/draggable.gif" alt="Draggable"></td>
-						</tr>
-						<tr>
-							<td><em>Fade In Animation</em></td>
-							<td><img src="/media/fade_in.gif" alt="Fade In"></td>
-						</tr>
-						<tr>
-							<td><em>Fade Out Animation</em></td>
-							<td><img src="/media/fade_out.gif" alt="Fae Out"></td>
-						</tr>
-						<tr>
-							<td><em>Ripple Animation</em></td>
-							<td><img src="/media/ripple.gif" alt="Ripple"></td>
-						</tr>
-						<tr>
-							<td><em>Scale In Animation</em></td>
-							<td><img src="/media/scale.gif" alt="Scale In"></td>
-						</tr>
-						<tr>
-							<td><em>Scale Out Animation</em></td>
-							<td><img src="/media/scale_out.gif" alt="Scale out"></td>
-						</tr>
-						<tr>
-							<td><em>Slide In Animation</em></td>
-							<td><img src="/media/slide_in.gif" alt="Slide in"></td>
-						</tr>
-						<tr>
-							<td><em>Slide Out Animation</em></td>
-							<td><img src="/media/slide_out.gif" alt="Slide out"></td>
-						</tr>
-				</tbody></table>
-				<a href="#in-action" id="in-action" style="color: inherit; text-decoration: none;">
-					<h4>In Action</h4>
-				</a>
-				<p><img src="/media/demo.gif" alt="Demore"></p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>External modules</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-external-module"><a href="modules/_types_.html" class="tsd-kind-icon">&quot;<wbr>Types&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_animationwrapperview_.html" class="tsd-kind-icon">&quot;components/<wbr>Animation<wbr>Wrapper<wbr>View&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_utils_.html" class="tsd-kind-icon">&quot;components/<wbr>Utils&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_baseanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Base<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_bounceanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Bounce<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_draggableanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Draggable<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_fadeanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Fade<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_jsonanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Json<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_rippleanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Ripple<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_scaleanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Scale<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_slideanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Slide<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_components_wrapper_wiggleanimationwrapper_.html" class="tsd-kind-icon">&quot;components/wrapper/<wbr>Wiggle<wbr>Animation<wbr>Wrapper&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_baseanimationconfig_.html" class="tsd-kind-icon">&quot;data/<wbr>Base<wbr>Animation<wbr>Config&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_bounceanimationconfig_.html" class="tsd-kind-icon">&quot;data/<wbr>Bounce<wbr>Animation<wbr>Config&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_enums_.html" class="tsd-kind-icon">&quot;data/<wbr>Enums&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_fadeanimationconfig_.html" class="tsd-kind-icon">&quot;data/<wbr>Fade<wbr>Animation<wbr>Config&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_jsonanimationconfig_.html" class="tsd-kind-icon">&quot;data/<wbr>Json<wbr>Animation<wbr>Config&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_rippleanimationconfig_.html" class="tsd-kind-icon">&quot;data/<wbr>Ripple<wbr>Animation<wbr>Config&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_scaleanimationconfig_.html" class="tsd-kind-icon">&quot;data/<wbr>Scale<wbr>Animation<wbr>Config&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_slideanimationconfig_.html" class="tsd-kind-icon">&quot;data/<wbr>Slide<wbr>Animation<wbr>Config&quot;</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_data_wiggleanimation_.html" class="tsd-kind-icon">&quot;data/<wbr>Wiggle<wbr>Animation&quot;</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
+					<li class="globals current ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
