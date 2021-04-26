@@ -18,14 +18,12 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
     private _transforms: any[][] = [];
     private _compositeAnimation: Animated.CompositeAnimation | undefined;
 
-    public componentDidMount() {
+    public constructor(props: JsonAnimationProps) {
+        super(props);
         this._updateAnimatedArray(this.props);
         this._updateCompositeAnimation(this.props);
         this._updateTransformsArray(this.props);
-
-        super.componentDidMount();
     }
-
 
     public shouldComponentUpdate(nextProps: JsonAnimationProps, _: JsonAnimationState) {
         if (this.props.animationConfig !== nextProps.animationConfig) {
