@@ -1,0 +1,17 @@
+import BaseAnimationConfig from "../src/core/data/BaseAnimationConfig";
+import BounceAnimationConfig from "../src/core/data/BounceAnimationConfig";
+import { FadeInAnimationConfig, FadeOutAnimationConfig } from "../src/core/data/FadeAnimationConfig";
+import { RippleAnimationConfig } from "../src/core/data/RippleAnimationConfig";
+import { ScaleAnimationConfig } from "../src/core/data/ScaleAnimationConfig";
+import { WiggleAnimationConfig } from "../src/core/data/WiggleAnimation";
+declare const bounceConfig: BounceAnimationConfig;
+declare const scaleInConfig: ScaleAnimationConfig;
+declare const scaleOutConfig: ScaleAnimationConfig;
+declare const rippleConfig: RippleAnimationConfig;
+declare const draggableConfig: BaseAnimationConfig;
+declare const fadeInConfig: FadeInAnimationConfig;
+declare const fadeOutConfig: FadeOutAnimationConfig;
+declare const slideInConfig: FadeInAnimationConfig;
+declare const slideOutConfig: FadeOutAnimationConfig;
+declare const wiggleAnimation: WiggleAnimationConfig;
+export { bounceConfig, scaleInConfig, slideInConfig, slideOutConfig, wiggleAnimation, fadeInConfig, fadeOutConfig, rippleConfig, draggableConfig, scaleOutConfig };
