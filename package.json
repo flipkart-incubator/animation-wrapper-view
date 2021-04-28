@@ -1,23 +1,12 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.0.2",
+  "version": "1.0.2-abc1",
   "repository": "https://github.fkinternal.com/Flipkart/animation-wrapper-view/",
-  "main": "dist/commonjs/index.js",
-  "module": "dist/module/index.js",
-  "types": "dist/typescript/src/index.d.ts",
+  "main": "test/index.js",
+  "types": "test/index.d.ts",
   "scripts": {
-    "prepare": "bob build",
     "document": "npx typedoc src/core"
-  },
-  "@react-native-community/bob": {
-    "source": "src",
-    "output": "dist",
-    "targets": [
-      "commonjs",
-      "module",
-      "typescript"
-    ]
   },
   "peerDependencies": {
     "react": "16.9.0",
@@ -26,22 +15,18 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "@react-native-community/bob": "^0.17.1",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
     "babel-loader": "^8.2.2",
     "typescript": "~3.9.5",
-    "typedoc": "0.16.10"
+    "typedoc": "0.20.36"
   },
   "eslintIgnore": [
     "node_modules/",
     "dist/"
   ],
   "files": [
-    "dist",
-    "!**/__tests__",
-    "!**/__fixtures__",
-    "!**/__mocks__"
+    "test"
   ]
 }

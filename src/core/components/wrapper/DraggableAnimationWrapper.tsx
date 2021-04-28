@@ -5,13 +5,10 @@ import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { AnimationWrapperProps } from '../../Types';
 import BaseAnimationConfig from '../../data/BaseAnimationConfig';
 
-
-
 interface DraggableAnimationState {
     pan: Animated.ValueXY,
     panResponder: any
 }
-
 
 export interface DraggableAnimationProps extends AnimationWrapperProps {
     animationConfig: BaseAnimationConfig;
