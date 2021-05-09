@@ -1,7 +1,7 @@
 import BaseAnimationConfig from './BaseAnimationConfig';
 
 type SlideHorizontalDirection = "ltr" | "rtl";
-type SlideVerticalDirection = "top_down" | "bottom_up";
+type SlideVerticalDirection = "up_down" | "down_up";
 
 interface SlideAnimationConfig extends BaseAnimationConfig {
     animationDuration: number;

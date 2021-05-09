@@ -284,7 +284,6 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                 animations.push({ opacity: value });
             }
         }
-        console.log(JSON.stringify(animations));
         return animations;
     }
 }

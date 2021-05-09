@@ -127,7 +127,7 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
         if (config.initialOffset === undefined || config.initialOffset === 0) {
             if (config.type === AnimationType.SLIDE_VERTICAL) {
                 const direction: SlideVerticalDirection | undefined = (config as SlideVerticalAnimationConfig).direction;
-                if (direction === "top_down") {
+                if (direction === "up_down") {
                     return -this._screenHeight;
                 } else {
                     return this._screenHeight;
