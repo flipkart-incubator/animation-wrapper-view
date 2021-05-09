@@ -66,42 +66,30 @@ private _onPressToReset = (_: GestureResponderEvent) => {
 
 To note, all the AnimationConfig objects extend from, so animationDuration, triggerType, triggerDelay, and interpolation properties are available to each of the animation definitions.
 
-| AnimationConfig | Property name | Type | Description | 
-| --- | --- | --- | --- |
+| AnimationConfig | Property name | Type | Description | Demo |
+| --- | --- | --- | --- | --- |
 | **BaseAnimationConfig** | type | AnimationType | AnimationType enum will determine which type of animation will be rendered |
 |  | triggerType | AnimationTriggerType | AnimationTriggerType enum defines the trigger critera of animation invokation; ON_LOAD, ON_CLICK |
 |  | interpolation | InterpolationDef | InterpolationDef defines the property related to interpolation that will be applied to the animation timing function. |
 |  | triggerDelay | number | This controls the animation trigger for ON_LOAD animation, it'll introduce delay before the animation is started |
 |  | animationDuration | number | This defines how long the animation will be played before stopping. |
-| **BounceAnimationConfig** | bounceHeight | number | This param defines the value of Y axis translation which will give the visual appearance of the view bouncing. |
-| **FadeAnimationConfig** | initialOpacity | number | This will define the initial opacity of the view when the Animation starts playing |
-|  | finalOpacity | number | This will define the final opacity of the view once animation ends |
-| **RippleAnimationConfig** | rippleColor | string | This will define the ripple color, the input value could be a supported color name, or a hexcode value. |
+| **BounceAnimationConfig** | bounceHeight | number | This param defines the value of Y axis translation which will give the visual appearance of the view bouncing. | ![Bounce](/media/bounce.gif) |
+| **FadeAnimationConfig** | initialOpacity | number | This will define the initial opacity of the view when the Animation starts playing | ![Fae Out](/media/fade_out.gif) |
+|  | finalOpacity | number | This will define the final opacity of the view once animation ends | ![Fade In](/media/fade_in.gif) |
+| **RippleAnimationConfig** | rippleColor | string | This will define the ripple color, the input value could be a supported color name, or a hexcode value. | ![Ripple](/media/ripple.gif) |
 |  | rippleCount | number | This determines how many ripples will be shown before animation ends |
 |  | rippleDuration | number | This determines for how long an individual ripple will animate. |
 |  | rippleIntervalDuration | number | This determines the time duration interval between each ripple. |
 |  | rippleRadius | number | This will define the size of the ripple in its fully expanded state. |
-| **ScaleAnimationConfig** | fromScale | number | This will define the initial scale of the view before animation starts. |
-|  | toScale | number | This will define the final scaale of the view once animation ends. |
-| **SlideHorizontalAnimationConfig** | initialOffset | number | This will define the initial offset from the view's original position before starting the animation. |
-|  | finalOffset | number | This will define the final offset of the view once animation ends, 0 value will lead the view back to its original position. |
+| **ScaleAnimationConfig** | fromScale | number | This will define the initial scale of the view before animation starts. | ![Scale In](/media/scale.gif) |
+|  | toScale | number | This will define the final scaale of the view once animation ends. | ![Scale out](/media/scale_out.gif) |
+| **SlideHorizontalAnimationConfig** | initialOffset | number | This will define the initial offset from the view's original position before starting the animation. | ![Slide in](/media/slide_in.gif) |
+|  | finalOffset | number | This will define the final offset of the view once animation ends, 0 value will lead the view back to its original position. | ![Slide out](/media/slide_out.gif)|  |
 |  | direction | SlideHorizontalDirection | The direction param in this case will define the slide direction; 'ltr': left to right, or 'rtl': Right to left |
 | **SlideVerticalAnimationConfig** |  initialOffset | number | This will define the initial offset from the view's original position before starting the animation. |
 |  | finalOffset | number | This will define the final offset of the view once animation ends, 0 value will lead the view back to its original position. |
 |  | direction | SlideVerticalDirection | The direction param in this case will define the slide direction; 'up_down': top to down, or 'down_up': below the view to upwards.  |
-
-### Demo
-| Animation Type | Demo GIF |
-| --- | --- |
-| *Bounce Animation* | ![Bounce](/media/bounce.gif) |
-| *Drag Animation* | ![Draggable](/media/draggable.gif) |
-| *Fade In Animation* | ![Fade In](/media/fade_in.gif) |
-| *Fade Out Animation* | ![Fae Out](/media/fade_out.gif) |
-| *Ripple Animation* | ![Ripple](/media/ripple.gif) |
-| *Scale In Animation* | ![Scale In](/media/scale.gif) |
-| *Scale Out Animation* | ![Scale out](/media/scale_out.gif) |
-| *Slide In Animation* | ![Slide in](/media/slide_in.gif) |
-| *Slide Out Animation* | ![Slide out](/media/slide_out.gif)| 
+| **DraggableAnimationConfig** | TBD | TBD |  TBD |
 
 
 #### In Action
