@@ -59,9 +59,9 @@ private _onPressToReset = (_: GestureResponderEvent) => {
 
 
 ## Types of supported Animations
-[Predefined Animations](#Different_types_of_animation_configs)
+[Predefined Animations](#different-types-of-animation-configs)
 
-[JSON Based custom Animations](#Define_your_custom_animations!)
+[JSON Based custom Animations](#define-your-custom-animations)
 ### Different types of animation configs
 
 To note, all the AnimationConfig objects extend from, so animationDuration, triggerType, triggerDelay, and interpolation properties are available to each of the animation definitions.
