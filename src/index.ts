@@ -1,8 +1,8 @@
 import AnimationWrapperView from './core/components/AnimationWrapperView';
 import BaseAnimationConfig from './core/data/BaseAnimationConfig';
 import BounceAnimationConfig from './core/data/BounceAnimationConfig';
-import {AnimationTriggerType, AnimationType} from './core/data/Enums';
-import {FadeInAnimationConfig, FadeOutAnimationConfig} from './core/data/FadeAnimationConfig';
+import { AnimationTriggerType, AnimationType } from './core/data/Enums';
+import { FadeAnimationConfig } from './core/data/FadeAnimationConfig';
 import {
     AnimationDef,
     EasingType,
@@ -11,8 +11,8 @@ import {
     TransformDef,
     TransformType
 } from './core/data/JsonAnimationConfig';
-import {RippleAnimationConfig} from './core/data/RippleAnimationConfig';
-import {ScaleAnimationConfig} from './core/data/ScaleAnimationConfig';
+import { RippleAnimationConfig } from './core/data/RippleAnimationConfig';
+import { ScaleAnimationConfig } from './core/data/ScaleAnimationConfig';
 import {
     SlideVerticalDirection,
     SlideHorizontalDirection,
@@ -20,7 +20,7 @@ import {
     SlideVerticalAnimationConfig,
     SlideHorizontalAnimationConfig
 } from './core/data/SlideAnimationConfig';
-import {WiggleAnimationConfig} from './core/data/WiggleAnimation';
+import { WiggleAnimationConfig } from './core/data/WiggleAnimation';
 import {
     WrapperComponent,
     AnimationWrapperProps,
@@ -35,8 +35,7 @@ export {
     AnimationType,
     BaseAnimationConfig,
     BounceAnimationConfig,
-    FadeInAnimationConfig,
-    FadeOutAnimationConfig,
+    FadeAnimationConfig,
     AnimationDef,
     EasingType,
     InterpolationDef,

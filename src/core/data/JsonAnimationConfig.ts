@@ -1,15 +1,19 @@
 import BaseAnimationConfig from "./BaseAnimationConfig"
 
 export type TransformType = "scale"
-    | "fade"
     | "opacity"
     | "translateX"
     | "translateY"
     | "rotate"
     | "rotateY"
     | "rotateX"
+    | "rotateZ"
     | "scaleX"
-    | "scaleY";
+    | "scaleY"
+    | "skewX"
+    | "skewY"
+    | "width"
+;
 
 export type EasingType = "linear"
     | "quad"
@@ -18,7 +22,7 @@ export type EasingType = "linear"
     | "bounce"
     | "back"
     | "cubic"
-    | "sin"
+    | "sine"
     | "exp"
     | "ease";
 

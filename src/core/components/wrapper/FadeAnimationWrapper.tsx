@@ -2,21 +2,16 @@ import { Animated } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 
-import { FadeInAnimationConfig, FadeOutAnimationConfig } from '../../data/FadeAnimationConfig';
-import { FadeAnimationProps } from '../../Types';
-import { AnimationType } from '../../data/Enums';
+import { FadeAnimationConfig } from '../../data/FadeAnimationConfig';
 import getEasingFunction from "../Utils";
+import { AnimationWrapperProps } from '../../..';
 
 interface FadeAnimationState {
     opacity: Animated.Value;
 }
 
-export interface FadeInAnimationProps extends FadeAnimationProps {
-    animationConfig: FadeInAnimationConfig;
-}
-
-export interface FadeOutAnimationProps extends FadeAnimationProps {
-    animationConfig: FadeOutAnimationConfig;
+export interface FadeAnimationProps extends AnimationWrapperProps {
+    animationConfig: FadeAnimationConfig;
 }
 
 export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProps, FadeAnimationState> {
@@ -26,25 +21,13 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
     public constructor(props: FadeAnimationProps) {
         super(props);
         this.state = this.getAnimationStateFromProps(props);
-        const { animationConfig } = this.props;
+        const { animationDuration, initialOpacity, finalOpacity, interpolationDef } = this.props.animationConfig;
 
-        let duration: number;
-        let toValue: number;
-
-        if (animationConfig.type === AnimationType.FADE_IN) {
-            const fadeInConfig = animationConfig as FadeInAnimationConfig;
-            duration = fadeInConfig.animationDuration;
-            toValue = 1;
-        } else {
-            const fadeOutConfig = animationConfig as FadeOutAnimationConfig;
-            duration = fadeOutConfig.animationDuration;
-            toValue = fadeOutConfig.finalOpacity ? fadeOutConfig.finalOpacity : 0;
-        }
-
+        this.state.opacity.setValue
         this._fadeAnimation = Animated.timing(this.state.opacity, {
-            duration: duration,
-            toValue: toValue,
-            easing: getEasingFunction(animationConfig.interpolationDef),
+            duration: animationDuration,
+            toValue: finalOpacity,
+            easing: getEasingFunction(interpolationDef),
             useNativeDriver: false
         });
     }
@@ -70,13 +53,13 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
 
     public resetAnimation = () => {
         this.stopAnimation();
-        this.state.opacity.setValue(this._getInitialOpacity(this.props));
+        this.state.opacity.setValue(this.props.animationConfig.initialOpacity);
     }
 
 
     public finishAnimation = () => {
         this.stopAnimation();
-        this.state.opacity.setValue(this._getFinalOpacity(this.props));
+        this.state.opacity.setValue(this.props.animationConfig.finalOpacity);
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
@@ -96,25 +79,9 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
 
     protected getAnimationStateFromProps(props: FadeAnimationProps): FadeAnimationState {
         return {
-            opacity: new Animated.Value(this._getInitialOpacity(props))
+            opacity: new Animated.Value(props.animationConfig.initialOpacity)
         }
     }
 
-    private _getInitialOpacity(props: FadeAnimationProps): number {
-        if (props.animationConfig.type === AnimationType.FADE_IN) {
-            const config = props.animationConfig as FadeInAnimationConfig;
-            return config.initialOpacity ? config.initialOpacity : 0;
-        } else {
-            return 1;
-        }
-    }
 
-    private _getFinalOpacity(props: FadeAnimationProps): number {
-        if (props.animationConfig.type === AnimationType.FADE_OUT) {
-            const config = props.animationConfig as FadeOutAnimationConfig;
-            return config.finalOpacity ? config.finalOpacity : 0;
-        } else {
-            return 1;
-        }
-    }
 }

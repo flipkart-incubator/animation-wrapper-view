@@ -1,16 +1,7 @@
 import { EasingFunction } from 'react-native';
 import BaseAnimationConfig from './BaseAnimationConfig';
-
-
-interface FadeInAnimationConfig extends BaseAnimationConfig {
+export interface FadeAnimationConfig extends BaseAnimationConfig {
     animationDuration: number;
-    initialOpacity?: number;
+    initialOpacity: number;
+    finalOpacity: number;
 }
-
-interface FadeOutAnimationConfig extends BaseAnimationConfig {
-    animationDuration: number;
-    finalOpacity?: number;
-}
-
-
-export { FadeInAnimationConfig, FadeOutAnimationConfig };

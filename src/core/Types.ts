@@ -1,3 +1,4 @@
+import { FadeAnimationProps } from './components/wrapper/FadeAnimationWrapper';
 import { BounceAnimationProps } from "./components/wrapper/BounceAnimationWrapper";
 import { DraggableAnimationProps } from "./components/wrapper/DraggableAnimationWrapper";
 import { JsonAnimationProps } from "./components/wrapper/JsonAnimationWrapper";
@@ -25,7 +26,6 @@ type AnimationWrapperProps = {
     onAnimationStart?: () => void;
 }
 
-type FadeAnimationProps = AnimationWrapperProps;
 type SlideAnimationProps = AnimationWrapperProps;
 
 type Dimension = {

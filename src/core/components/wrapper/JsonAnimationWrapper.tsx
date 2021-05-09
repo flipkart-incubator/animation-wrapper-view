@@ -1,21 +1,19 @@
-import { Animated, Easing, EasingFunction } from 'react-native';
+import { Animated, TransformsStyle, ViewStyle } from 'react-native';
 import React from 'react';
 import { BaseAnimationWrapper } from './BaseAnimationWrapper';
-import { InterpolationDef, JsonAnimationConfig, TransformDef } from '../../data/JsonAnimationConfig';
+import { JsonAnimationConfig, TransformDef } from '../../data/JsonAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
 import getEasingFunction from "../Utils";
 
-interface JsonAnimationState {
-}
 
 export interface JsonAnimationProps extends AnimationWrapperProps {
     animationConfig: JsonAnimationConfig
 }
-
-export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProps, JsonAnimationState> {
+export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProps, {}> {
 
     private _animation: Animated.Value[] | undefined;
     private _transforms: any[][] = [];
+    private _viewStyles: Record<string, any> = {};
     private _compositeAnimation: Animated.CompositeAnimation | undefined;
 
     public constructor(props: JsonAnimationProps) {
@@ -25,7 +23,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         this._updateTransformsArray(this.props);
     }
 
-    public shouldComponentUpdate(nextProps: JsonAnimationProps, _: JsonAnimationState) {
+    public shouldComponentUpdate(nextProps: JsonAnimationProps, _: {}) {
         if (this.props.animationConfig !== nextProps.animationConfig) {
             this.resetAnimation();
             this._updateAnimatedArray(nextProps);
@@ -70,14 +68,15 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
 
     protected renderAnimation = (content: React.ReactNode): React.ReactNode => {
         const transformArray = this._getTransformArray();
+        const animations: ViewStyle[] = this._getViewStyleAnimationArray();
         return (
-            <Animated.View style={{ transform: transformArray }}>
+            <Animated.View style={[{ transform: transformArray }, animations]}>
                 {content}
             </Animated.View>
         );
     }
 
-    protected getAnimationStateFromProps(_: JsonAnimationProps): JsonAnimationState {
+    protected getAnimationStateFromProps(_: JsonAnimationProps): {} {
         // unused
         return {};
     }
@@ -150,6 +149,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
     private _updateTransformsArray = (props: JsonAnimationProps) => {
         const jsonAnimation = props.animationConfig as JsonAnimationConfig;
         this._transforms = [];
+        this._viewStyles = {};
 
         if (Array.isArray(jsonAnimation.animationConfig)) {
             for (let animationIndex = 0; animationIndex < jsonAnimation.animationConfig.length; animationIndex++) {
@@ -236,12 +236,40 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                 });
                 this._transforms[animationIndex].push({ rotateY });
                 break;
+            case "rotateZ":
+                const rotateZ = this._animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [`${transformation.from}deg`, `${transformation.to}deg`]
+                });
+                this._transforms[animationIndex].push({ rotateZ });
+                break;
+
+            case "skewX":
+                const skewX = this._animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [`${transformation.from}deg`, `${transformation.to}deg`]
+                });
+                this._transforms[animationIndex].push({ skewX });
+                break;
+            case "skewY":
+                const skewY = this._animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [`${transformation.from}deg`, `${transformation.to}deg`]
+                });
+                this._transforms[animationIndex].push({ skewY });
+                break;
+            case "opacity":
+                const opacity = this._animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.from, transformation.to]
+                });
+                this._viewStyles = { ...this._viewStyles, opacity: opacity };
+                break;
 
         }
     }
 
     private _getTransformArray = (): any[] => {
-
         let transforms: any[] = [];
         for (let i = 0; i < this._transforms.length; i++) {
             transforms = transforms.concat(this._transforms[i]);
@@ -249,5 +277,14 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         return transforms;
     }
 
-
+    private _getViewStyleAnimationArray = (): ViewStyle[] => {
+        let animations: ViewStyle[] = [];
+        for (let [key, value] of Object.entries(this._viewStyles)) {
+            if (key === 'opacity') {
+                animations.push({ opacity: value });
+            }
+        }
+        console.log(JSON.stringify(animations));
+        return animations;
+    }
 }

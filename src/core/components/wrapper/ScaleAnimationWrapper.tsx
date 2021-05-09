@@ -6,29 +6,26 @@ import { ScaleAnimationConfig } from '../../data/ScaleAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
 import getEasingFunction from "../Utils";
 
-
 interface ScaleAnimationState {
     scale: Animated.Value;
 }
 
-
 export interface ScaleAnimationProps extends AnimationWrapperProps {
-    animationConfig: ScaleAnimationConfig;
+    animationConfig: ScaleAnimationConfig ;
 }
 
-
 export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationProps, ScaleAnimationState> {
-    private isScaled: boolean;
     private _scaleAnimation: Animated.CompositeAnimation;
 
     public constructor(props: ScaleAnimationProps) {
         super(props);
         this.state = this.getAnimationStateFromProps(props);
-        this.isScaled = false;
+
         const { animationConfig } = this.props;
+        this.state.scale.setValue(animationConfig.fromScale ?? 1);
         this._scaleAnimation = Animated.timing(this.state.scale, {
-            duration: animationConfig.scaleDuration,
-            toValue: (this.isScaled) ? 1 : animationConfig.toScale,
+            duration: animationConfig.animationDuration,
+            toValue: animationConfig.toScale,
             easing: getEasingFunction(animationConfig.interpolationDef),
             useNativeDriver: false
         });
@@ -55,7 +52,7 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
 
     public resetAnimation(): void {
         this.stopAnimation();
-        this.state.scale.setValue(1);
+        this.state.scale.setValue(this.props.animationConfig.fromScale ?? 1);
     }
 
     public finishAnimation = () => {
@@ -80,9 +77,9 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
         );
     }
 
-    protected getAnimationStateFromProps(_: ScaleAnimationProps): ScaleAnimationState {
+    protected getAnimationStateFromProps(props: ScaleAnimationProps): ScaleAnimationState {
         return {
-            scale: new Animated.Value(1)
+            scale: new Animated.Value(props.animationConfig.fromScale ?? 1)
         };
     }
 }
