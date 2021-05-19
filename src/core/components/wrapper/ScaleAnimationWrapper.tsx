@@ -11,19 +11,29 @@ interface ScaleAnimationState {
 }
 
 export interface ScaleAnimationProps extends AnimationWrapperProps {
-    animationConfig: ScaleAnimationConfig ;
+    animationConfig: ScaleAnimationConfig;
 }
 
-export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationProps, ScaleAnimationState> {
-    private _scaleAnimation: Animated.CompositeAnimation;
+export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationProps> {
+    
+    private scale: Animated.Value;
 
     public constructor(props: ScaleAnimationProps) {
         super(props);
-        this.state = this.getAnimationStateFromProps(props);
 
+        this.scale = new Animated.Value(props.animationConfig.fromScale ?? 1);
+        
+    }
+
+    public finishAnimation(): void {
+        this.stopAnimation();
+        this.scale.setValue(this.props.animationConfig.toScale);
+    }
+
+    protected updateCompositeAnimation(): void {
         const { animationConfig } = this.props;
-        this.state.scale.setValue(animationConfig.fromScale ?? 1);
-        this._scaleAnimation = Animated.timing(this.state.scale, {
+        this.scale.setValue(animationConfig.fromScale ?? 1);
+        this._compositeAnimation = Animated.timing(this.scale, {
             duration: animationConfig.animationDuration,
             toValue: animationConfig.toScale,
             easing: getEasingFunction(animationConfig.interpolationDef),
@@ -31,37 +41,8 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
         });
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: ScaleAnimationProps, _nextContext: any): void {
-        if (nextProps !== this.props) {
-            const nextState: ScaleAnimationState | null = this.getAnimationStateFromProps(nextProps);
-            if (null != nextState) {
-                this.setState(nextState);
-            }
-        }
-    }
-
-    public startAnimation(): void {
-        this.animationStarted();
-        this._scaleAnimation.reset();
-        this._scaleAnimation.start(() => { this.animationFinished() });
-    }
-
-    public stopAnimation(): void {
-        this._scaleAnimation.stop();
-    }
-
-    public resetAnimation(): void {
-        this.stopAnimation();
-        this.state.scale.setValue(this.props.animationConfig.fromScale ?? 1);
-    }
-
-    public finishAnimation = () => {
-        this.stopAnimation();
-        this.state.scale.setValue(this.props.animationConfig.toScale);
-    }
-
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
-        const scale = this.state.scale;
+        const scale = this.scale;
 
         return (
             <Animated.View
@@ -75,11 +56,5 @@ export class ScaleAnimationWrapper extends BaseAnimationWrapper<ScaleAnimationPr
                 {content}
             </Animated.View>
         );
-    }
-
-    protected getAnimationStateFromProps(props: ScaleAnimationProps): ScaleAnimationState {
-        return {
-            scale: new Animated.Value(props.animationConfig.fromScale ?? 1)
-        };
     }
 }

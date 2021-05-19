@@ -1,6 +1,6 @@
-import {Animated, Dimensions, TransformsStyle} from 'react-native';
+import { Animated, Dimensions, TransformsStyle } from 'react-native';
 import React from 'react';
-import {BaseAnimationWrapper} from './BaseAnimationWrapper';
+import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import {
     SlideAnimationConfig,
     SlideHorizontalAnimationConfig,
@@ -8,13 +8,9 @@ import {
     SlideVerticalAnimationConfig,
     SlideVerticalDirection
 } from '../../data/SlideAnimationConfig';
-import {AnimationType} from '../../data/Enums';
-import {SlideAnimationProps} from '../../Types';
+import { AnimationType } from '../../data/Enums';
+import { SlideAnimationProps } from '../../Types';
 import getEasingFunction from "../Utils";
-
-interface SlideAnimationState {
-    translate: Animated.Value;
-}
 
 export interface SlideHorizontalAnimationProps extends SlideAnimationProps {
     animationConfig: SlideHorizontalAnimationConfig;
@@ -24,77 +20,33 @@ export interface SlideVerticalAnimationProps extends SlideAnimationProps {
     animationConfig: SlideVerticalAnimationConfig;
 }
 
-export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationProps, SlideAnimationState> {
+export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationProps> {
 
-    private _slideAnimation: Animated.CompositeAnimation;
+    private translate: Animated.Value;
 
     private _screenWidth: number;
     private _screenHeight: number;
-    private _animationType: AnimationType;
+    private _animationType?: AnimationType;
 
     public constructor(props: SlideAnimationProps) {
         super(props);
-
         this._screenWidth = Math.round(Dimensions.get('window').width);
         this._screenHeight = Math.round(Dimensions.get('window').height);
-        this.state = this.getAnimationStateFromProps(props);
-
-        const {animationConfig} = this.props;
-        this._animationType = animationConfig.type;
-
-        const config = animationConfig as SlideAnimationConfig;
-        let fromValue: number = this._getInitialTranslateValue(this.props);
-        let toValue: number = config.finalOffset;
-        let duration: number = config.animationDuration;
-
-        this.state.translate.setValue(fromValue);
-        this._slideAnimation = Animated.timing(this.state.translate, {
-            duration: duration,
-            toValue: toValue,
-            easing: getEasingFunction(animationConfig.interpolationDef),
-            useNativeDriver: false
-        });
+        this.translate = new Animated.Value(this._getInitialTranslateValue(props));
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: SlideAnimationProps, _nextContext: any): void {
-        if (nextProps !== this.props) {
-            const nextState: SlideAnimationState | null = this.getAnimationStateFromProps(nextProps);
-            if (null != nextState) {
-                this.setState(nextState);
-            }
-        }
-    }
-
-    public startAnimation(): void {
-        this.animationStarted();
-        this._slideAnimation.reset();
-        this._slideAnimation.start(() => {
-            this.animationFinished()
-        });
-    }
-
-    public stopAnimation(): void {
-        this._slideAnimation.stop();
-    }
-
-    public resetAnimation(): void {
+    public finishAnimation(): void {
         this.stopAnimation();
-        this.state.translate.setValue(this._getInitialTranslateValue(this.props));
-    }
-
-    public finishAnimation = () => {
-        this.stopAnimation();
-        this.state.translate.setValue(this._getFinalTranslateValue(this.props));
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
-        if (this._animationType === AnimationType.SLIDE_HORIZONTAL) {
+        if (this.props.animationConfig.type === AnimationType.SLIDE_HORIZONTAL) {
             return (
                 <Animated.View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
                     transform: [
-                        {translateX: this.state.translate}
+                        { translateX: this.translate }
                     ]
                 }}>
                     {content}
@@ -106,7 +58,7 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
                     justifyContent: 'center',
                     alignItems: 'center',
                     transform: [
-                        {translateY: this.state.translate}
+                        { translateY: this.translate }
                     ]
                 }}>
                     {content}
@@ -116,15 +68,31 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
 
     }
 
-    protected getAnimationStateFromProps(props: SlideAnimationProps): SlideAnimationState {
-        return {
-            translate: new Animated.Value(this._getInitialTranslateValue(props))
-        }
+    protected updateCompositeAnimation() {
+        const { animationConfig } = this.props;
+        this._animationType = animationConfig.type;
+
+        const config = animationConfig as SlideAnimationConfig;
+        let fromValue: number = this._getInitialTranslateValue(this.props);
+
+
+        let toValue: number = config.finalOffset;
+        let duration: number = config.animationDuration;
+        console.log(fromValue, toValue);
+        this.translate.setValue(fromValue);
+        this._compositeAnimation = Animated.timing(this.translate, {
+            duration: duration,
+            toValue: toValue,
+            easing: getEasingFunction(animationConfig.interpolationDef),
+            useNativeDriver: false
+        });
+
+        console.log("compositeAnimationUpdated");
     }
 
     private _getInitialTranslateValue(props: SlideAnimationProps): number {
         const config = props.animationConfig as SlideAnimationConfig;
-        if (config.initialOffset === undefined || config.initialOffset === 0) {
+        if (config.initialOffset === undefined) {
             if (config.type === AnimationType.SLIDE_VERTICAL) {
                 const direction: SlideVerticalDirection | undefined = (config as SlideVerticalAnimationConfig).direction;
                 if (direction === "up_down") {

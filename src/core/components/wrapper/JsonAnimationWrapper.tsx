@@ -9,42 +9,17 @@ import getEasingFunction from "../Utils";
 export interface JsonAnimationProps extends AnimationWrapperProps {
     animationConfig: JsonAnimationConfig
 }
-export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProps, {}> {
-
+export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProps> {
     private _animation: Animated.Value[] | undefined;
     private _transforms: any[][] = [];
     private _viewStyles: Record<string, any> = {};
-    private _compositeAnimation: Animated.CompositeAnimation | undefined;
 
     public constructor(props: JsonAnimationProps) {
         super(props);
-        this._updateAnimatedArray(this.props);
-        this._updateCompositeAnimation(this.props);
-        this._updateTransformsArray(this.props);
+        this.updateCompositeAnimation();
     }
-
-    public shouldComponentUpdate(nextProps: JsonAnimationProps, _: {}) {
-        if (this.props.animationConfig !== nextProps.animationConfig) {
-            this.resetAnimation();
-            this._updateAnimatedArray(nextProps);
-            this._updateCompositeAnimation(nextProps);
-            this._updateTransformsArray(nextProps);
-            return true;
-        }
-        return false;
-    }
-
-    public startAnimation = (): void => {
-        this.animationStarted();
-        this._compositeAnimation?.reset();
-        this._compositeAnimation?.start(() => { this.animationFinished() });
-    }
-
-    public stopAnimation = (): void => {
-        this._compositeAnimation?.stop();
-    }
-
-    public resetAnimation = (): void => {
+   
+    public resetAnimation ():void {
         this.stopAnimation();
         if (Array.isArray(this.props.animationConfig.animationConfig)) {
             for (let i = 0; i < this.props.animationConfig.animationConfig.length; i++) {
@@ -55,7 +30,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
-    public finishAnimation = () => {
+    public finishAnimation(): void {
         this.stopAnimation();
         if (Array.isArray(this.props.animationConfig.animationConfig)) {
             for (let i = 0; i < this.props.animationConfig.animationConfig.length; i++) {
@@ -66,7 +41,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
-    protected renderAnimation = (content: React.ReactNode): React.ReactNode => {
+    protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const transformArray = this._getTransformArray();
         const animations: ViewStyle[] = this._getViewStyleAnimationArray();
         return (
@@ -81,7 +56,13 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         return {};
     }
 
-    private _updateAnimatedArray = (props: JsonAnimationProps): void => {
+    protected updateCompositeAnimation(): void {
+        this._updateAnimatedArray(this.props);
+        this._updateCompositeAnimation(this.props);
+        this._updateTransformsArray(this.props);
+    }
+
+    private _updateAnimatedArray(props: JsonAnimationProps): void {
         if (Array.isArray(props.animationConfig.animationConfig)) {
             if (this._animation === undefined) {
                 this._animation = [];
@@ -118,7 +99,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
-    private _updateCompositeAnimation = (props: JsonAnimationProps): void => {
+    private _updateCompositeAnimation(props: JsonAnimationProps): void {
         const animationSequence: Animated.CompositeAnimation[] = [];
         if (Array.isArray(props.animationConfig.animationConfig)) {
             for (let i = 0; i < props.animationConfig.animationConfig.length; i++) {
@@ -146,7 +127,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
-    private _updateTransformsArray = (props: JsonAnimationProps) => {
+    private _updateTransformsArray(props: JsonAnimationProps): void {
         const jsonAnimation = props.animationConfig as JsonAnimationConfig;
         this._transforms = [];
         this._viewStyles = {};
@@ -173,7 +154,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
-    private _appendTransform = (transformations: TransformDef[], transformIndex: number, animationIndex: number) => {
+    private _appendTransform(transformations: TransformDef[], transformIndex: number, animationIndex: number): void {
         const transformation: TransformDef = transformations[transformIndex];
         if (this._animation === undefined || this._animation[animationIndex] === undefined || this._transforms[animationIndex] === undefined) {
 
@@ -269,7 +250,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
-    private _getTransformArray = (): any[] => {
+    private _getTransformArray(): any[] {
         let transforms: any[] = [];
         for (let i = 0; i < this._transforms.length; i++) {
             transforms = transforms.concat(this._transforms[i]);
@@ -277,7 +258,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         return transforms;
     }
 
-    private _getViewStyleAnimationArray = (): ViewStyle[] => {
+    private _getViewStyleAnimationArray(): ViewStyle[] {
         let animations: ViewStyle[] = [];
         for (let [key, value] of Object.entries(this._viewStyles)) {
             if (key === 'opacity') {

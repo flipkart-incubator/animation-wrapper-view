@@ -23,8 +23,11 @@ export type EasingType = "linear"
     | "back"
     | "cubic"
     | "sine"
-    | "exp"
-    | "ease";
+    | "expo-in"
+    | "expo-out"
+    | "ease-in"
+    | "ease-out"
+    | "ease-in-out";
 
 export interface JsonAnimationConfig extends BaseAnimationConfig {
     animationConfig: AnimationDef | AnimationDef[] 

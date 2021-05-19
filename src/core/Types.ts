@@ -20,10 +20,12 @@ type WrapperComponent = React.ComponentClass<RippleAnimationProps>
     | React.ComponentClass<JsonAnimationProps>;
 
 
+
+
 type AnimationWrapperProps = {
     animationConfig: BaseAnimationConfig;
-    onAnimationFinish?: () => void;
-    onAnimationStart?: () => void;
+    onAnimationFinish?: (animationConfig?: BaseAnimationConfig) => void;
+    onAnimationStart?: (animationConfig?: BaseAnimationConfig) => void;
 }
 
 type SlideAnimationProps = AnimationWrapperProps;

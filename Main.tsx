@@ -121,7 +121,6 @@ export default class Main extends React.Component<{}, State> {
 
     private onPressButton = (ev: any) => {
         ToastAndroid.show("hello", ToastAndroid.SHORT);
-        console.log('swapnil');
     }
 }
 

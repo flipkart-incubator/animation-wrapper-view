@@ -1,5 +1,5 @@
-import {InterpolationDef} from "../data/JsonAnimationConfig";
-import {Easing, EasingFunction} from "react-native";
+import { InterpolationDef } from "../data/JsonAnimationConfig";
+import { Easing, EasingFunction } from "react-native";
 
 export default function getEasingFunction(interpolation?: InterpolationDef): EasingFunction {
     switch (interpolation?.easing) {
@@ -13,12 +13,18 @@ export default function getEasingFunction(interpolation?: InterpolationDef): Eas
             return Easing.bounce;
         case "cubic":
             return Easing.cubic;
-        case "sin":
+        case "sine":
             return Easing.sin;
-        case "exp":
-            return Easing.exp;
-        case "ease":
-            return Easing.ease;
+        case "expo-in":
+            return Easing.bezier(0.7, 0, 0.84, 0);;
+        case "expo-out":
+            return Easing.bezier(0.16, 1, 0.3, 1);
+        case "ease-in":
+            return Easing.bezier(0.42, 0, 1, 1);
+        case "ease-out":
+            return Easing.bezier(0, 0, 0.58, 1);
+        case "ease-in-out":
+            return Easing.bezier(0.42, 0, 0.58, 1);
         case "elastic":
             const bounciness = interpolation?.params?.bounciness;
             if (bounciness && !isNaN(bounciness)) {
