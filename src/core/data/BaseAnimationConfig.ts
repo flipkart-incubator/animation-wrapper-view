@@ -6,4 +6,5 @@ export default interface BaseAnimationConfig {
     triggerType: AnimationTriggerType;
     interpolationDef?: InterpolationDef;
     triggerDelay?: number; // only for triggerType -> ON_LOAD
+    metaData?: object;
 }

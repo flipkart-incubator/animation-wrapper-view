@@ -1,14 +1,14 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.0.4-scale3",
+  "version": "1.0.53",
   "repository": "https://github.fkinternal.com/Flipkart/animation-wrapper-view/",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "document": "npx typedoc src/core",
     "build": "tsc",
-    "tsc": "tsc --version && tsc -p tsconfig.json",
+    "tsc": "rimraf lib && tsc --version && tsc -p tsconfig.json",
     "watch": "npm run tsc -- --watch",
     "watch:tsrex": "npm run watch -- --outDir ../ts-rex/node_modules/animation-wrapper-view/lib/"
   },
@@ -23,8 +23,9 @@
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
     "babel-loader": "^8.2.2",
-    "typescript": "~3.9.5",
-    "typedoc": "0.20.36"
+    "rimraf": "3.0.2",
+    "typedoc": "0.20.36",
+    "typescript": "~3.9.5"
   },
   "eslintIgnore": [
     "node_modules/",
@@ -32,5 +33,8 @@
   ],
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "react-native-gesture-handler": "1.10.3"
+  }
 }

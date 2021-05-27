@@ -1,3 +1,5 @@
+import { DragState } from './core/components/wrapper/DragStateMachine';
+import { DraggableAnimationConfig } from './core/components/wrapper/DraggableAnimationWrapper';
 import AnimationWrapperView from './core/components/AnimationWrapperView';
 import BaseAnimationConfig from './core/data/BaseAnimationConfig';
 import BounceAnimationConfig from './core/data/BounceAnimationConfig';
@@ -54,5 +56,7 @@ export {
     AnimationWrapperProps,
     FadeAnimationProps,
     SlideAnimationProps,
-    Dimension
+    Dimension,
+    DraggableAnimationConfig,
+    DragState
 };

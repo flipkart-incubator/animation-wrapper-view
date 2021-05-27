@@ -6,65 +6,26 @@ import { FadeAnimationConfig } from '../../data/FadeAnimationConfig';
 import getEasingFunction from "../Utils";
 import { AnimationWrapperProps } from '../../..';
 
-interface FadeAnimationState {
-    opacity: Animated.Value;
-}
-
 export interface FadeAnimationProps extends AnimationWrapperProps {
     animationConfig: FadeAnimationConfig;
 }
 
-export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProps, FadeAnimationState> {
+export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProps> {
 
-    private _fadeAnimation: Animated.CompositeAnimation;
+    private opacity: Animated.Value;
 
     public constructor(props: FadeAnimationProps) {
         super(props);
-        this.state = this.getAnimationStateFromProps(props);
-        const { animationDuration, initialOpacity, finalOpacity, interpolationDef } = this.props.animationConfig;
-
-        this.state.opacity.setValue
-        this._fadeAnimation = Animated.timing(this.state.opacity, {
-            duration: animationDuration,
-            toValue: finalOpacity,
-            easing: getEasingFunction(interpolationDef),
-            useNativeDriver: false
-        });
+        this.opacity = new Animated.Value(props.animationConfig.initialOpacity);
     }
 
-    public UNSAFE_componentWillReceiveProps(nextProps: FadeAnimationProps, _nextContext: any): void {
-        if (nextProps !== this.props) {
-            const nextState: FadeAnimationState | null = this.getAnimationStateFromProps(nextProps);
-            if (null != nextState) {
-                this.setState(nextState);
-            }
-        }
-    }
-
-    public startAnimation = () => {
-        this.animationStarted();
-        this._fadeAnimation.reset();
-        this._fadeAnimation.start(() => { this.animationFinished() });
-    }
-
-    public stopAnimation = () => {
-        this._fadeAnimation.stop();
-    }
-
-    public resetAnimation = () => {
+    public finishAnimation(): void {
         this.stopAnimation();
-        this.state.opacity.setValue(this.props.animationConfig.initialOpacity);
-    }
-
-
-    public finishAnimation = () => {
-        this.stopAnimation();
-        this.state.opacity.setValue(this.props.animationConfig.finalOpacity);
+        this.opacity.setValue(this.props.animationConfig.finalOpacity);
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
-        const opacity = this.state.opacity;
-
+        const opacity = this.opacity;
         return (
             <Animated.View
                 style={{
@@ -77,11 +38,14 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
         );
     }
 
-    protected getAnimationStateFromProps(props: FadeAnimationProps): FadeAnimationState {
-        return {
-            opacity: new Animated.Value(props.animationConfig.initialOpacity)
-        }
+    protected updateCompositeAnimation(): void {
+        const { animationDuration, initialOpacity, finalOpacity, interpolationDef } = this.props.animationConfig;
+        this.opacity.setValue(initialOpacity);
+        this._compositeAnimation = Animated.timing(this.opacity, {
+            duration: animationDuration,
+            toValue: finalOpacity,
+            easing: getEasingFunction(interpolationDef),
+            useNativeDriver: false
+        });
     }
-
-
 }

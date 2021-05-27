@@ -1,2 +1,0 @@
-
-//# sourceMappingURL=ScaleAnimationConfig.js.map
