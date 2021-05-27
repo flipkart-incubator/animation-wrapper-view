@@ -12,18 +12,22 @@ export enum DragState {
 }
 
 export class DragStateMachine {
-    private enableStateDetection: boolean;
     public dragState: DragState = DragState.UNDEFINED;
 
-    private blacklistedAxis: DragState[];
+    private readonly disableDragDetection: boolean;
+    private readonly blacklistedDragStates: DragState[];
+    private readonly touchSnapDelta: number;
+
     private dx: number[];
     private dy: number[];
 
-    constructor(enableStateDetection?: boolean, blacklistedAxis?: DragState[]) {
-        this.enableStateDetection = enableStateDetection ?? true;
+
+    constructor(disableDragDetection?: boolean, blacklistedDragStates?: DragState[], touchSnapDelta?: number) {
+        this.disableDragDetection = disableDragDetection ?? false;
         this.dx = [];
         this.dy = [];
-        this.blacklistedAxis = blacklistedAxis ?? [];
+        this.blacklistedDragStates = blacklistedDragStates ?? [];
+        this.touchSnapDelta = touchSnapDelta ?? 15;
     }
 
     public clearState() {
@@ -33,30 +37,30 @@ export class DragStateMachine {
     }
 
     public getDragState(dx?: number, dy?: number): DragState {
-        if (!this.enableStateDetection) {
-            return this.dragState;
+        if (this.disableDragDetection || !this.blacklistedDragStates.includes(DragState.FREE_DRAG)) {
+            return DragState.FREE_DRAG;
         }
-        if (dx && dy && this.dx.length <= 5) {
-            this.dx.push(dx);
-            this.dy.push(dy);
-        }
-        console.log(this.dragState);
-        if (this.dy.length === 5 && dy && dx) {
-            const xMean = this.dx.reduce((a, b) => a + b, 0);
-            const yMean = this.dy.reduce((a, b) => a + b, 0);
-            if (!inRange(xMean, -15, 15) && !inRange(yMean, -15, 15) || (inRange(xMean, -15,15) && inRange(yMean, -15, 15))) {
-                this.dragState = DragState.FREE_DRAG;
-            } else if (inRange(xMean, -15, 15)) {
-                if (dy > 0 && !this.blacklistedAxis.includes(DragState.SWIPE_DOWN)) {
-                    this.dragState = DragState.SWIPE_DOWN;
-                } else if (dy < 0 && !this.blacklistedAxis.includes(DragState.SWIPE_UP)) {
-                    this.dragState = DragState.SWIPE_UP;
-                }
-            } else if (inRange(yMean, -15, 15)) {
-                if (dx > 0 && !this.blacklistedAxis.includes(DragState.SWIPE_RIGHT)) {
-                    this.dragState = DragState.SWIPE_RIGHT;
-                } else if (dx < 0 && !this.blacklistedAxis.includes(DragState.SWIPE_LEFT)) {
-                    this.dragState = DragState.SWIPE_LEFT;
+        if (dx && dy) {
+            if (this.dx.length <= 5) {
+                this.dx.push(dx);
+                this.dy.push(dy);
+            } else if (this.dx.length === 5 || this.dragState === DragState.UNDEFINED) {
+                const xMean = this.dx.reduce((a, b) => a + b, 0);
+                const yMean = this.dy.reduce((a, b) => a + b, 0);
+                if (inRange(xMean, -this.touchSnapDelta, this.touchSnapDelta)) { // Detected Vertical Swipe
+                    if (dy > 0 && !this.blacklistedDragStates.includes(DragState.SWIPE_DOWN)) { // Detected swipe in downward direction
+                        this.dragState = DragState.SWIPE_DOWN;
+                    } else if (dy < 0 && !this.blacklistedDragStates.includes(DragState.SWIPE_UP)) { // Detected swipe in upward direction
+                        this.dragState = DragState.SWIPE_UP;
+                    }
+                } else if (inRange(yMean, -this.touchSnapDelta, this.touchSnapDelta)) { // Detected Horizontal Swipe
+                    if (dx > 0 && !this.blacklistedDragStates.includes(DragState.SWIPE_RIGHT)) { // Detected swipe in right direction
+                        this.dragState = DragState.SWIPE_RIGHT;
+                    } else if (dx < 0 && !this.blacklistedDragStates.includes(DragState.SWIPE_LEFT)) { // Detected swipe in left direction
+                        this.dragState = DragState.SWIPE_LEFT;
+                    }
+                } else if(!this.blacklistedDragStates.includes(DragState.FREE_DRAG)) {
+                    this.dragState = DragState.FREE_DRAG; // Fallback to free swipe direction.
                 }
             }
         }

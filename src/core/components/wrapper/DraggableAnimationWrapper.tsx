@@ -11,10 +11,11 @@ export interface DraggableAnimationProps extends AnimationWrapperProps {
 }
 
 export interface DraggableAnimationConfig extends BaseAnimationConfig {
-    enableAxisDetection?: boolean;
-    blacklistedAxis?: DragState[];
+    blacklistedStates?: DragState[];
+    enableStateDetection?: boolean;
+    snapDelta?: number;
     onDragRelease?: (dragState: DragState, dx: number, dy: number, x: number, y: number) => void;
-    onDragDirectionDetected?: (dragState: DragState, dx: number, dy: number) => void;
+    onDragDirectionDetected?: (dragState: DragState) => void;
 }
 
 export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAnimationProps> {
@@ -26,9 +27,9 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     public constructor(props: DraggableAnimationProps) {
         super(props);
 
-        const { enableAxisDetection, blacklistedAxis } = this.props.animationConfig;
+        const { enableStateDetection: enableAxisDetection, blacklistedStates: blacklistedAxis, snapDelta: touchSnapDelta } = this.props.animationConfig;
 
-        this.dragStateMachine = new DragStateMachine(enableAxisDetection, blacklistedAxis);
+        this.dragStateMachine = new DragStateMachine(enableAxisDetection, blacklistedAxis, touchSnapDelta);
 
         this.updateCompositeAnimation();
         this.pan = new Animated.ValueXY();
@@ -37,7 +38,7 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
             onPanResponderMove: (e, gesture) => {
                 const dragState = this.dragStateMachine.getDragState(gesture.dx, gesture.dy);
                 if (dragState !== DragState.UNDEFINED) {
-                    this.props.animationConfig.onDragDirectionDetected?.(dragState, gesture.dx, gesture.dy);
+                    this.props.animationConfig.onDragDirectionDetected?.(dragState);
                 }
                 switch (dragState) {
                     case DragState.SWIPE_LEFT:
@@ -54,7 +55,6 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
                         break;
                     case DragState.SWIPE_DOWN:
                     case DragState.SWIPE_UP:
-                        
                         if (dragState === DragState.SWIPE_UP) {
                             Animated.event([null, {
                                 dy: this.pan.y
@@ -99,7 +99,5 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
 
     protected updateCompositeAnimation(): void { }
 
-    public finishAnimation(): void {
-        this.stopAnimation();
-    }
+    public finishAnimation(): void { }
 }

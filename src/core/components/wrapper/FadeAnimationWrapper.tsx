@@ -45,7 +45,7 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
             duration: animationDuration,
             toValue: finalOpacity,
             easing: getEasingFunction(interpolationDef),
-            useNativeDriver: true
+            useNativeDriver: false
         });
     }
 }

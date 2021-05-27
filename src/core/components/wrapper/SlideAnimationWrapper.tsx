@@ -74,11 +74,8 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
 
         const config = animationConfig as SlideAnimationConfig;
         let fromValue: number = this._getInitialTranslateValue(this.props);
-
-
         let toValue: number = config.finalOffset;
         let duration: number = config.animationDuration;
-        console.log(fromValue, toValue);
         this.translate.setValue(fromValue);
         this._compositeAnimation = Animated.timing(this.translate, {
             duration: duration,
@@ -86,8 +83,6 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
             easing: getEasingFunction(animationConfig.interpolationDef),
             useNativeDriver: false
         });
-
-        console.log("compositeAnimationUpdated");
     }
 
     private _getInitialTranslateValue(props: SlideAnimationProps): number {
