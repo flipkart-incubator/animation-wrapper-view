@@ -19,9 +19,6 @@ type WrapperComponent = React.ComponentClass<RippleAnimationProps>
     | React.ComponentClass<WiggleAnimationProps>
     | React.ComponentClass<JsonAnimationProps>;
 
-
-
-
 type AnimationWrapperProps = {
     animationConfig: BaseAnimationConfig;
     onAnimationFinish?: (animationConfig?: BaseAnimationConfig) => void;

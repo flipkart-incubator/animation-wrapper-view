@@ -1,3 +1,5 @@
+import { PanResponderGestureState } from "react-native";
+
 const inRange = (x: number, min: number, max: number): boolean => {
     return ((x - min) * (x - max) <= 0);
 }
@@ -21,7 +23,6 @@ export class DragStateMachine {
     private dx: number[];
     private dy: number[];
 
-
     constructor(disableDragDetection?: boolean, blacklistedDragStates?: DragState[], touchSnapDelta?: number) {
         this.disableDragDetection = disableDragDetection ?? false;
         this.dx = [];
@@ -34,6 +35,14 @@ export class DragStateMachine {
         this.dx = [];
         this.dy = [];
         this.dragState = DragState.UNDEFINED;
+    }
+
+    public isTapGesture(gesture: PanResponderGestureState): boolean {
+        const { dx, dy } = gesture;
+        if (dx > 2 || dx < -2 || dy > 2 || dy < -2) {
+            return false;
+        }
+        return true;
     }
 
     public getDragState(dx?: number, dy?: number): DragState {
@@ -59,7 +68,7 @@ export class DragStateMachine {
                     } else if (dx < 0 && !this.blacklistedDragStates.includes(DragState.SWIPE_LEFT)) { // Detected swipe in left direction
                         this.dragState = DragState.SWIPE_LEFT;
                     }
-                } else if(!this.blacklistedDragStates.includes(DragState.FREE_DRAG)) {
+                } else if (!this.blacklistedDragStates.includes(DragState.FREE_DRAG)) {
                     this.dragState = DragState.FREE_DRAG; // Fallback to free swipe direction.
                 }
             }

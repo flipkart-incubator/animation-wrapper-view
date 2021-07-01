@@ -3,7 +3,6 @@ import { AnimationTriggerType, WiggleAnimationConfig, AnimationType, BounceAnima
 export const getWiggleAnimationConfig = (
     animationDuration: number,
     wiggleDistance: number,
-
     triggerType?: AnimationTriggerType
 ): WiggleAnimationConfig => {
     return {

@@ -4,7 +4,7 @@ import { ScaleAnimationWrapper } from './wrapper/ScaleAnimationWrapper';
 import { BounceAnimationWrapper } from './wrapper/BounceAnimationWrapper';
 
 import BaseAnimationConfig from '../data/BaseAnimationConfig';
-import { DraggableAnimationWrapper, DraggableAnimationConfig } from './wrapper/DraggableAnimationWrapper';
+import { DraggableAnimationWrapper } from './wrapper/DraggableAnimationWrapper';
 import { AnimationWrapperProps, WrapperComponent } from "../Types";
 
 import { FadeAnimationWrapper } from './wrapper/FadeAnimationWrapper';

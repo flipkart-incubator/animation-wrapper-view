@@ -22,7 +22,7 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
         this.opacity = new Animated.Value(1);
     }
 
-    public finishAnimation ():void {
+    public finishAnimation(): void {
         this.stopAnimation();
         // no extra op
     }
@@ -33,7 +33,10 @@ export class RippleAnimationWrapper extends BaseAnimationWrapper<RippleAnimation
         const rippleStyle = RippleAnimationWrapper.getRippleStyle(animationConfig.rippleRadius);
 
         return (
-            <View>
+            <View style={{
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
                 <Animated.View
                     style={[
                         rippleStyle,
