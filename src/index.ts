@@ -30,6 +30,14 @@ import {
     SlideAnimationProps,
     Dimension
 } from './core/Types';
+import {
+    getBounceAnimationConfig,
+    getFadeAnimationConfig,
+    getHorizontalSlideAnimationConfig,
+    getVerticalSlideAnimationConfig,
+    getRippleAnimationConfig,
+    getWiggleAnimationConfig
+} from './core/Utils';
 
 export {
     AnimationWrapperView,
@@ -58,5 +66,11 @@ export {
     SlideAnimationProps,
     Dimension,
     DraggableAnimationConfig,
-    DragState
+    DragState,
+    getBounceAnimationConfig,
+    getFadeAnimationConfig,
+    getHorizontalSlideAnimationConfig,
+    getVerticalSlideAnimationConfig,
+    getRippleAnimationConfig,
+    getWiggleAnimationConfig
 };
