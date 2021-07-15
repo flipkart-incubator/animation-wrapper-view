@@ -1,10 +1,10 @@
 import { AnimationTriggerType, WiggleAnimationConfig, AnimationType, BounceAnimationConfig, FadeAnimationConfig, RippleAnimationConfig, SlideHorizontalDirection, SlideHorizontalAnimationConfig, SlideVerticalDirection, SlideVerticalAnimationConfig } from "..";
 
-export const getWiggleAnimationConfig = (
+export function getWiggleAnimationConfig(
     animationDuration: number,
     wiggleDistance: number,
     triggerType?: AnimationTriggerType
-): WiggleAnimationConfig => {
+): WiggleAnimationConfig {
     return {
         type: AnimationType.WIGGLE,
         wiggleDistance,
@@ -13,11 +13,11 @@ export const getWiggleAnimationConfig = (
     };
 };
 
-export const getBounceAnimationConfig = (
+export function getBounceAnimationConfig(
     animationDuration: number,
     bounceHeight: number,
     triggerType?: AnimationTriggerType
-): BounceAnimationConfig => {
+): BounceAnimationConfig {
     return {
         type: AnimationType.BOUNCE,
         triggerType: triggerType ? triggerType : AnimationTriggerType.ON_LOAD,
@@ -26,12 +26,12 @@ export const getBounceAnimationConfig = (
     }
 };
 
-export const getFadeAnimationConfig = (
+export function getFadeAnimationConfig(
     animationDuration: number,
     initialOpacity: number,
     finalOpacity: number,
     triggerType?: AnimationTriggerType
-): FadeAnimationConfig => {
+): FadeAnimationConfig{
     return {
         type: AnimationType.FADE,
         triggerType: triggerType ? triggerType : AnimationTriggerType.ON_LOAD,
@@ -41,13 +41,13 @@ export const getFadeAnimationConfig = (
     } as FadeAnimationConfig;
 };
 
-export const getRippleAnimationConfig = (rippleColor: string,
+export function getRippleAnimationConfig(rippleColor: string,
     rippleCount: number,
     rippleDuration: number,
     rippleRadius: number,
     rippleIntervalDuration?: number,
     triggerType?: AnimationTriggerType
-): RippleAnimationConfig => {
+): RippleAnimationConfig {
 
     return {
         type: AnimationType.RIPPLE,
@@ -60,13 +60,13 @@ export const getRippleAnimationConfig = (rippleColor: string,
     };
 };
 
-export const getHorizontalSlideAnimationConfig = (
+export function getHorizontalSlideAnimationConfig (
     animationDuration: number,
     initialOffset: number,
     finalOffset: number,
     direction?: SlideHorizontalDirection,
     triggerType?: AnimationTriggerType
-): SlideHorizontalAnimationConfig => {
+): SlideHorizontalAnimationConfig  {
     return {
         type: AnimationType.SLIDE_HORIZONTAL,
         triggerType: triggerType ?? AnimationTriggerType.ON_LOAD,
@@ -83,13 +83,13 @@ export const getHorizontalSlideAnimationConfig = (
     };
 };
 
-export const getVerticalSlideAnimationConfig = (
+export function getVerticalSlideAnimationConfig (
     animationDuration: number,
     initialOffset: number,
     finalOffset: number,
     direction?: SlideVerticalDirection,
     triggerType?: AnimationTriggerType
-): SlideVerticalAnimationConfig => {
+): SlideVerticalAnimationConfig {
     return {
         type: AnimationType.SLIDE_VERTICAL,
         triggerType: triggerType ? triggerType : AnimationTriggerType.ON_LOAD,
