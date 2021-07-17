@@ -96,7 +96,6 @@ export function getVerticalSlideAnimationConfig (
         direction: direction,
         initialOffset: initialOffset,
         finalOffset: finalOffset,
-        triggerDelay: 1000,
         animationDuration,
         interpolationDef: {
             easing: 'elastic',
