@@ -27,7 +27,7 @@ export class FadeAnimationWrapper extends BaseAnimationWrapper<FadeAnimationProp
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const opacity = this.opacity;
         return (
-            <Animated.View
+            <Animated.View needsOffscreenAlphaCompositing
                 style={{
                     justifyContent: 'center',
                     alignItems: 'center',

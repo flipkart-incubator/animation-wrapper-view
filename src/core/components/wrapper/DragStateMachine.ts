@@ -28,7 +28,7 @@ export class DragStateMachine {
         this.dx = [];
         this.dy = [];
         this.blacklistedDragStates = blacklistedDragStates ?? [];
-        this.touchSnapDelta = touchSnapDelta ?? 15;
+        this.touchSnapDelta = touchSnapDelta ?? 20;
     }
 
     public clearState() {
@@ -50,10 +50,10 @@ export class DragStateMachine {
             return DragState.FREE_DRAG;
         }
         if (dx && dy) {
-            if (this.dx.length <= 5) {
+            if (this.dx.length <= 3) {
                 this.dx.push(dx);
                 this.dy.push(dy);
-            } else if (this.dx.length === 5 || this.dragState === DragState.UNDEFINED) {
+            } else if (this.dx.length === 3 || this.dragState === DragState.UNDEFINED) {
                 const xMean = this.dx.reduce((a, b) => a + b, 0);
                 const yMean = this.dy.reduce((a, b) => a + b, 0);
                 if (inRange(xMean, -this.touchSnapDelta, this.touchSnapDelta)) { // Detected Vertical Swipe
