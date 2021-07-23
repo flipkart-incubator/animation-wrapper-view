@@ -16,7 +16,6 @@ export interface DraggableAnimationConfig extends BaseAnimationConfig {
     snapDelta?: number;
     onDragRelease?: (dragState: DragState, dx: number, dy: number, x: number, y: number) => void;
     onDragDirectionDetected?: (dragState: DragState) => void;
-    onTapDetected?: () => void;
 }
 
 export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAnimationProps> {
@@ -34,11 +33,11 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
             switch (dragState) {
                 case DragState.SWIPE_LEFT:
                 case DragState.SWIPE_RIGHT:
-                    if (dragState === DragState.SWIPE_LEFT) {
+                    if (dragState === DragState.SWIPE_LEFT && gesture.dx < 0) {
                         Animated.event([null, {
                             dx: this.pan.x
                         }])(e, gesture);
-                    } else if (dragState === DragState.SWIPE_RIGHT) {
+                    } else if (dragState === DragState.SWIPE_RIGHT &&  gesture.dx > 0) {
                         Animated.event([null, {
                             dx: this.pan.x
                         }])(e, gesture);
@@ -46,11 +45,11 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
                     break;
                 case DragState.SWIPE_DOWN:
                 case DragState.SWIPE_UP:
-                    if (dragState === DragState.SWIPE_UP) {
+                    if (dragState === DragState.SWIPE_UP && gesture.dy < 0) {
                         Animated.event([null, {
                             dy: this.pan.y
                         }])(e, gesture);
-                    } else if (dragState === DragState.SWIPE_DOWN) {
+                    } else if (dragState === DragState.SWIPE_DOWN && gesture.dy > 0) {
                         Animated.event([null, {
                             dy: this.pan.y
                         }])(e, gesture);

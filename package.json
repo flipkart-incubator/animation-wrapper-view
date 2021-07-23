@@ -1,7 +1,7 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.0.69",
+  "version": "1.0.70",
   "repository": "https://github.fkinternal.com/Flipkart/animation-wrapper-view/",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
