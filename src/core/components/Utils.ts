@@ -37,6 +37,14 @@ export default function getEasingFunction(interpolation?: InterpolationDef): Eas
                 return Easing.back(back);
             }
             return Easing.linear;
+        case "custom-bezier":
+            const bezierCurvePoints = interpolation?.params?.bezierCurvePoints;
+            if(Array.isArray(bezierCurvePoints) && bezierCurvePoints.length === 4){
+                /* Expecting user to pass values in this order would align with the usage */
+                const [x1, y1, x2, y2] = bezierCurvePoints;
+                return Easing.bezier(x1, y1, x2, y2)
+            }
+            return Easing.linear;
         default:
             return Easing.linear;
     }

@@ -66,5 +66,6 @@ export type InterpolationDef = {
 
 type InterpolationParams = {
     back?: number,
-    bounciness?: number
+    bounciness?: number,
+    bezierCurvePoints?: Array<number>
 }
