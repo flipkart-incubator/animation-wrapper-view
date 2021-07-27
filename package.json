@@ -1,7 +1,7 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.0.70",
+  "version": "1.0.71",
   "repository": "https://github.fkinternal.com/Flipkart/animation-wrapper-view/",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "document": "npx typedoc src/core",
-    "build": "tsc",
+    "build": "rimraf lib && tsc",
     "tsc": "rimraf lib && tsc --version && tsc -p tsconfig.json",
     "watch": "npm run tsc -- --watch",
     "watch:tsrex": "npm run watch -- --outDir ../ts-rex/node_modules/animation-wrapper-view/lib/"
