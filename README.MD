@@ -107,7 +107,7 @@ Type definitions:
 
 | Type name | params | usage |
 | --- | --- | --- |
-| TransformDef | property: TransformType  | Defines the property to transform: SCALE, FADE,OPACITY, TRANSLATE_Y, ROTATE, TRANSLATE_X, ROTATE_X, ROTATE_Y , SCALE_X, SCALE_Y |
+| TransformDef | property: TransformType  | Defines the property to transform: scale, fade, opacity, translateY, rotate, translateX, rotateX, rotateY , scaleX, scaleY |
 | | to:number | The starting value of the transformation |
 | | from:number | The final value of transformation after animation |
 
@@ -122,6 +122,7 @@ Type definitions:
 | --- | --- | --- |
 | InterpolationParams | back: number | https://reactnative.dev/docs/easing#back |
 | | bounciness: number | https://reactnative.dev/docs/easing#bounce |
+| | bezierCurvePoints: Array<[x1: number, y1: number, x2: number, y2: number]> | https://cubic-bezier.com/
 
 | Type name | params | usage |
 | --- | --- | --- |
@@ -132,36 +133,41 @@ Type definitions:
 
 Multiple set of transformations can be played in a sequence.
 
-Sample Json
-```json
-{
-  "animation": [
-    {
-      "transformations": [
-        {
-          "key": "SCALE",
-          "from": 0,
-          "to": 1
-        },
-        {
-          "key": "ROTATE",
-          "from": 0,
-          "to": 90
-        },
-        {
-          "key": "ROTATE_X",
-          "from": 0,
-          "to": 180
+### Usage of JSON based custom animation
+```jsx
+const animationConfig: JsonAnimationConfig = {
+        type: AnimationType.JSON,
+        triggerType: AnimationTriggerType.ON_LOAD,
+        animationConfig: {
+            transforms: [
+                {
+                    key: 'scale',
+                    from: 0,
+                    to: 1,
+                },
+                {
+                    key: 'rotate',
+                    from: 0,
+                    to: 90,
+                },
+                {
+                    key: 'rotateX',
+                    from: 0,
+                    to: 180,
+                }
+            ],
+            duration: 1000,
+            interpolation: {
+                easing: "linear"
+            }
         }
-      ],
-      "duration": 1000,
-      "interpolation": {
-          "easing": "linear"
-      }
-    }
-  ]
-}
+    };
+
+<AnimationWrapperView animationConfig={bounceConfig}>
+    {/* {your component} */}
+</AnimationWrapperView>
 ```
+
 ![Json Animation Demo](/media/json_animation.gif)
 ![Json Animation Demo](/media/json_demo.gif)
 
