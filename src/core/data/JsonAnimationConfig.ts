@@ -27,7 +27,9 @@ export type EasingType = "linear"
     | "expo-out"
     | "ease-in"
     | "ease-out"
-    | "ease-in-out";
+    | "ease-in-out"
+    | "custom-bezier"
+;
 
 export interface JsonAnimationConfig extends BaseAnimationConfig {
     animationConfig: AnimationDef | AnimationDef[] 

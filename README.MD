@@ -135,11 +135,10 @@ Multiple set of transformations can be played in a sequence.
 
 ### Usage of JSON based custom animation
 ```jsx
-const animationConfig: BounceAnimation = {
+const animationConfig: JsonAnimationConfig = {
         type: AnimationType.JSON,
         triggerType: AnimationTriggerType.ON_LOAD,
-        triggerDelay: 5000,
-        animationConfig: [{
+        animationConfig: {
             transforms: [
                 {
                     key: 'scale',
@@ -161,7 +160,7 @@ const animationConfig: BounceAnimation = {
             interpolation: {
                 easing: "linear"
             }
-        }]
+        }
     };
 
 <AnimationWrapperView animationConfig={bounceConfig}>
