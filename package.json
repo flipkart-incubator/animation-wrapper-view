@@ -1,13 +1,13 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.0.71",
-  "repository": "https://github.fkinternal.com/Flipkart/animation-wrapper-view/",
+  "version": "1.0.0-beta",
+  "repository": "https://github.com/flipkart-incubator/animation-wrapper-view",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": {
     "name": "Swapnil Tiwari",
-    "email": "swapnil.tiwari@flipkart.com",
+    "email": "swapniltiwari775@gmail.com",
     "url": "http://github.com/swapnil1104"
   },
   "scripts": {
