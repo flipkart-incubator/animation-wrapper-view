@@ -15,6 +15,12 @@ const bounceConfig: BounceAnimation = {
 </AnimationWrapperView>
 ```
 
+### Installation
+```
+npm i animation-wrapper-view
+```
+
+
 ### AnimationWrapperView capabilities
 - Robustly exposed API to allow developer to have control over various aspects of predefined animations.
 - Ability to compose your own animations on the fly by providing a custom JSON.
