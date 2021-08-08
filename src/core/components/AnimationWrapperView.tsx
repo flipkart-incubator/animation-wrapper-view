@@ -82,7 +82,7 @@ export default class AnimationWrapperView extends React.PureComponent<AnimationW
         this._animationComponentRef?.finishAnimation();
     }
 
-    private _setRef(ref: Component<AnimationWrapperProps>): void {
+    private _setRef = (ref: Component<AnimationWrapperProps>): void => {
         this._animationComponentRef = ref as BaseAnimationWrapper<AnimationWrapperProps>;
     }
 
