@@ -20,6 +20,9 @@ const bounceConfig: BounceAnimation = {
 npm i animation-wrapper-view
 ```
 
+### Live Demo
+An Expo snack is created illustrating capabilities of animation-wrapper-view, visit and play around!!
+https://snack.expo.dev/@swapnil1104/animationwrapperview-playground 
 
 ### AnimationWrapperView capabilities
 - Robustly exposed API to allow developer to have control over various aspects of predefined animations.
