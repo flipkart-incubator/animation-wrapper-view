@@ -43,17 +43,17 @@ render() {
     );
 }
 
-// Start animation on button press.
+// Start animation from the view ref.
 private _onPressToStart = (_: GestureResponderEvent) => {
     this._wrapperRef?.startAnimation();
 }
 
-// Pause animation on button press.
+// Pause animation from the view ref.
 private _onPressToPause = (_: GestureResponderEvent) => {
     this._wrapperRef?.pauseAnimation();
 }
 
-// Reset animation on button press.
+// Reset animation from the view ref.
 private _onPressToReset = (_: GestureResponderEvent) => {
     this._wrapperRef?.resetAnimation();
 }
