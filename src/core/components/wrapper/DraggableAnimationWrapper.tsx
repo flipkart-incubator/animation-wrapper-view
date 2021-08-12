@@ -23,7 +23,10 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     private panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => false,
         onStartShouldSetPanResponderCapture: () => false,
-        onMoveShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: (e, gestureState) => {
+            const { dx, dy } = gestureState;
+            return (Math.abs(dx) > 10) || (Math.abs(dy) > 10);
+        },
         onMoveShouldSetPanResponderCapture: () => true,
         onPanResponderMove: (e, gesture) => {
             const dragState = this.dragStateMachine.getDragState(gesture.dx, gesture.dy);
@@ -37,7 +40,7 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
                         Animated.event([null, {
                             dx: this.pan.x
                         }])(e, gesture);
-                    } else if (dragState === DragState.SWIPE_RIGHT &&  gesture.dx > 0) {
+                    } else if (dragState === DragState.SWIPE_RIGHT && gesture.dx > 0) {
                         Animated.event([null, {
                             dx: this.pan.x
                         }])(e, gesture);

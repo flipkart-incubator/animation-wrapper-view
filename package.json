@@ -1,15 +1,14 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.0.0-beta",
-  "repository": "https://github.com/flipkart-incubator/animation-wrapper-view",
+  "version": "1.0.0-beta4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flipkart-incubator/animation-wrapper-view.git"
+  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "author": {
-    "name": "Swapnil Tiwari",
-    "email": "swapniltiwari775@gmail.com",
-    "url": "http://github.com/swapnil1104"
-  },
+  "author": "Swapnil Tiwari <swapniltiwari775@gmail.com> (http://github.com/swapnil1104)",
   "scripts": {
     "document": "npx typedoc src/core",
     "build": "rimraf lib && tsc",
@@ -38,5 +37,15 @@
   ],
   "files": [
     "lib"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/flipkart-incubator/animation-wrapper-view/issues"
+  },
+  "homepage": "https://github.com/flipkart-incubator/animation-wrapper-view#readme",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "dependencies": {},
+  "license": "ISC"
 }

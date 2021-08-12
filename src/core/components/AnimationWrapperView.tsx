@@ -13,8 +13,9 @@ import { WiggleAnimationWrapper } from './wrapper/WiggleAnimationWrapper';
 import { BaseAnimationWrapper } from './wrapper/BaseAnimationWrapper';
 import { JsonAnimationWrapper } from './wrapper/JsonAnimationWrapper';
 import { AnimationType } from '../data/Enums';
+import deepDiffer from '../data/DeepDiffer';
 
-export default class AnimationWrapperView extends React.PureComponent<AnimationWrapperProps> {
+export default class AnimationWrapperView extends React.Component<AnimationWrapperProps> {
 
     private _animationComponentClass: WrapperComponent | undefined;
     private _animationComponentRef?: BaseAnimationWrapper<AnimationWrapperProps> | null;
@@ -25,10 +26,12 @@ export default class AnimationWrapperView extends React.PureComponent<AnimationW
     }
 
     public shouldComponentUpdate(nextProps: Readonly<AnimationWrapperProps>, _: any): boolean {
-        const shouldUpdate = nextProps.animationConfig !== this.props.animationConfig;
+        const shouldUpdate = deepDiffer(nextProps.animationConfig, this.props.animationConfig);
         if (shouldUpdate) {
             this._animationComponentRef?.resetAnimation();
-            this._animationComponentClass = this._animationWrapperGenerator(nextProps.animationConfig);
+            if (nextProps.animationConfig.type !== this.props.animationConfig.type) {
+                this._animationComponentClass = this._animationWrapperGenerator(nextProps.animationConfig);
+            }
         }
         return shouldUpdate;
     }
@@ -82,7 +85,7 @@ export default class AnimationWrapperView extends React.PureComponent<AnimationW
         this._animationComponentRef?.finishAnimation();
     }
 
-    private _setRef(ref: Component<AnimationWrapperProps>): void {
+    private _setRef = (ref: Component<AnimationWrapperProps>): void => {
         this._animationComponentRef = ref as BaseAnimationWrapper<AnimationWrapperProps>;
     }
 

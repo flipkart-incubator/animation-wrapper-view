@@ -2,8 +2,8 @@ import React from 'react';
 import { Animated, GestureResponderEvent, TouchableWithoutFeedback, View } from 'react-native';
 import { AnimationTriggerType } from '../../data/Enums';
 import { AnimationWrapperProps } from '../../Types';
-
-export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps> extends React.PureComponent<P> {
+import deepDiffer from '../../data/DeepDiffer';
+export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps> extends React.Component<P> {
 
     public abstract finishAnimation(): void;
     protected abstract renderAnimation(content: React.ReactNode): React.ReactNode;
@@ -12,8 +12,7 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps> exte
     protected _compositeAnimation: Animated.CompositeAnimation | undefined;
 
     public shouldComponentUpdate(nextProps: Readonly<AnimationWrapperProps>, _: any): boolean {
-        const shouldUpdate = nextProps.animationConfig !== this.props.animationConfig;
-        return shouldUpdate;
+        return deepDiffer(nextProps.animationConfig, this.props.animationConfig);
     }
 
     public componentDidMount(): void {

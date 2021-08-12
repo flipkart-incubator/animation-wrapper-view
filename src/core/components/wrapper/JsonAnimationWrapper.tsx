@@ -4,6 +4,7 @@ import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { JsonAnimationConfig, TransformDef } from '../../data/JsonAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
 import getEasingFunction from "../Utils";
+import deepDiffer from '../../data/DeepDiffer';
 
 
 export interface JsonAnimationProps extends AnimationWrapperProps {
@@ -18,7 +19,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         super(props);
         this.updateCompositeAnimation();
     }
-   
+
     public resetAnimation ():void {
         this.stopAnimation();
         if (Array.isArray(this.props.animationConfig.animationConfig)) {
