@@ -4,7 +4,6 @@ import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { JsonAnimationConfig, TransformDef } from '../../data/JsonAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
 import getEasingFunction from "../Utils";
-import deepDiffer from '../../data/DeepDiffer';
 
 
 export interface JsonAnimationProps extends AnimationWrapperProps {

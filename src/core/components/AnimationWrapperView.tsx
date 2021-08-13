@@ -13,7 +13,6 @@ import { WiggleAnimationWrapper } from './wrapper/WiggleAnimationWrapper';
 import { BaseAnimationWrapper } from './wrapper/BaseAnimationWrapper';
 import { JsonAnimationWrapper } from './wrapper/JsonAnimationWrapper';
 import { AnimationType } from '../data/Enums';
-import deepDiffer from '../data/DeepDiffer';
 
 export default class AnimationWrapperView extends React.Component<AnimationWrapperProps> {
 
@@ -26,12 +25,10 @@ export default class AnimationWrapperView extends React.Component<AnimationWrapp
     }
 
     public shouldComponentUpdate(nextProps: Readonly<AnimationWrapperProps>, _: any): boolean {
-        const shouldUpdate = deepDiffer(nextProps.animationConfig, this.props.animationConfig);
+        const shouldUpdate = nextProps.animationConfig !== this.props.animationConfig;
         if (shouldUpdate) {
             this._animationComponentRef?.resetAnimation();
-            if (nextProps.animationConfig.type !== this.props.animationConfig.type) {
-                this._animationComponentClass = this._animationWrapperGenerator(nextProps.animationConfig);
-            }
+            this._animationComponentClass = this._animationWrapperGenerator(nextProps.animationConfig);
         }
         return shouldUpdate;
     }

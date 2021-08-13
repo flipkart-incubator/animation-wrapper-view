@@ -12,7 +12,7 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps> exte
     protected _compositeAnimation: Animated.CompositeAnimation | undefined;
 
     public shouldComponentUpdate(nextProps: Readonly<AnimationWrapperProps>, _: any): boolean {
-        return deepDiffer(nextProps.animationConfig, this.props.animationConfig);
+        return nextProps.animationConfig !== this.props.animationConfig;
     }
 
     public componentDidMount(): void {

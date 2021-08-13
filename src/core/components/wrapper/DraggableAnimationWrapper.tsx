@@ -23,11 +23,10 @@ export class DraggableAnimationWrapper extends BaseAnimationWrapper<DraggableAni
     private panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => false,
         onStartShouldSetPanResponderCapture: () => false,
-        onMoveShouldSetPanResponder: (e, gestureState) => {
+        onMoveShouldSetPanResponderCapture: (e, gestureState) => {
             const { dx, dy } = gestureState;
             return (Math.abs(dx) > 10) || (Math.abs(dy) > 10);
         },
-        onMoveShouldSetPanResponderCapture: () => true,
         onPanResponderMove: (e, gesture) => {
             const dragState = this.dragStateMachine.getDragState(gesture.dx, gesture.dy);
             if (dragState !== DragState.UNDEFINED) {
