@@ -1,6 +1,7 @@
 export enum AnimationTriggerType {
     ON_CLICK = "ON_CLICK",
-    ON_LOAD = "ON_LOAD"
+    ON_LOAD = "ON_LOAD",
+    ON_CONDITION = "ON_CONDITION"
 }
 
 export enum AnimationType {
