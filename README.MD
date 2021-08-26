@@ -8,6 +8,14 @@ AnimationWrapperView is a collection of a well defined set of component level an
  - Declarative transformation animations with JSON.
  - Imperative controls to the animation state. (start/pause/reset)
 
+### Snack Playground
+https://snack.expo.dev/@swapnil1104/animationwrapperview-playground
+
+### Steps to integrate
+```
+npm install animation-wrapper-view
+```
+
 ### Sample code
 ```jsx
 const bounceConfig: BounceAnimation = {
@@ -20,12 +28,6 @@ const bounceConfig: BounceAnimation = {
 <AnimationWrapperView animationConfig={bounceConfig}>
     {/* {your component} */}
 </AnimationWrapperView>
-```
-
-### Steps to integrate
-
-```
-npm install animation-wrapper-view
 ```
 
 ### AnimationWrapperView capabilities
