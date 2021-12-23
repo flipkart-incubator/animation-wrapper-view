@@ -13,7 +13,6 @@ export type TransformType = "scale"
     | "skewX"
     | "skewY"
     | "width"
-    | "height"
 ;
 
 export type EasingType = "linear"
