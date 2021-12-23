@@ -275,8 +275,18 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
     private _getViewStyleAnimationArray(): ViewStyle[] {
         let animations: ViewStyle[] = [];
         for (let [key, value] of Object.entries(this._viewStyles)) {
-            if (key === 'opacity') {
-                animations.push({ opacity: value });
+            switch (key) {
+                case 'opacity':
+                    animations.push({ opacity: value });
+                    break;
+                case 'width': 
+                    animations.push({ width: value });
+                    break;
+                case 'height':
+                    animations.push({height: value})
+                    break;
+                default:
+                    break;
             }
         }
         return animations;
