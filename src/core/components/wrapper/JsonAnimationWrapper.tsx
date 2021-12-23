@@ -246,6 +246,20 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                 });
                 this._viewStyles = { ...this._viewStyles, opacity: opacity };
                 break;
+            case "width":
+                const width = this._animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.from, transformation.to]
+                });
+                this._viewStyles = { ...this._viewStyles, width: width };
+                break;
+            case "height":
+                const height = this._animation[animationIndex].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [transformation.from, transformation.to]
+                });
+                this._viewStyles = { ...this._viewStyles, height: height };
+                break;
 
         }
     }
