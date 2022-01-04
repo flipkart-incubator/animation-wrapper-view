@@ -283,7 +283,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                     animations.push({ width: value });
                     break;
                 case 'height':
-                    animations.push({height: value})
+                    animations.push({ height: value });
                     break;
                 default:
                     break;
