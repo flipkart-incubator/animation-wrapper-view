@@ -23,6 +23,7 @@ type AnimationWrapperProps = {
     animationConfig: BaseAnimationConfig;
     onAnimationFinish?: (animationConfig?: BaseAnimationConfig) => void;
     onAnimationStart?: (animationConfig?: BaseAnimationConfig) => void;
+    animationWrapperStyles?:object;
 }
 
 type SlideAnimationProps = AnimationWrapperProps;
