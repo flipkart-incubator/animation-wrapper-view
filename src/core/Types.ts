@@ -6,7 +6,7 @@ import { RippleAnimationProps } from "./components/wrapper/RippleAnimationWrappe
 import { ScaleAnimationProps } from "./components/wrapper/ScaleAnimationWrapper";
 import { WiggleAnimationProps } from "./components/wrapper/WiggleAnimationWrapper";
 import BaseAnimationConfig from "./data/BaseAnimationConfig";
-import {StyleProp, ViewStyle} from "react-native";
+import { StyleProp, ViewStyle } from "react-native";
 
 /**
  * Append the React.ComponentClass<T extends AnimationProps> for each class extending from BaseAnimationWrapper
