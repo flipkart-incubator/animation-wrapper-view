@@ -45,7 +45,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         const transformArray = this._getTransformArray();
         const animations: ViewStyle[] = this._getViewStyleAnimationArray();
         return (
-            <Animated.View style={[{ transform: transformArray }, animations]}>
+            <Animated.View style={[{transform: transformArray}, animations, this.props?.animationWrapperStyles]}>
                 {content}
             </Animated.View>
         );

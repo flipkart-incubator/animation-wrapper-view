@@ -35,14 +35,15 @@ export default class AnimationWrapperView extends React.Component<AnimationWrapp
 
     public render(): React.ReactNode | undefined {
         this._assertChildType();
-        const { animationConfig, children, onAnimationFinish, onAnimationStart } = this.props;
+        const { animationConfig, children, onAnimationFinish, onAnimationStart, animationWrapperStyles} = this.props;
         if (this._animationComponentClass && children) {
             return (
                 <this._animationComponentClass
                     ref={this._setRef}
                     animationConfig={animationConfig as any}
                     onAnimationFinish={onAnimationFinish}
-                    onAnimationStart={onAnimationStart}>
+                    onAnimationStart={onAnimationStart}
+                    animationWrapperStyles={animationWrapperStyles}>
                     {children}
                 </this._animationComponentClass>
             );
