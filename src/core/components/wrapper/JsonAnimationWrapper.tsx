@@ -41,11 +41,12 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         }
     }
 
+    //For now, we are only adding the stying passed as a prop for JsonAnimationWrapper.
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
         const transformArray = this._getTransformArray();
         const animations: ViewStyle[] = this._getViewStyleAnimationArray();
         return (
-            <Animated.View style={[{ transform: transformArray }, animations]}>
+            <Animated.View style={[{transform: transformArray}, animations, this.props?.animationWrapperStyles]}>
                 {content}
             </Animated.View>
         );
