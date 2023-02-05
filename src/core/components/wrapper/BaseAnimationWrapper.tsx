@@ -31,13 +31,13 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps> exte
         const content = this.props.children;
         if (this.props.animationConfig?.triggerType === AnimationTriggerType.ON_CLICK) {
             return (
-                <TouchableWithoutFeedback onPress={this._onPress}>
+                <TouchableWithoutFeedback onPress={this._onPress} style={this.props?.baseAnimationStyles}>
                     {this.renderAnimation(content)}
                 </TouchableWithoutFeedback>
             );
         } else {
             return (
-                <View>
+                <View style={this.props?.baseAnimationStyles}>
                     {this.renderAnimation(content)}
                 </View>
             )
