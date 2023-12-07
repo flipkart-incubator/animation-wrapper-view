@@ -1,7 +1,7 @@
 {
   "name": "animation-wrapper-view",
   "description": "Create declarative animations for React Native",
-  "version": "1.1.2",
+  "version": "1.1.3-SNAPSHOT-1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flipkart-incubator/animation-wrapper-view.git"
@@ -17,19 +17,19 @@
     "watch:tsrex": "npm run watch -- --outDir ../ts-rex/node_modules/animation-wrapper-view/lib/"
   },
   "peerDependencies": {
-    "react": "16.9.0",
-    "react-dom": "16.0.0",
-    "react-native": "0.61.2"
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.72.7"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "@types/react": "~16.9.35",
-    "@types/react-dom": "~16.9.8",
-    "@types/react-native": "~0.63.2",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/react-native": "0.72.7",
     "babel-loader": "^8.2.2",
     "rimraf": "3.0.2",
-    "typedoc": "0.20.36",
-    "typescript": "~3.9.5"
+    "typedoc": "0.24.8",
+    "typescript": "4.9.5"
   },
   "eslintIgnore": [
     "node_modules/",
