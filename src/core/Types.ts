@@ -26,6 +26,7 @@ type AnimationWrapperProps = {
     onAnimationStart?: (animationConfig?: BaseAnimationConfig) => void;
     animationWrapperStyles?: StyleProp<ViewStyle>;
     baseAnimationStyles?: StyleProp<ViewStyle>;
+    children?: React.ReactNode;
 }
 
 type SlideAnimationProps = AnimationWrapperProps;
