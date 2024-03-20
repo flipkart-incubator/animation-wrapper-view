@@ -1,4 +1,5 @@
 import BaseAnimationConfig from "./BaseAnimationConfig"
+import { OrderType } from "./Enums";
 
 export type TransformType = "scale"
     | "opacity"
@@ -33,7 +34,8 @@ export type EasingType = "linear"
 ;
 
 export interface JsonAnimationConfig extends BaseAnimationConfig {
-    animationConfig: AnimationDef | AnimationDef[] 
+    animationConfig: AnimationDef | AnimationDef[],
+    orderType?: OrderType
 }
 
 /**
