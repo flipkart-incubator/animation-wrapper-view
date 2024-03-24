@@ -15,3 +15,8 @@ export enum AnimationType {
     WIGGLE = "WIGGLE",
     JSON = "JSON"
 }
+
+export enum OrderType {
+    SEQUENCE = 'SEQUENCE',
+    PARALLEL = 'PARALLEL'
+}

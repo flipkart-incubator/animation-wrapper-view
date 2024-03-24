@@ -4,6 +4,7 @@ import { BaseAnimationWrapper } from './BaseAnimationWrapper';
 import { JsonAnimationConfig, TransformDef } from '../../data/JsonAnimationConfig';
 import { AnimationWrapperProps } from '../../Types';
 import getEasingFunction from "../Utils";
+import { OrderType } from '../../data/Enums';
 
 
 export interface JsonAnimationProps extends AnimationWrapperProps {
@@ -100,12 +101,12 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
     }
 
     private _updateCompositeAnimation(props: JsonAnimationProps): void {
-        const animationSequence: Animated.CompositeAnimation[] = [];
+        const animationList: Animated.CompositeAnimation[] = [];
         if (Array.isArray(props.animationConfig.animationConfig)) {
             for (let i = 0; i < props.animationConfig.animationConfig.length; i++) {
                 const animationDef = props.animationConfig.animationConfig[i];
                 if (this._animation) {
-                    animationSequence.push(Animated.timing(this._animation[i], {
+                    animationList.push(Animated.timing(this._animation[i], {
                         toValue: 1,
                         duration: animationDef.duration,
                         easing: getEasingFunction(animationDef.interpolation),
@@ -113,7 +114,10 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                     }));
                 }
             }
-            this._compositeAnimation = Animated.sequence(animationSequence);
+            this._compositeAnimation =
+              props.animationConfig.orderType === OrderType.PARALLEL
+                ? Animated.parallel(animationList)
+                : Animated.sequence(animationList);
         } else {
             const animationDef = props.animationConfig.animationConfig;
             if (this._animation) {
