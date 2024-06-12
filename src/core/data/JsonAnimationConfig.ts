@@ -34,8 +34,15 @@ export type EasingType = "linear"
 ;
 
 export interface JsonAnimationConfig extends BaseAnimationConfig {
-    animationConfig: AnimationDef | AnimationDef[],
-    orderType?: OrderType
+    animationConfig: AnimationDef | AnimationDef[] | AnimationDefTree,
+}
+
+/**
+ * Support for custom sequence, parallel and delay animations.
+ */
+type AnimationDefTree = {
+    type: OrderType,
+    animationConfig: (AnimationDefTree | AnimationDef | DelayAnimationDef)[]
 }
 
 /**
@@ -73,4 +80,8 @@ type InterpolationParams = {
     back?: number,
     bounciness?: number,
     bezierCurvePoints?: Array<number>
+}
+
+type DelayAnimationDef = {
+    duration: number;
 }

@@ -110,7 +110,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                         toValue: 1,
                         duration: animationDef.duration,
                         easing: getEasingFunction(animationDef.interpolation),
-                        useNativeDriver: false
+                        useNativeDriver: !!props.animationConfig.useNativeDriver,
                     }));
                 }
             }
@@ -125,7 +125,7 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
                     toValue: 1,
                     duration: animationDef.duration,
                     easing: getEasingFunction(animationDef.interpolation),
-                    useNativeDriver: false
+                    useNativeDriver: !!props.animationConfig.useNativeDriver,
                 });
             }
         }
