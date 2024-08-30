@@ -37,6 +37,7 @@ export class SlideAnimationWrapper extends BaseAnimationWrapper<SlideAnimationPr
 
     public finishAnimation(): void {
         this.stopAnimation();
+        this.translate.setValue(this._getFinalTranslateValue(this.props));
     }
 
     protected renderAnimation(content: React.ReactNode): React.ReactNode {
