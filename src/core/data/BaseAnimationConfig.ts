@@ -7,4 +7,5 @@ export default interface BaseAnimationConfig {
     interpolationDef?: InterpolationDef;
     triggerDelay?: number; // only for triggerType -> ON_LOAD
     metaData?: any;
+    useNativeDriver?: boolean;
 }

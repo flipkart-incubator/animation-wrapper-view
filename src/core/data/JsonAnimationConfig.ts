@@ -1,4 +1,5 @@
 import BaseAnimationConfig from "./BaseAnimationConfig"
+import { OrderType } from "./Enums";
 
 export type TransformType = "scale"
     | "opacity"
@@ -33,7 +34,15 @@ export type EasingType = "linear"
 ;
 
 export interface JsonAnimationConfig extends BaseAnimationConfig {
-    animationConfig: AnimationDef | AnimationDef[] 
+    animationConfig: AnimationDef | AnimationDef[] | AnimationDefTree,
+}
+
+/**
+ * Support for custom sequence, parallel and delay animations.
+ */
+type AnimationDefTree = {
+    type: OrderType,
+    animationConfig: (AnimationDefTree | AnimationDef | DelayAnimationDef)[]
 }
 
 /**
@@ -71,4 +80,8 @@ type InterpolationParams = {
     back?: number,
     bounciness?: number,
     bezierCurvePoints?: Array<number>
+}
+
+type DelayAnimationDef = {
+    duration: number;
 }
