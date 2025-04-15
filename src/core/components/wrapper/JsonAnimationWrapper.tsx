@@ -56,10 +56,10 @@ export class JsonAnimationWrapper extends BaseAnimationWrapper<JsonAnimationProp
         return {};
     }
 
-    protected updateCompositeAnimation(): void {
-        this._updateAnimatedArray(this.props);
-        this._updateCompositeAnimation(this.props);
-        this._updateTransformsArray(this.props);
+    protected updateCompositeAnimation(newProps?: JsonAnimationProps): void {
+        this._updateAnimatedArray(newProps ?? this.props);
+        this._updateCompositeAnimation(newProps ?? this.props);
+        this._updateTransformsArray(newProps ?? this.props);
     }
 
     private _updateAnimatedArray(props: JsonAnimationProps): void {

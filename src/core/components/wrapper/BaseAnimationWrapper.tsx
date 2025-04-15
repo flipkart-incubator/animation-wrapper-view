@@ -7,12 +7,16 @@ export abstract class BaseAnimationWrapper<P extends AnimationWrapperProps> exte
 
     public abstract finishAnimation(): void;
     protected abstract renderAnimation(content: React.ReactNode): React.ReactNode;
-    protected abstract updateCompositeAnimation(): void;
+    protected abstract updateCompositeAnimation(nextProps?: AnimationWrapperProps): void;
 
     protected _compositeAnimation: Animated.CompositeAnimation | undefined;
 
     public shouldComponentUpdate(nextProps: Readonly<AnimationWrapperProps>, _: any): boolean {
-        return nextProps.animationConfig !== this.props.animationConfig;
+        const shouldUpdate = nextProps.animationConfig !== this.props.animationConfig;
+        if (shouldUpdate) {
+            this.updateCompositeAnimation(nextProps);
+        }
+        return shouldUpdate;
     }
 
     public componentDidMount(): void {
